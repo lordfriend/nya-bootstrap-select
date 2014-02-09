@@ -1,0 +1,14 @@
+{
+  "name": "nya-bootstrap-select",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "*",
+    "bootstrap-select": "*",
+    "jquery": ">=1.7"
+  },
+  "devDependencies": {
+    "bootstrap-css":"~3.0",
+    "angular-mocks": "*",
+    "angular-scenario": "*"
+  }
+}
