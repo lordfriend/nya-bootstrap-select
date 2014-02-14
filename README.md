@@ -19,12 +19,16 @@ angular.module('myApp', ['nyaBootstrapSelect'])
 
 4. Create your `<select>` with the `.nya-selectpicker` class or 'nya-selectpicker' attribute. You should use ng-repeat to generate your `option` tags. add an `ng-model` directive to bind a model to your `<select>`. In order to update the model according to your select, your should bind `value` with your models.
 ```html
-<select class="nya-selectpicker">
+<select class="nya-selectpicker" ng-model="myModel">
   <option ng-repeat="option in options" value="{{option}}">{{option}}</option>
 </select>
 ```
+5. init your options model. you can retrieve your model from server any time. when options model changes. `ng-repeat` will update the `<option>` s. nya-bootstrap-select directive will update your select as well.
+```javascripts
+$scope.options = ['alpha', 'bravo', 'charlie'];
+```
 
-5. Fire up your angular app.
+6. Fire up your angular app.
 
 ## License ##
 
