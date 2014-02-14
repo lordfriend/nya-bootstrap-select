@@ -116,7 +116,13 @@ describe('nya-bootstrap-select default config test', function(){
 
     $scope.$digest();
 
-    expect(selectpicker.val()).toEqual($scope.myModel);
+    // selectpicker not guarrantee the order. we need to deal with this.
+    var selection = {};
+    angular.forEach(selectpicker.val(), function(value) {
+      selection[value] = true;
+    });
+
+    expect(selection).toEqual(newModels);
 
   });
 
