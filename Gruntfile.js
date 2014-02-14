@@ -64,6 +64,16 @@ module.exports = function(grunt) {
         'examples/{,*/}*.js'
       ]
 
+    },
+
+    // Test
+
+    karma: {
+      unit: {
+        configFile: 'test/karma.conf.js',
+        autoWatch: false,
+        singleRun: true
+      }
     }
   });
 
@@ -72,4 +82,7 @@ module.exports = function(grunt) {
     'connect:livereload',
     'watch'
   ]);
+
+  // Creates the 'test' task
+  grunt.registerTask('test', ['karma:unit']);
 };
