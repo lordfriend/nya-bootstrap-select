@@ -8,7 +8,7 @@ An AngularJS directive wrapper for silviomoreto's [Bootstrap-select](https://git
 
 ## Usage ##
 
-1. install view bower
+1. install via bower
 ```
 $ bower install nya-bootstrap-select
 ```
