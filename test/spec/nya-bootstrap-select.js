@@ -155,4 +155,17 @@ describe('nya-bootstrap-select default config test', function(){
     expect(modelMap).toEqual(newSelection);
 
   });
+
+  it('should be able to remove generated DOM when select element is destroyed', function() {
+    var selectpicker = rootElement.children('.nya-selecpicker');
+
+    $scope.$destroy();
+
+    $scope.$digest();
+    $scope = null;
+
+    selectpicker.remove();
+
+    expect(rootElement.children('.bootstrap-selet').length).toBe(0);
+  });
 });
