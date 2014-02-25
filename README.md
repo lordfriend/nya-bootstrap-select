@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/lordfriend/nya-bootstrap-select.png?branch=master)](https://travis-ci.org/lordfriend/nya-bootstrap-select)
 
-An AngularJS directive wrapper for silviomoreto's [Bootstrap-select](https://github.com/silviomoreto/bootstrap-select), which supports `ngRepeat` in options to dynamically build a Bootstrap-select.
+An AngularJS directive wrapper for silviomoreto's [Bootstrap-select](https://github.com/silviomoreto/bootstrap-select), which dynamically build a Bootstrap-select aware of option or group change when use `ngRepeat` or `ngOptions`.
 
 **Requirements:** AngularJS 1.0+, jQuery 1.7+, Bootstrap-select 1.3+
 
@@ -24,6 +24,8 @@ angular.module('myApp', ['nya.bootstrap.select'])
   <option ng-repeat="option in options" value="{{option}}">{{option}}</option>
 </select>
 ```
+You can also use ngOptions in `<select` tag. If you prefer to use `ngOptions` to generate option dynamically, you shouldn't use ngRepeat in `<option>` tag any longer. We prefer to use `ngOptions` if you want to generate an optgroup
+
 5. init your options model. you can retrieve your model from server any time. when options model changes. `ng-repeat` will update the `<option>` s. nya-bootstrap-select directive will update your select as well.
 ```javascripts
 $scope.options = ['alpha', 'bravo', 'charlie'];
