@@ -14,7 +14,7 @@ $ bower install nya-bootstrap-select
 ```
 2. include the nyaBootstrapSelect module as a dependency for your app.
 ```javascript
-angular.module('myApp', ['nyaBootstrapSelect'])
+angular.module('myApp', ['nya.bootstrap.select'])
 ```
 3. include the bootstrap-select js and css file in your html.
 

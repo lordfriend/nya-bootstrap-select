@@ -23,7 +23,7 @@ describe('nya-bootstrap-select default config test', function(){
   };
 
   // load the nyaBootstrapSelect module
-  beforeEach(module('nyaBootstrapSelect'));
+  beforeEach(module('nya.bootstrap.select'));
 
   beforeEach(inject(function(_$rootScope_, _$compile_){
     $scope = _$rootScope_.$new();

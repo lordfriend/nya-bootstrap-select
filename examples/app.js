@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('demoApp',['nyaBootstrapSelect'])
+angular.module('demoApp',['nya.bootstrap.select'])
   .controller('MainCtrl', function($scope){
 
     var options = ['Alpha', 'Bravo', 'Charlie', 'Delta',
