@@ -1,73 +1,131 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf8">
-    <title>nya-bootstrap-select demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf8">
+  <title>nya-bootstrap-select demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" href="../bower_components/bootstrap-css/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="../bower_components/bootstrap-select/bootstrap-select.css"/>
-    <link rel="stylesheet" href="main.css"/>
+  <link rel="stylesheet" href="../bower_components/bootstrap-css/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="../bower_components/bootstrap-select/bootstrap-select.css"/>
+  <link rel="stylesheet" href="main.css"/>
 </head>
 <body ng-app="demoApp">
 <div class="masthead">
-    <div class="container">
-        <h1>nya-bootstrap-select</h1>
-        <p>An angular wrapper for Bootstrap-select with dynamic loading options support</p>
-        <a class="btn btn-default btn-lg" href="#">View on Github</a>
-    </div>
+  <div class="container">
+    <h1>nya-bootstrap-select</h1>
+
+    <p>An angular wrapper for Bootstrap-select with dynamic loading options support</p>
+    <a class="btn btn-default btn-lg" href="#">View on Github</a>
+  </div>
 </div>
 <div class="container" ng-controller="MainCtrl">
-    <section>
-        <h1 id="overview" class="page-header">Overview</h1>
-        <p>This is an angular directive wrapping for popular custom select <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>.
-            Unlike other <strong>directives</strong>. This directive support <code>ng-repeat</code> in <code>option</code>.
-        </p>
-        <p>All of the <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>'s function is supported.
-            The select result is bound to a model, so you don't need to use
-            <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>'s api to get value.
-            just write your select in the angular way
-        </p>
-        <p class="text-warning"><code>ngOptions</code> directive is not supported yet.</p>
-    </section>
-    <section>
-        <h1 id="example" class="page-header">Example</h1>
-        <h3>Dynamic modify options</h3>
-        <p>The select has three options initially. Click the <strong>Change Options</strong> button to change the options randomly.</p>
+  <section>
+    <h1 id="overview" class="page-header">Overview</h1>
 
-        <form class="form-inline">
-            <p class="alert-info">The options of the select is {{options1}}</p>
-            <p class="alert-info">You have select {{myModel}}</p>
-            <button type="button" class="btn btn-primary" ng-click="changeOptions('options1')">Change Options</button>
-            <span>----></span>
-            <select id="dynamic-options" class="nya-selectpicker" ng-model="myModel" data-container="body" multiple>
-                <option ng-repeat="option in options1" value="{{option}}">{{option}}</option>
-            </select>
-        </form>
+    <p>This is an angular directive wrapping for popular custom select <strong><a
+        href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>.
+      Unlike other <strong>directives</strong>. This directive support <code>ng-repeat</code> in <code>option</code>.
+    </p>
 
-        <h3>Dynamic modify selection</h3>
-        <p>The model change will affect the selection. Click the <strong>Change Model</strong> button to change the model randomly.</p>
-        <form class="form-inline">
-            <p class="alert-info">The options of the select is {{options2}}</p>
-            <p class="alert-info">You have select {{model2}}</p>
-            <button type="button" class="btn btn-primary" ng-click="changeModel('model2')">Change Model</button>
-            <span>----></span>
-            <select id="dynamic-model" class="nya-selectpicker" ng-model="model2" data-container="body" multiple>
-                <option ng-repeat="option in options2" value="{{option}}">{{option}}</option>
-            </select>
-        </form>
+    <p>All of the <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>'s
+      function is supported.
+      The select result is bound to a model, so you don't need to use
+      <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>'s api to get
+      value.
+      just write your select in the angular way
+    </p>
 
-    </section>
+  </section>
+  <section>
+    <h1 id="example" class="page-header">Example</h1>
+
+    <h3>Static options</h3>
+
+    <p>The select has three hard coded options.</p>
+
+    <form class="form-inline">
+      <p class="alert-info">You have select {{staticModel}}</p>
+      <select id="static-options" class="nya-selectpicker" ng-model="staticModel" data-container="body" multiple>
+        <option value="alpha">alpha</option>
+        <option value="bravo">bravo</option>
+        <option value="charlie">charlie</option>
+      </select>
+    </form>
+
+    <h3>Dynamic modify options</h3>
+
+    <p>The select has three options initially. Click the <strong>Change Options</strong> button to change the options
+      randomly.</p>
+
+    <form class="form-inline">
+      <p class="alert-info">The options of the select is {{options1}}</p>
+
+      <p class="alert-info">You have select {{myModel}}</p>
+      <button type="button" class="btn btn-primary" ng-click="changeOptions('options1')">Change Options</button>
+      <span>----></span>
+      <select id="dynamic-options" class="nya-selectpicker" ng-model="myModel" data-container="body" multiple>
+        <option ng-repeat="option in options1" value="{{option}}">{{option}}</option>
+      </select>
+    </form>
+
+    <h3>Dynamic modify selection</h3>
+
+    <p>The model change will affect the selection. Click the <strong>Change Model</strong> button to change the model
+      randomly.</p>
+
+    <form class="form-inline">
+      <p class="alert-info">The options of the select is {{options2}}</p>
+
+      <p class="alert-info">You have select {{model2}}</p>
+      <button type="button" class="btn btn-primary" ng-click="changeModel('model2')">Change Model</button>
+      <span>----></span>
+      <select id="dynamic-model" class="nya-selectpicker" ng-model="model2" data-container="body" multiple>
+        <option ng-repeat="option in options2" value="{{option}}">{{option}}</option>
+      </select>
+    </form>
+
+    <h3>ngOptions examples</h3>
+
+    <p>The options is generated by <code>ngOptions</code> directive Click the <strong>Change Options</strong> button to change the options
+      randomly.</p>
+
+    <form class="form-inline">
+      <p class="alert-info">The options of the select is {{options3}}</p>
+
+      <p class="alert-info">You have select {{model3}}</p>
+      <button type="button" class="btn btn-primary" ng-click="changeOptions('options3')">Change Options</button>
+      <span>----></span>
+      <select id="ngOptions-example" class="nya-selectpicker" ng-model="model3" data-container="body" multiple ng-options="c for c in options3">
+      </select>
+    </form>
+
+    <h3>ngOptions optgroup examples</h3>
+
+    <p>The options and optgroups are generated by <code>ngOptions</code> directive. Click the <strong>Change Groups</strong> button to change the groups and options
+      randomly.</p>
+
+    <form class="form-inline">
+      <p class="alert-info">The options of the select is {{options3}}</p>
+
+      <p class="alert-info">You have select {{model4}}</p>
+      <button type="button" class="btn btn-primary" ng-click="changeGroups('options4')">Change Groups</button>
+      <span>----></span>
+      <select id="ngOptions-grouped-example" class="nya-selectpicker" ng-model="model4" data-container="body" multiple ng-options="c.name group by c.group for c in options4">
+      </select>
+    </form>
+
+  </section>
 </div>
 <footer class="footer">
-    <div class="container">
-        <p>Designed and built by <a href="http://nya.io">Nyasoft</p>
-        <p>Code licensed under MIT License</p>
-    </div>
+  <div class="container">
+    <p>Designed and built by <a href="http://nya.io">Nyasoft</p>
+
+    <p>Code licensed under MIT License</p>
+  </div>
 </footer>
 
 
-<script src="../bower_components/jquery/jquery.js"></script>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/bootstrap-css/js/bootstrap.js"></script>
 <script src="../bower_components/bootstrap-select/bootstrap-select.js"></script>

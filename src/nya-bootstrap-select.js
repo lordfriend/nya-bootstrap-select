@@ -15,7 +15,7 @@ angular.module('nyaBootstrapSelect',[])
         var optionArray = [];
         scope.$watch(function optionDOMWatch(){
           // check every option if has changed.
-          var optionElements = $(element).find('option.ng-scope');
+          var optionElements = $(element).find('option');
 
           if(optionElements.length !== optionArray.length) {
             optionArray = makeOptionArray(optionElements);

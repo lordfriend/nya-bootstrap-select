@@ -73,6 +73,12 @@ module.exports = function(grunt) {
         configFile: 'test/karma.conf.js',
         autoWatch: false,
         singleRun: true
+      },
+      locally: {
+        configFile: 'test/karma.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        browsers: ['Chrome', 'Firefox', 'PhantomJS']
       }
     }
   });
@@ -85,4 +91,7 @@ module.exports = function(grunt) {
 
   // Creates the 'test' task
   grunt.registerTask('test', ['karma:unit']);
+
+  // Creates the 'test-local' task
+  grunt.registerTask('test-local', ['karma:locally']);
 };
