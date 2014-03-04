@@ -28,13 +28,20 @@ angular.module('demoApp',['nya.bootstrap.select'])
 
     $scope.options2 = options.splice(0, 6);
 
-    $scope.changeModel = function(model) {
-      var length = Math.floor(Math.random() * $scope.options2.length);
-      var newModel = {};
+    var existInArray = function(value, array) {
+      return array.some(function(element){return angular.equals(element, value);});
+    };
+
+    $scope.changeModel = function(model, options) {
+      var length = Math.floor(Math.random() * $scope[options].length);
+      var newModel = [];
       for(var i = 0; i < length; i++) {
-        newModel[$scope.options2[Math.floor(Math.random() * $scope.options2.length)]] = true;
+        var newValue = $scope[options][Math.floor(Math.random() * $scope[options].length)];
+        if(newModel.length === 0 || !existInArray(newValue, newModel)) {
+          newModel.push(newValue);
+        }
       }
-      $scope[model] = Object.keys(newModel);
+      $scope[model] = newModel;
     };
 
     $scope.options3 = options.splice(0,6);
@@ -48,7 +55,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
       var newOptionArray = [];
       var groupCount = Math.max(Math.floor(Math.random() * length / 2), 2);
       angular.forEach(newOptions, function(value, key) {
-        var group = Math.max(Math.floor(Math.random() * groupCount), 1);
+        var group = Math.max(Math.ceil(Math.random() * groupCount), 1);
         newOptionArray.push({
           name: key,
           group: 'Group ' + group
@@ -60,4 +67,34 @@ angular.module('demoApp',['nya.bootstrap.select'])
     $scope.changeGroups('options4');
 
 
+    $scope.changeObject = function(targetOptions) {
+      var length = Math.max(Math.min(Math.floor(Math.random() * options.length), 10), 3);
+      var newOptions = {};
+      var groupCount = Math.max(Math.floor(Math.random() * length / 2), 2);
+      for(var i = 0; i < length; i++) {
+        var newValue = options[Math.floor(Math.random() * options.length)];
+        var group = Math.max(Math.ceil(Math.random() * groupCount), 1);
+        newOptions[newValue] = {
+          name: newValue.toLowerCase(),
+          group: 'Group' + group
+        };
+      }
+      $scope[targetOptions] = newOptions;
+    };
+
+    $scope.changeObject('options5');
+
+    $scope.changeModelOfObject = function(model, options) {
+      var keys = Object.keys($scope[options]);
+      var length = Math.floor(Math.random() * keys.length);
+      var newModel = [];
+      var keyModel = {};
+      for(var i = 0; i < length; i++) {
+        keyModel[keys[Math.floor(Math.random() * keys.length)]] = true;
+      }
+      angular.forEach(keyModel, function(value, key) {
+        newModel.push($scope[options][key]);
+      });
+      $scope[model] = newModel;
+    };
   });
