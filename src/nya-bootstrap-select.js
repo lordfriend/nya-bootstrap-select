@@ -1,3 +1,9 @@
+/**
+ * @license nya-bootstrap-select v1.2.1
+ * Copyright 2014 nyasoft
+ * Licensed under MIT license
+ */
+
 'use strict';
 
 angular.module('nya.bootstrap.select',[])
