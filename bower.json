@@ -1,0 +1,20 @@
+{
+  "name": "nya-bootstrap-select",
+  "version": "1.2.1",
+  "main": "src/nya-bootstrap-select.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "examples"
+  ],
+  "dependencies": {
+    "angular": "*",
+    "bootstrap-select": "*"
+  },
+  "devDependencies": {
+    "bootstrap-css": "~3.0",
+    "angular-mocks": "*"
+  }
+}
