@@ -97,4 +97,6 @@ angular.module('demoApp',['nya.bootstrap.select'])
       });
       $scope[model] = newModel;
     };
+
+    $scope.changeModel('model4', 'options4');
   });
