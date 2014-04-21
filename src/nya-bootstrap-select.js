@@ -146,7 +146,7 @@ angular.module('nya.bootstrap.select',[])
           }
           $(element).selectpicker();
           if(!!valuesFn) {
-//            setValue(ngCtrl.$modelValue);
+            setValue(ngCtrl.$modelValue);
           } else {
             $(element).val(ngCtrl.$modelValue).selectpicker('render');
           }

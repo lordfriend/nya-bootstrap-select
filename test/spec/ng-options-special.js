@@ -96,6 +96,8 @@ describe('nya-bootstrap-select with ngOptions support and special scenario', fun
     changeGroups('options');
     changeModel('myModel', 'options');
 
+    $scope.$digest();
+
     rootElement = $compile('<div class="select-container">' +
       '<select class="nya-selectpicker" ng-model="myModel" multiple ng-options="c.name group by c.group for c in options">' +
       '</select>' +
