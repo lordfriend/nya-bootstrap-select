@@ -102,16 +102,16 @@ describe('nya-bootstrap-select with ngOptions support and special scenario', fun
       '</div>')($scope);
     $scope.$digest();
 
-    var modelIndexArray = [];
-    for(var i = 0; i < $scope.myModel.length; i++) {
-      var index = indexOf($scope.myModel[i], $scope.options, ['label', 'value', 'group']);
-      modelIndexArray.push(index);
-    }
-
     var selectElement = rootElement.children('.nya-selectpicker');
-    // retrieve value
-    console.log('value', selectElement.val());
-    console.log('model', $scope.myModel, 'options', $scope.options);
-    console.log('modelIndexArray', modelIndexArray);
+    var dropdown = selectElement.next().find('.dropdown-menu.selectpicker');
+    var selectedListElement = dropdown.children('.selected');
+
+    expect(selectedListElement.length).toEqual($scope.myModel.length);
+
+    selectedListElement.each(function() {
+      var text = $(this).find('a > span.text').text();
+      var indexOfModel = indexOf({name: text}, $scope.myModel, ['name']);
+      expect(indexOfModel).toBeGreaterThan(-1);
+    });
   });
 });
