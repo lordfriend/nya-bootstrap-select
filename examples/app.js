@@ -99,4 +99,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
     };
 
     $scope.changeModel('model4', 'options4');
+
+    $scope.options6 = [{label: 'Alpha', value: 'alpha'}, {label: 'Bravo', value: 'bravo'}, {label: 'Charlie', value: 'charlie'}];
+    $scope.model6 = {label: 'Bravo', value: 'bravo'};
   });
