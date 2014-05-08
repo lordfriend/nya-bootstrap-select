@@ -100,6 +100,19 @@ angular.module('demoApp',['nya.bootstrap.select'])
 
     $scope.changeModel('model4', 'options4');
 
-    $scope.options6 = [{label: 'Alpha', value: 'alpha'}, {label: 'Bravo', value: 'bravo'}, {label: 'Charlie', value: 'charlie'}];
-    $scope.model6 = {label: 'Bravo', value: 'bravo'};
+    $scope.options6 = [{label: 'Alpha', value: 'alpha', group: 'group1'}, {label: 'Bravo', value: 'bravo', group: 'group1'}, {label: 'Charlie', value: 'charlie', group: 'group1'}];
+
+    $scope.changeModelArray = function(model, options) {
+      var length = Math.max(Math.min(Math.floor(Math.random() * $scope[options].length), 10), 3);
+      var newOptions = {};
+      for(var i = 0; i < length; i++) {
+        newOptions[$scope[options][Math.floor(Math.random() * $scope[options].length)].value] = true;
+      }
+      $scope[model] = Object.keys(newOptions);
+    };
+    $scope.model6 = $scope.changeModelArray('model6', 'options6');
+
+    $('#ngOptions-track-by-example').on('change', function(){
+      console.log($('#ngOptions-track-by-example').val());
+    });
   });

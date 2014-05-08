@@ -116,4 +116,39 @@ describe('nya-bootstrap-select with ngOptions support and special scenario', fun
       expect(indexOfModel).toBeGreaterThan(-1);
     });
   });
+
+  it('should change select when model changed while ng-options contains track by', function(){
+    // define options and models before compile
+    $scope.options = [
+      {label: 'Alpha', value: 'alpha', group: 'group1'},
+      {label: 'Bravo', value: 'bravo', group: 'group1'},
+      {label: 'Charlie', value: 'charlie', group: 'group1'},
+      {label: 'Delta', value: 'delta', group: 'group2'},
+      {label: 'Echo', value: 'echo', group: 'group2'},
+      {label: 'Fox', value: 'fox', group: 'group2'}
+    ];
+
+    $scope.$digest();
+
+    rootElement = $compile('<div class="select-container">' +
+      '<select class="nya-selectpicker" ng-model="myModel" multiple ng-options="c.value as c.label group by c.group for c in options track by c.value">' +
+      '</select>' +
+      '</div>')($scope);
+    $scope.$digest();
+
+    $scope.myModel = ['bravo', 'delta', 'fox'];
+
+    $scope.$digest();
+
+    var selectElement = rootElement.children('.nya-selectpicker');
+    var dropdown = selectElement.next().find('.dropdown-menu.selectpicker');
+    var selectedListElement = dropdown.children('.selected');
+
+    expect(selectedListElement.length).toEqual($scope.myModel.length);
+
+    selectedListElement.each(function(index) {
+      var text = $(this).find('a > span.text').text();
+      expect($scope.myModel[index]).toEqual(text.toLowerCase());
+    });
+  });
 });
