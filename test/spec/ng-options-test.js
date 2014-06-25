@@ -63,7 +63,7 @@ describe('nya-bootstrap-select with ngOptions support', function() {
     selectElement.children('optgroup').each(function(groupIndex, group){
       var optionCount = $(group).children('option').length;
 
-      console.log(groupIndex, optionCount);
+//      console.log(groupIndex, optionCount);
       var groupLabel = lis.eq(firstOptOfGroup).find('dt').children('span.text').text();
       console.log(groupLabel);
       // validate group label
