@@ -64,7 +64,7 @@
       <button type="button" class="btn btn-primary" ng-click="changeOptions('options1')">Change Options</button>
       <span>----></span>
       <select id="dynamic-options" class="nya-selectpicker" ng-model="myModel" data-container="body" multiple>
-        <option ng-repeat="option in options1" value="{{option}}">{{option}}</option>
+        <option ng-repeat="option in options1" value="{{option}}" data-content="<span class='label label-danger'>{{option}}</span>">{{option}}</option>
       </select>
     </form>
 

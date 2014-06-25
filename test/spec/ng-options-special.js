@@ -151,4 +151,44 @@ describe('nya-bootstrap-select with ngOptions support and special scenario', fun
       expect($scope.myModel[index]).toEqual(text.toLowerCase());
     });
   });
+
+  it('should rebuild dropdown menu when data attribute changes in option', function() {
+    // define options and models before compile
+    $scope.options = [
+      {label: 'Alpha', value: 'alpha', color: 'red'},
+      {label: 'Bravo', value: 'bravo', color: 'blue'},
+      {label: 'Charlie', value: 'charlie', color: 'cyan'},
+      {label: 'Delta', value: 'delta', color: 'yellow'}
+    ];
+
+    $scope.$digest();
+
+    rootElement = $compile('<div class="select-container">' +
+        '<select class="nya-selectpicker" ng-model="myModel">' +
+          '<option ng-repeat="option in options" value="{{option.value}}" data-content="<span class=\'label\'>{{option.color}}</span>">{{option.label}}</option>' +
+        '</select>' +
+      '</div>')($scope);
+
+    $scope.$digest();
+
+    $scope.myModel = "alpha";
+
+    $scope.$digest();
+
+    runs(function(){
+      setTimeout(function(){
+        var selectElement = rootElement.children('.nya-selectpicker');
+        var dropdown = selectElement.next().find('.dropdown-menu.selectpicker');
+        var listElement = dropdown.children('li');
+        listElement.each(function(index, li) {
+          var liElement = $(li).find('a > span.label');
+          expect(liElement.length).toEqual(1);
+          expect(liElement.text()).toEqual($scope.options[index].color);
+        });
+      }, 100);
+    });
+
+    waits(200);
+
+  });
 });

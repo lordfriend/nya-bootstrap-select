@@ -30,6 +30,36 @@ angular.module('nya.bootstrap.select',[])
         // prevent selectDirective render an unknownOption.
         selectCtrl.renderUnknownOption = angular.noop;
         var optionArray = [];
+        /**
+         * Check option data attributes, text and value equality.
+         * @param opt the option dom element
+         * @param index the index of the option
+         * @returns {boolean}
+         */
+        var checkOptionEquality = function(opt, index) {
+          var isEqual = opt.value === optionArray[index].value && opt.text === optionArray[index].text;
+          if(isEqual) {
+            for(var i = 0; i< opt.attributes.length; i++){
+              if(opt.attributes[i].nodeName.indexOf('data-')!==-1) {
+                if(optionArray[index].attributes[opt.attributes[i].nodeName] !== opt.attributes[i].nodeValue) {
+                  isEqual = false;
+                  break;
+                }
+              }
+            }
+          }
+          return isEqual;
+        };
+
+        var resetDataProperties = function(opt) {
+          var attributes = opt.attributes;
+          for(var i = 0; i < attributes.length; i++) {
+            if(attributes[i].nodeName.indexOf('data-')!==-1) {
+              $(opt).data(attributes[i].nodeName.substring(5, attributes[i].nodeName.length), attributes[i].value);
+            }
+          }
+        };
+
         scope.$watch(function optionDOMWatch(){
           // check every option if has changed.
           var optionElements = $(element).find('option');
@@ -49,9 +79,10 @@ angular.module('nya.bootstrap.select',[])
           } else {
             var hasChanged = false;
             optionElements.each(function(index, value){
-              if(optionArray[index].text !== value.text || optionArray[index].value !== value.value) {
+              if(!checkOptionEquality(value, index)) {
+                // if check fails. reset all data properties.
+                resetDataProperties(value);
                 hasChanged = true;
-
               }
             });
             if(hasChanged) {
@@ -131,12 +162,24 @@ angular.module('nya.bootstrap.select',[])
           return key;
         }
 
+        /**
+         * Copy option value and text and data attributes to an array for future comparison.
+         * @param optionElements the source option elements. a jquery objects' array.
+         * @returns {Array} the copied array.
+         */
         function makeOptionArray(optionElements) {
           var optionArray = [];
           optionElements.each(function(index, childNode){
+            var attributes = {};
+            for(var i = 0; i < childNode.attributes.length; i++) {
+              if(childNode.attributes[i].nodeName.indexOf('data-')!==-1) {
+                attributes[childNode.attributes[i].nodeName] = childNode.attributes[i].nodeValue;
+              }
+            }
             optionArray.push({
               value: childNode.value,
-              text: childNode.text
+              text: childNode.text,
+              attributes: attributes
             });
           });
           return optionArray;
