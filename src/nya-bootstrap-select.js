@@ -30,6 +30,24 @@ angular.module('nya.bootstrap.select',[])
         // prevent selectDirective render an unknownOption.
         selectCtrl.renderUnknownOption = angular.noop;
         var optionArray = [];
+
+        // store data- attribute options of select
+        var selectorOptions = {};
+        var BS_ATTR = ['container', 'countSelectedText', 'dropupAuto', 'header', 'hideDisabled', 'selectedTextFormat', 'size', 'showSubtext', 'showIcon', 'showContent', 'style', 'title', 'width', 'disabled'];
+
+        var checkSelectorOptionsEquality = function() {
+          var isEqual = true;
+          angular.forEach(BS_ATTR, function(attr) {
+            isEqual = isEqual && attrs[attr] === selectorOptions[attr];
+          });
+        };
+
+        var updateSelectorOptions = function() {
+          angular.forEach(BS_ATTR, function(attr) {
+            selectorOptions[attr] = attrs[attr];
+          });
+        };
+
         /**
          * Check option data attributes, text and value equality.
          * @param opt the option dom element
@@ -87,6 +105,10 @@ angular.module('nya.bootstrap.select',[])
             });
             if(hasChanged) {
               buildSelector();
+            }
+            if(!checkSelectorOptionsEquality()) {
+              updateSelectorOptions();
+              $(element).selectpicker('refresh');
             }
             optionArray = makeOptionArray(optionElements);
           }

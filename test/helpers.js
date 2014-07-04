@@ -8,6 +8,12 @@ beforeEach(function() {
       };
 
       return this.actual.hasClass(cls);
+    },
+    toHaveAttribute: function(cls) {
+      this.message = function() {
+        return "Expected '" + angular.mock.dump(this.actual) + "' to have attribute '" + cls + "'.";
+      };
+      return this.actual.is('['+cls+']');
     }
   });
 });
