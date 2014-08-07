@@ -78,7 +78,7 @@ angular.module('nya.bootstrap.select',[])
           }
         };
 
-        scope.$watch(function optionDOMWatch(){
+        function optionDOMWatch(){
           // check every option if has changed.
           var optionElements = $(element).find('option');
 
@@ -112,8 +112,17 @@ angular.module('nya.bootstrap.select',[])
             }
             optionArray = makeOptionArray(optionElements);
           }
+        }
 
-        });
+        scope.$watch(function(){
+          // Create an object to deep inspect if anything has changed.
+          // This is slow, but not as slow as calling optionDOMWatch every $digest
+          return {
+            ngModel: ngCtrl.$viewValue,
+            options: makeOptionArray( $(element).find('option') )
+          };
+        // If any of the above properties change, call optionDOMWatch.
+        }, optionDOMWatch, true);
 
         var setValue = function(modelValue) {
           var collection = valuesFn(scope);
