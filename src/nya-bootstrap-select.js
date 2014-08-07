@@ -46,6 +46,8 @@ angular.module('nya.bootstrap.select',[])
           angular.forEach(BS_ATTR, function(attr) {
             selectorOptions[attr] = attrs[attr];
           });
+
+          return selectorOptions;
         };
 
         /**
@@ -119,7 +121,8 @@ angular.module('nya.bootstrap.select',[])
           // This is slow, but not as slow as calling optionDOMWatch every $digest
           return {
             ngModel: ngCtrl.$viewValue,
-            options: makeOptionArray( $(element).find('option') )
+            options: makeOptionArray( $(element).find('option') ),
+            selectors: updateSelectorOptions()
           };
         // If any of the above properties change, call optionDOMWatch.
         }, optionDOMWatch, true);
