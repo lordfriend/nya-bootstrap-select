@@ -4,9 +4,11 @@
  * Licensed under MIT license
  */
 
-(function ($) {
+(function () {
   'use strict';
-
+  
+  var $ = angular.element;
+  
   angular.module('nya.bootstrap.select',[])
     .directive('nyaSelectpicker', ['$parse', function ($parse) {
   
@@ -240,5 +242,4 @@
         }
       };
     }]);
-  
-}(jQuery))
+}())
