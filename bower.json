@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "angular": "*",
-    "bootstrap-select": "*"
+    "bootstrap-select": "<1.6.0"
   },
   "devDependencies": {
     "bootstrap-css": "~3.0",
