@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/lordfriend/nya-bootstrap-select.png?branch=master)](https://travis-ci.org/lordfriend/nya-bootstrap-select)
 
+**This Project is under rewriting, version 2.0 will available soon, 1.x will no longer get update, use with caution.**
+
 An AngularJS directive wrapper for silviomoreto's [Bootstrap-select](https://github.com/silviomoreto/bootstrap-select), which supports `ngRepeat` in options to dynamically build a Bootstrap-select.
 
 **Requirements:** AngularJS 1.0+, jQuery 1.7+, Bootstrap-select 1.3+
