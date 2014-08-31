@@ -15,7 +15,7 @@ module.exports = function(config) {
       '../bower_components/jquery/dist/jquery.min.js',
       '../bower_components/angular/angular.js',
       '../bower_components/angular-mocks/angular-mocks.js',
-      '../bower_components/bootstrap-select/bootstrap-select.js',
+      '../bower_components/bootstrap-select/dist/js/bootstrap-select.js',
 
       // load our directive
       '../src/*.js',
