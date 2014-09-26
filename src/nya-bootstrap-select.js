@@ -73,21 +73,69 @@
   }
 
   function sortByGroup(array ,group, property) {
-    var length = array.length,
-      resultArray = new Array(length),
-      i, o, j,
-      indexInGroup;
-    for(i = 0; i < length; i++) {
-      o = array[i][property];
-
-      indexInGroup = group.indexOf(o);
-      resultArray[i] = array[i];
-      resultArray[i].$$groupIndex = indexInGroup;
+    var unknownGroup = [],
+      i, j,
+      resultArray = [];
+    for(i = 0; i < group.length; i++) {
+      for(j = 0; j < array.length;j ++) {
+        if(!array[j][property]) {
+          unknownGroup.push(array[j]);
+        } else if(array[j][property] === group[i]) {
+          resultArray.push(array[j]);
+        }
+      }
     }
 
-    // use insertion sort because the source array is almost sorted.
+    resultArray = resultArray.concat(unknownGroup);
 
+    return resultArray;
   }
+
+  /**
+   * Return the DOM siblings between the first and last node in the given array.
+   * @param {Array} array like object
+   * @returns {jqLite} jqLite collection containing the nodes
+   */
+  function getBlockNodes(nodes) {
+    // TODO(perf): just check if all items in `nodes` are siblings and if they are return the original
+    //             collection, otherwise update the original collection.
+    var node = nodes[0];
+    var endNode = nodes[nodes.length - 1];
+    var blockNodes = [node];
+
+    do {
+      node = node.nextSibling;
+      if (!node) break;
+      blockNodes.push(node);
+    } while (node !== endNode);
+
+    return angular.element(blockNodes);
+  }
+
+  var getBlockStart = function(block) {
+    return block.clone[0];
+  };
+
+  var getBlockEnd = function(block) {
+    return block.clone[block.clone.length - 1];
+  };
+
+  var updateScope = function(scope, index, valueIdentifier, value, keyIdentifier, key, arrayLength, group) {
+    // TODO(perf): generate setters to shave off ~40ms or 1-1.5%
+    scope[valueIdentifier] = value;
+    if (keyIdentifier) scope[keyIdentifier] = key;
+    scope.$index = index;
+    scope.$first = (index === 0);
+    scope.$last = (index === (arrayLength - 1));
+    scope.$middle = !(scope.$first || scope.$last);
+    // jshint bitwise: false
+    scope.$odd = !(scope.$even = (index&1) === 0);
+    // jshint bitwise: true
+
+    if(group) {
+      scope.$group = group;
+    }
+  };
 
   angular.module('nya.bootstrap.select',[])
     .controller('nyaBsSelectCtrl', ['$scope', function($scope){
@@ -143,6 +191,7 @@
         require: '^nyaBsSelect',
         compile: function nyaBsOptionCompile (tElement, tAttrs) {
           var expression = tAttrs.nyaBsSelect;
+          var nyaBsOptionEndComment = document.createComment(' end ngRepeat: ' + expression + ' ');
           var match = expression.match(BS_OPTION_REGEX);
 
           if(!match) {
@@ -207,6 +256,10 @@
 
             $scope.$watch(collectionExp, function nyaBsOptionAction(collection) {
               var index, length,
+
+                previousNode = $element[0],     // node that cloned nodes should be inserted after
+                                                // initialized to the comment node anchor
+
                 key, value,
                 trackById,
                 trackByIdFn,
@@ -217,9 +270,9 @@
                 nextBlockMap = createMap(),
                 nextBlockOrder,
                 block,
-                groupName, groupIndex, groupLength,
-                group,
-                lastGroupIndex;
+                groupName,
+                nextNode,
+                group;
 
               if(groupByFn) {
                 group = [];
@@ -271,7 +324,7 @@
                   throw new Error("Duplicates in a select are not allowed. Use 'track by' expression to specify unique keys.");
                 } else {
                   // new never before seen block
-                  nextBlockOrder[index] = {id: trackById, scope: undefined, clone: undefined};
+                  nextBlockOrder[index] = {id: trackById, scope: undefined, clone: undefined, key: key, value: value};
                   nextBlockMap[trackById] = true;
                   if(groupName) {
                     nextBlockOrder[index].group = groupName;
@@ -282,16 +335,31 @@
               // only resort nextBlockOrder when group found
               if(group && group.length > 0) {
 
-                groupLength = group.length;
-                lastGroupIndex = 0;
+                nextBlockOrder = sortByGroup(nextBlockOrder, group, 'group');
+              }
 
-                for(groupIndex = 0; groupIndex < groupLength; groupLength++) {
-                  groupName = group[groupIndex];
-                  for(index = 0; index < collectionLength; index++) {
-                    if(nextBlockOrder[index].group === groupName) {
+              for( var blockKey in lastBlockMap) {
+                block = lastBlockMap[blockKey];
+                getBlockNodes(block.clone).remove();
+                block.scope.$destroy();
+              }
 
-                    }
-                  }
+              for(index = 0; index < collectionLength; index++) {
+                block = nextBlockOrder[index];
+                if(block.scope) {
+                  // if we have already seen this object, then we need to reuse the
+                  // associated scope/element
+                  previousNode = getBlockEnd(block);
+                  updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength);
+                } else {
+                  $transclude(function nyaBsOptionTransclude(clone, scope) {
+                    block.scope = scope;
+
+                    var endNode = nyaBsOptionEndComment.cloneNode(false);
+                    clone[clone.length++] = endNode;
+
+                    endNode.parentNode.insertBefore(endNode);
+                  });
                 }
               }
             });
