@@ -7,6 +7,37 @@
 (function(){
   'use strict';
 
+  var uid = 0;
+
+  function nextUid() {
+    return ++uid;
+  }
+
+  /**
+   * Checks if `obj` is a window object.
+   *
+   * @private
+   * @param {*} obj Object to check
+   * @returns {boolean} True if `obj` is a window obj.
+   */
+  function isWindow(obj) {
+    return obj && obj.window === obj;
+  }
+
+  /**
+   * @ngdoc function
+   * @name angular.isString
+   * @module ng
+   * @kind function
+   *
+   * @description
+   * Determines if a reference is a `String`.
+   *
+   * @param {*} value Reference to check.
+   * @returns {boolean} True if `value` is a `String`.
+   */
+  function isString(value){return typeof value === 'string';}
+
   /**
    * @param {*} obj
    * @return {boolean} Returns true if `obj` is an array or array-like object (NodeList, Arguments,
@@ -23,7 +54,7 @@
       return true;
     }
 
-    return isString(obj) || isArray(obj) || length === 0 ||
+    return isString(obj) || Array.isArray(obj) || length === 0 ||
       typeof length === 'number' && length > 0 && (length - 1) in obj;
   }
 
@@ -72,6 +103,7 @@
     return objType + ':' + key;
   }
 
+  //TODO: have a bug, may lost element in array
   function sortByGroup(array ,group, property) {
     var unknownGroup = [],
       i, j,
@@ -137,6 +169,9 @@
     }
   };
 
+  // map global property to local variable.
+  var jqLite = angular.element;
+
   angular.module('nya.bootstrap.select',[])
     .controller('nyaBsSelectCtrl', ['$scope', function($scope){
       var self = this;
@@ -149,7 +184,7 @@
         '<span class="caret"></span>' +
         '</button>';
 
-      var DROPDOWN_MENU = '<ul class="dropdown-menu"></ul>';
+      var DROPDOWN_MENU = '<ul class="dropdown-menu-no-style"></ul>';
 
       return {
         restrict: 'ECA',
@@ -159,8 +194,8 @@
         compile: function(tElement, tAttrs){
           tElement.addClass('btn-group');
           var options = tElement.children().detach();
-          var dropdownToggle = angular.element(DROPDOWN_TOGGLE);
-          var dropdownMenu = angular.element(DROPDOWN_MENU);
+          var dropdownToggle = jqLite(DROPDOWN_TOGGLE);
+          var dropdownMenu = jqLite(DROPDOWN_MENU);
           dropdownMenu.append(options);
           tElement.append(dropdownToggle);
           tElement.append(dropdownMenu);
@@ -190,8 +225,8 @@
         terminal: true,
         require: '^nyaBsSelect',
         compile: function nyaBsOptionCompile (tElement, tAttrs) {
-          var expression = tAttrs.nyaBsSelect;
-          var nyaBsOptionEndComment = document.createComment(' end ngRepeat: ' + expression + ' ');
+          var expression = tAttrs.nyaBsOption;
+          var nyaBsOptionEndComment = document.createComment(' end nyaBsOption: ' + expression + ' ');
           var match = expression.match(BS_OPTION_REGEX);
 
           if(!match) {
@@ -201,15 +236,15 @@
           var valueIdentifier = match[3] || match[1],
             keyIdentifier = match[2],
             collectionExp = match[4],
-            groupByExpGetter = $parse(match[5] || ''),
-            trackByExp = match[4];
+            groupByExpGetter = match[5] ? $parse(match[5]) : null,
+            trackByExp = match[6];
 
           var trackByIdArrayFn,
             trackByIdObjFn,
             trackByIdExpFn,
             trackByExpGetter;
           var hashFnLocals = {$id: hashKey};
-          var groupByFn, locals;
+          var groupByFn, locals = {};
 
           if(trackByExp) {
             trackByExpGetter = $parse(trackByExp);
@@ -292,7 +327,6 @@
                 }
                 collectionKeys.sort();
               }
-
               collectionLength = collectionKeys.length;
               nextBlockOrder = new Array(collectionLength);
 
@@ -300,7 +334,7 @@
                 key = (collection === collectionKeys) ? index : collectionKeys[index];
                 value = collection[key];
                 trackById = trackByIdFn(key, value, index);
-
+                console.log('trackById: ', trackById);
                 if(groupByFn) {
                   groupName = groupByFn(key, value);
                   if(group.indexOf(groupName) === -1 && groupName) {
@@ -316,7 +350,7 @@
                   nextBlockOrder[index] = block
                 } else if(nextBlockMap[trackById]) {
                   //if collision detected. restore lastBlockMap and throw an error
-                  forEach(nextBlockOrder, function(block) {
+                  nextBlockOrder.forEach(function(block) {
                     if(block && block.scope) {
                       lastBlockMap[block.id] = block;
                     }
@@ -331,26 +365,31 @@
                   }
                 }
               }
-
+              console.log('nextBlockOrder: ', nextBlockOrder);
               // only resort nextBlockOrder when group found
               if(group && group.length > 0) {
 
                 nextBlockOrder = sortByGroup(nextBlockOrder, group, 'group');
               }
 
+              console.log('nextBlockOrder: ', nextBlockOrder, 'collectionLength: ', collectionLength);
               for( var blockKey in lastBlockMap) {
                 block = lastBlockMap[blockKey];
                 getBlockNodes(block.clone).remove();
                 block.scope.$destroy();
               }
-
               for(index = 0; index < collectionLength; index++) {
                 block = nextBlockOrder[index];
                 if(block.scope) {
                   // if we have already seen this object, then we need to reuse the
                   // associated scope/element
+
+                  nextNode = previousNode;
+                  if(getBlockStart(block) != nextNode) {
+                    jqLite(previousNode).after(block.clone);
+                  }
                   previousNode = getBlockEnd(block);
-                  updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength);
+                  updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength, block.group);
                 } else {
                   $transclude(function nyaBsOptionTransclude(clone, scope) {
                     block.scope = scope;
@@ -358,10 +397,19 @@
                     var endNode = nyaBsOptionEndComment.cloneNode(false);
                     clone[clone.length++] = endNode;
 
-                    endNode.parentNode.insertBefore(endNode);
+                    jqLite(previousNode).after(clone);
+
+                    previousNode = endNode;
+                    // Note: We only need the first/last node of the cloned nodes.
+                    // However, we need to keep the reference to the jqlite wrapper as it might be changed later
+                    // by a directive with templateUrl when its template arrives.
+                    block.clone = clone;
+                    nextBlockMap[block.id] = block;
+                    updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength, block.group);
                   });
                 }
               }
+              lastBlockMap = nextBlockMap;
             });
           };
         }
