@@ -103,7 +103,7 @@
     return objType + ':' + key;
   }
 
-  //TODO: have a bug, may lost element in array
+  //TODO: use with caution. if an property of element in array doesn't exist in group, the resultArray may lose some element.
   function sortByGroup(array ,group, property) {
     var unknownGroup = [],
       i, j,
@@ -191,15 +191,20 @@
         scope: true,
         require: ['ngModel', 'nyaBsSelect'],
         controller: 'nyaBsSelectCtrl',
-        compile: function(tElement, tAttrs){
+        compile: function nyaBsSelectCompile (tElement, tAttrs){
+
           tElement.addClass('btn-group');
-          var options = tElement.children().detach();
+
+          var options = tElement.children();
+
           var dropdownToggle = jqLite(DROPDOWN_TOGGLE);
+
           var dropdownMenu = jqLite(DROPDOWN_MENU);
+
           dropdownMenu.append(options);
           tElement.append(dropdownToggle);
           tElement.append(dropdownMenu);
-          return function(scope, element, attrs, ctrls) {
+          return function nyaBsSelectLink (scope, element, attrs, ctrls) {
             var BS_ATTR = ['container', 'countSelectedText', 'dropupAuto', 'header', 'hideDisabled', 'selectedTextFormat', 'size', 'showSubtext', 'showIcon', 'showContent', 'style', 'title', 'width', 'disabled'];
             var ngCtrl = ctrls[0];
             var nyaBsSelectCtrl = ctrls[1];
@@ -209,6 +214,11 @@
               }
               nyaBsSelectCtrl.bsOptions = options;
             }, true);
+
+            dropdownMenu.on('click', function(event) {
+//              console.log('event obj', event);
+              console.log('target scope', jqLite(event.target).scope());
+            });
           };
         }
       };
@@ -290,7 +300,7 @@
             var lastBlockMap = createMap();
 
             $scope.$watch(collectionExp, function nyaBsOptionAction(collection) {
-              var index, length,
+              var index,
 
                 previousNode = $element[0],     // node that cloned nodes should be inserted after
                                                 // initialized to the comment node anchor
@@ -346,8 +356,16 @@
                   // found previously seen block
                   block = lastBlockMap[trackById];
                   delete lastBlockMap[trackById];
+
+                  // must update block here because some data we stored may change.
+                  if(groupByFn) {
+                    block.group = groupName;
+                  }
+                  block.key = key;
+                  block.value = value;
+
                   nextBlockMap[trackById] = block;
-                  nextBlockOrder[index] = block
+                  nextBlockOrder[index] = block;
                 } else if(nextBlockMap[trackById]) {
                   //if collision detected. restore lastBlockMap and throw an error
                   nextBlockOrder.forEach(function(block) {
@@ -365,7 +383,7 @@
                   }
                 }
               }
-              console.log('nextBlockOrder: ', nextBlockOrder);
+              console.log('nextBlockOrder: ', nextBlockOrder, 'group: ', group);
               // only resort nextBlockOrder when group found
               if(group && group.length > 0) {
 

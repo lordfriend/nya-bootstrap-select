@@ -112,7 +112,4 @@ angular.module('demoApp',['nya.bootstrap.select'])
     };
     $scope.model6 = $scope.changeModelArray('model6', 'options6');
 
-    $('#ngOptions-track-by-example').on('change', function(){
-      console.log($('#ngOptions-track-by-example').val());
-    });
   });

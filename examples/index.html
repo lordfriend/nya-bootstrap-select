@@ -47,12 +47,11 @@
       <p class="alert-info"> You have select {{staticModel}}</p>
       <p class="alert-info"> options4 is {{options4}}</p>
       <button ng-click="changeGroups('options4')">Change Option</button>
-      <!--<ol id="static-options" class="nya-bs-select" ng-model="staticModel" data-container="body">-->
-        <!--<li value="{{option}}" nya-bs-option="option in options4 group by option.group">-->
-          <!--{{option}}-->
-          <!--{{$group}}-->
-        <!--</li>-->
-      <!--</ol>-->
+      <ol id="static-options" class="nya-bs-select" ng-model="staticModel" data-container="body">
+        <li value="{{option}}" ng-repeat="option in options4 track by option.name">
+          {{option}}
+        </li>
+      </ol>
     </form>
   </section>
   <section>
@@ -84,10 +83,10 @@
 </footer>
 
 
-<script src="../bower_components/jquery/dist/jquery.js"></script>
+<!--<script src="../bower_components/jquery/dist/jquery.js"></script>-->
 <script src="../bower_components/angular/angular.js"></script>
-<script src="../bower_components/bootstrap-css/js/bootstrap.js"></script>
-<script src="../bower_components/bootstrap-select/bootstrap-select.js"></script>
+<!--<script src="../bower_components/bootstrap-css/js/bootstrap.js"></script>-->
+<!--<script src="../bower_components/bootstrap-select/bootstrap-select.js"></script>-->
 
 <script src="../src/nya-bootstrap-select.js"></script>
 
