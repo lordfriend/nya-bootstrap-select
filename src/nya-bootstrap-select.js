@@ -176,8 +176,15 @@
     .controller('nyaBsSelectCtrl', ['$scope', function($scope){
       var self = this;
 
+      // keyIdentifier and valueIdentifier are set by nyaBsOption directive
+      // used by nyaBsSelect directive to retrieve key and value from each nyaBsOption's child scope.
+      self.keyIdentifier = null;
+      self.valueIdentifier = null;
+
+
+
     }])
-    .directive('nyaBsSelect', ['$parse', function ($parse) {
+    .directive('nyaBsSelect', ['$parse', '$document', function ($parse, $document) {
 
       var DROPDOWN_TOGGLE = '<button class="btn dropdown-toggle">' +
         '<span class="pull-left filter-option"></span>' +
@@ -185,6 +192,40 @@
         '</button>';
 
       var DROPDOWN_MENU = '<ul class="dropdown-menu-no-style"></ul>';
+
+      /**
+       * filter the event target for the nya-bs-option element.
+       * Use this method with event delegate. (attach a event handler on an parent element and listen the special children elements)
+       * @param target event.target node
+       * @param parent {object} the parent, where the event handler attached.
+       * @param selector {string}|{object} a class or DOM element
+       * @return the filtered target or null if no element satisfied the selector.
+       */
+      var filterTarget = function(target, parent, selector) {
+        var elem = target,
+          className, type = typeof selector;
+
+        if(target == parent) {
+          return null;
+        } else {
+          do {
+            if(type === 'string') {
+              className = ' ' + elem.className + ' ';
+              if(elem.nodeType === 1 && className.replace(/[\t\r\n\f]/g, ' ').indexOf(selector) >= 0) {
+                return elem;
+              }
+            } else {
+              if(elem == selector) {
+                return elem;
+              }
+            }
+
+          } while((elem = elem.parentNode) && elem != parent && elem.nodeType !== 9);
+
+          return null;
+        }
+
+      };
 
       return {
         restrict: 'ECA',
@@ -204,21 +245,85 @@
           dropdownMenu.append(options);
           tElement.append(dropdownToggle);
           tElement.append(dropdownMenu);
-          return function nyaBsSelectLink (scope, element, attrs, ctrls) {
+          return function nyaBsSelectLink ($scope, $element, $attrs, ctrls) {
             var BS_ATTR = ['container', 'countSelectedText', 'dropupAuto', 'header', 'hideDisabled', 'selectedTextFormat', 'size', 'showSubtext', 'showIcon', 'showContent', 'style', 'title', 'width', 'disabled'];
             var ngCtrl = ctrls[0];
             var nyaBsSelectCtrl = ctrls[1];
-            scope.$watch(attrs.bsOptions, function(options) {
+            $scope.$watch($attrs.bsOptions, function(options) {
               if(angular.isUndefined(options)) {
                 return;
               }
               nyaBsSelectCtrl.bsOptions = options;
             }, true);
 
-            dropdownMenu.on('click', function(event) {
-//              console.log('event obj', event);
-              console.log('target scope', jqLite(event.target).scope());
+            dropdownMenu.on('click', function menuEventHandler (event) {
+
+              var nyaBsOptionNode = filterTarget(event.target, dropdownMenu[0], 'nya-bs-option'),
+                nyaBsOption,
+                scopeOfOption,
+                value,
+                viewValue,
+                index;
+              console.log(nyaBsOptionNode);
+              if(nyaBsOptionNode !== null) {
+                nyaBsOption = jqLite(nyaBsOptionNode);
+                // if user specify the value attribute. we should use the value attribute
+                // otherwise, use the valueIdentifier specified field in target scope
+                if(!(value = nyaBsOption.attr('value'))) {
+                  if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
+                    // retrieve the scope
+                    scopeOfOption = nyaBsOption.scope();
+                    // valueIdentifier is prior to keyIdentifier
+                    value = scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
+                  } else {
+                    // if value attribute not exists and nya-bs-option is static. try to retrieve text node as value.
+                    // but this mechanics is inconsistency because it relies on the children element structure.
+                    value = nyaBsOption.find('a').text();
+                  }
+                }
+
+                if(value) {
+                  if($element.multiply) {
+                    viewValue = ngCtrl.$modelValue || [];
+                    index = viewValue.indexOf(value);
+                    if(index === -1) {
+                      // check element
+                      viewValue.push(value);
+                      nyaBsOption.addClass('selected');
+                    } else {
+                      // uncheck element
+                      viewValue.splice(index, 1);
+                      nyaBsOption.removeClass('selected');
+                    }
+
+                  } else {
+                    $element.children().removeClass('selected');
+                    viewValue = value;
+                    nyaBsOption.addClass('selected');
+                  }
+                  console.log(viewValue);
+                  ngCtrl.$setViewValue(viewValue);
+                  $scope.$digest();
+                }
+
+                if(!$element.multiply) {
+                  // in single selection mode. close the dropdown menu
+                  dropdownMenu.removeClass('open');
+                }
+              }
             });
+
+            // if click the outside of dropdown menu, close the dropdown menu
+            $document.on('click', function(event) {
+//              console.log('event', event);
+//              console.log('document click', filterTarget(event.target, $document[0], dropdownMenu[0]));
+              if(filterTarget(event.target, $element[0], dropdownMenu[0]) === null) {
+                console.log('click outside');
+                dropdownMenu.removeClass('open');
+              }
+            });
+
+
           };
         }
       };
@@ -235,6 +340,7 @@
         terminal: true,
         require: '^nyaBsSelect',
         compile: function nyaBsOptionCompile (tElement, tAttrs) {
+
           var expression = tAttrs.nyaBsOption;
           var nyaBsOptionEndComment = document.createComment(' end nyaBsOption: ' + expression + ' ');
           var match = expression.match(BS_OPTION_REGEX);
@@ -287,6 +393,14 @@
                 locals[valueIdentifier] = value;
                 return groupByExpGetter($scope, locals);
               }
+            }
+
+            // set keyIdentifier and valueIdentifier property of nyaBsSelectCtrl
+            if(keyIdentifier) {
+              ctrl.keyIdentifier = keyIdentifier;
+            }
+            if(valueIdentifier) {
+              ctrl.valueIdentifier = valueIdentifier;
             }
 
             // Store a list of elements from previous run. This is a hash where key is the item from the
@@ -344,7 +458,6 @@
                 key = (collection === collectionKeys) ? index : collectionKeys[index];
                 value = collection[key];
                 trackById = trackByIdFn(key, value, index);
-                console.log('trackById: ', trackById);
                 if(groupByFn) {
                   groupName = groupByFn(key, value);
                   if(group.indexOf(groupName) === -1 && groupName) {
@@ -416,6 +529,10 @@
                     clone[clone.length++] = endNode;
 
                     jqLite(previousNode).after(clone);
+
+                    // add nya-bs-option class
+
+                    clone.addClass('nya-bs-option');
 
                     previousNode = endNode;
                     // Note: We only need the first/last node of the cloned nodes.

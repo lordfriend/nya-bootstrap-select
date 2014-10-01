@@ -66,9 +66,16 @@
       <p class="alert-info"> options4 is {{options4}}</p>
       <button ng-click="changeGroups('options4')">Change Option</button>
       <ol id="track_by_examples" class="nya-bs-select" ng-model="staticModel" data-container="body">
-        <li value="{{option}}" nya-bs-option="option in options4 group by option.group track by option.name">
-          {{option}}
-          {{$group}}
+        <li value="{{option}}" nya-bs-option="option in options4 group by option.group track by option.name" style="padding:5px; background: green;">
+          <a style="padding: 10px; background: red;">
+            <span style="padding:5px; background: blue;">
+              <strong>{{option}}</strong>
+            </span>
+          </a>
+          <span>{{$group}}</span>
+        </li>
+        <li style="background: yellow; padding: 15px;">
+          not a nya-bs-option element
         </li>
       </ol>
     </form>
