@@ -180,8 +180,10 @@
       // used by nyaBsSelect directive to retrieve key and value from each nyaBsOption's child scope.
       self.keyIdentifier = null;
       self.valueIdentifier = null;
+      self.isMultiple = false;
 
-
+      // Should be override by nyaBsSelect directive and called by nyaBsOption directive when collection is changed.
+      self.onCollectionChange = function(){};
 
     }])
     .directive('nyaBsSelect', ['$parse', '$document', function ($parse, $document) {
@@ -227,9 +229,22 @@
 
       };
 
+      var contains = function(array, element) {
+        var length = array.length,
+          i;
+        if(length === 0) {
+          return false;
+        }
+        for(i = 0;i < length; i++) {
+          if(angular.equals(element, array[i])) {
+            return true;
+          }
+        }
+        return false;
+      };
+
       return {
         restrict: 'ECA',
-        scope: true,
         require: ['ngModel', 'nyaBsSelect'],
         controller: 'nyaBsSelectCtrl',
         compile: function nyaBsSelectCompile (tElement, tAttrs){
@@ -245,16 +260,90 @@
           dropdownMenu.append(options);
           tElement.append(dropdownToggle);
           tElement.append(dropdownMenu);
+
+          var isMultiple = typeof tAttrs.multiple !== 'undefined';
+
           return function nyaBsSelectLink ($scope, $element, $attrs, ctrls) {
             var BS_ATTR = ['container', 'countSelectedText', 'dropupAuto', 'header', 'hideDisabled', 'selectedTextFormat', 'size', 'showSubtext', 'showIcon', 'showContent', 'style', 'title', 'width', 'disabled'];
             var ngCtrl = ctrls[0];
             var nyaBsSelectCtrl = ctrls[1];
+
+            var valueExpFn,
+              valueExpGetter = $parse(nyaBsSelectCtrl.valueExp);
+            if(nyaBsSelectCtrl.valueExp) {
+              valueExpFn = function(scope, locals) {
+                return valueExpGetter(scope, locals);
+              };
+            }
+
             $scope.$watch($attrs.bsOptions, function(options) {
               if(angular.isUndefined(options)) {
                 return;
               }
               nyaBsSelectCtrl.bsOptions = options;
             }, true);
+
+            if(isMultiple) {
+              nyaBsSelectCtrl.isMultiple = true;
+            }
+
+            /**
+             * Do some check on modelValue. remove no existing value
+             * @param values
+             */
+            nyaBsSelectCtrl.onCollectionChange = function (values) {
+
+              var valuesForSelect = [],
+                index,
+                modelValue = ngCtrl.$modelValue;
+
+              if(!modelValue) {
+                return;
+              }
+
+              if(!values || values.length === 0) {
+                if(isMultiple) {
+                  modelValue = [];
+                } else {
+                  modelValue = null;
+                }
+              } else {
+
+                if(valueExpFn) {
+                  for(index = 0; index < values.length; index++) {
+                    valuesForSelect.push(valueExpFn($scope, values[index]));
+                  }
+                } else {
+                  for(index = 0; index < values.length; index++) {
+                    if(nyaBsSelectCtrl.valueIdentifier) {
+                      valuesForSelect.push(values[index][nyaBsSelectCtrl.valueIdentifier]);
+                    } else if(nyaBsSelectCtrl.keyIdentifier) {
+                      valuesForSelect.push(values[index][nyaBsSelectCtrl.keyIdentifier]);
+                    }
+                  }
+
+                }
+
+                if(isMultiple) {
+                  for(index = 0; index < modelValue.length; index++) {
+                    if(!contains(valuesForSelect, modelValue[index])) {
+                      modelValue.splice(index, 1);
+                      index--;
+                    }
+                  }
+                } else {
+                  if(!contains(valuesForSelect, modelValue)) {
+                    modelValue = valuesForSelect[0];
+                  }
+                }
+
+              }
+
+              ngCtrl.$setViewValue(modelValue);
+
+            };
+
+            // view --> model
 
             dropdownMenu.on('click', function menuEventHandler (event) {
 
@@ -269,44 +358,47 @@
                 nyaBsOption = jqLite(nyaBsOptionNode);
                 // if user specify the value attribute. we should use the value attribute
                 // otherwise, use the valueIdentifier specified field in target scope
-                if(!(value = nyaBsOption.attr('value'))) {
+
+                if(valueExpFn) {
+                  scopeOfOption = nyaBsOption.scope();
+                  value = valueExpFn(scopeOfOption);
+                } else {
                   if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
-                    // retrieve the scope
                     scopeOfOption = nyaBsOption.scope();
-                    // valueIdentifier is prior to keyIdentifier
                     value = scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
                   } else {
-                    // if value attribute not exists and nya-bs-option is static. try to retrieve text node as value.
-                    // but this mechanics is inconsistency because it relies on the children element structure.
-                    value = nyaBsOption.find('a').text();
+                    value = nyaBsOption.attr('value');
                   }
                 }
 
                 if(value) {
-                  if($element.multiply) {
+                  if(isMultiple) {
                     viewValue = ngCtrl.$modelValue || [];
                     index = viewValue.indexOf(value);
                     if(index === -1) {
                       // check element
                       viewValue.push(value);
                       nyaBsOption.addClass('selected');
+
                     } else {
                       // uncheck element
                       viewValue.splice(index, 1);
                       nyaBsOption.removeClass('selected');
+
                     }
 
                   } else {
                     $element.children().removeClass('selected');
                     viewValue = value;
                     nyaBsOption.addClass('selected');
+
                   }
                   console.log(viewValue);
                   ngCtrl.$setViewValue(viewValue);
                   $scope.$digest();
                 }
 
-                if(!$element.multiply) {
+                if(!isMultiple) {
                   // in single selection mode. close the dropdown menu
                   dropdownMenu.removeClass('open');
                 }
@@ -315,14 +407,62 @@
 
             // if click the outside of dropdown menu, close the dropdown menu
             $document.on('click', function(event) {
-//              console.log('event', event);
-//              console.log('document click', filterTarget(event.target, $document[0], dropdownMenu[0]));
               if(filterTarget(event.target, $element[0], dropdownMenu[0]) === null) {
-                console.log('click outside');
+
                 dropdownMenu.removeClass('open');
               }
             });
 
+
+            // model --> view
+
+            ngCtrl.$render = function() {
+              var modelValue = ngCtrl.$modelValue,
+                index,
+                bsOptionElements = dropdownMenu.children(),
+                length = bsOptionElements.length,
+                value,
+                valueIdentifier = nyaBsSelectCtrl.valueIdentifier,
+                keyIdentifier = nyaBsSelectCtrl.keyIdentifier,
+                scopeOfOption;
+              if(typeof modelValue === 'undefined') {
+                // if modelValue is undefined. uncheck all option
+                for(index = 0; index < length; index++) {
+                  if(bsOptionElements.eq(index).hasClass('nya-bs-option')) {
+                    bsOptionElements.eq(index).removeClass('selected');
+                  }
+                }
+              }
+
+              for(index = 0; index < length; index++) {
+                if(bsOptionElements.eq(index).hasClass('nya-bs-option')) {
+                  if(valueExpFn) {
+                    scopeOfOption = bsOptionElements.eq(index).scope();
+                    value = valueExpFn(scopeOfOption);
+                  } else if(valueIdentifier || keyIdentifier) {
+                    scopeOfOption = bsOptionElements.eq(index).scope();
+                    value = scopeOfOption[valueIdentifier] || scopeOfOption[keyIdentifier];
+                  } else {
+                    value = bsOptionElements.eq(index).attr('value');
+                  }
+
+                  if(isMultiple) {
+                    if(contains(modelValue, value)) {
+                      bsOptionElements.eq(index).addClass('selected');
+                    } else {
+                      bsOptionElements.eq(index).removeClass('selected');
+                    }
+                  } else {
+                    if(angular.equals(modelValue, value)) {
+                      bsOptionElements.eq(index).addClass('selected');
+                    } else {
+                      bsOptionElements.eq(index).removeClass('selected');
+                    }
+                  }
+
+                }
+              }
+            }
 
           };
         }
@@ -349,6 +489,10 @@
             throw new Error('invalid expression');
           }
 
+          // we want to keep our expression comprehensible so we don't use 'select as label for value in collection' expression.
+          var valueExp = tAttrs.value,
+            valueExpGetter = valueExp ? $parse(valueExp) : null;
+
           var valueIdentifier = match[3] || match[1],
             keyIdentifier = match[2],
             collectionExp = match[4],
@@ -373,6 +517,9 @@
             };
           }
           return function nyaBsOptionLink($scope, $element, $attr, ctrl, $transclude) {
+            var valueExpFn,
+              valueExpLocals = {};
+
             if(trackByExpGetter) {
               trackByIdExpFn = function(key, value, index) {
                 // assign key, value, and $index to the locals so that they can be used in hash functions
@@ -403,6 +550,17 @@
               ctrl.valueIdentifier = valueIdentifier;
             }
 
+            if(valueExpGetter) {
+              ctrl.valueExp = valueExp;
+              valueExpFn = function(key, value) {
+                if(keyIdentifier) {
+                  valueExpLocals[keyIdentifier] = key;
+                }
+                valueExpLocals[valueIdentifier] = value;
+                return valueExpGetter($scope, valueExpLocals);
+              }
+            }
+
             // Store a list of elements from previous run. This is a hash where key is the item from the
             // iterator, and the value is objects with following properties.
             //   - scope: bound scope
@@ -428,6 +586,7 @@
                 // lastBlockMap on the next iteration.
                 nextBlockMap = createMap(),
                 nextBlockOrder,
+                values = [], // use for the nyaBsSelect to check modelValue valid
                 block,
                 groupName,
                 nextNode,
@@ -458,6 +617,13 @@
                 key = (collection === collectionKeys) ? index : collectionKeys[index];
                 value = collection[key];
                 trackById = trackByIdFn(key, value, index);
+
+                values.push({});
+                if(keyIdentifier) {
+                  values[index][keyIdentifier] = key;
+                }
+                values[index][valueIdentifier] = value;
+
                 if(groupByFn) {
                   groupName = groupByFn(key, value);
                   if(group.indexOf(groupName) === -1 && groupName) {
@@ -504,11 +670,15 @@
               }
 
               console.log('nextBlockOrder: ', nextBlockOrder, 'collectionLength: ', collectionLength);
+
+
+              // remove DOM nodes
               for( var blockKey in lastBlockMap) {
                 block = lastBlockMap[blockKey];
                 getBlockNodes(block.clone).remove();
                 block.scope.$destroy();
               }
+
               for(index = 0; index < collectionLength; index++) {
                 block = nextBlockOrder[index];
                 if(block.scope) {
@@ -544,6 +714,9 @@
                   });
                 }
               }
+
+              ctrl.onCollectionChange(values);
+
               lastBlockMap = nextBlockMap;
             });
           };
