@@ -3,6 +3,8 @@
 **nya-bootstrap-select 2** is an AngularJS directive set inspired by @silviomoreto 's [bootstrap-select](https://github.com/silviomoreto/bootstrap-select) .  With this directive you can built an **bootstrap-select** with data-binding feature of angularjs. 
 The 2.x version is totally written. while keep the most feature of **bootstrap-select** but no longer depends jquery and bootstrap-select plugin.
 
+Require: angular 1.2+
+
 ##Usage##
 
 1. Install
@@ -28,7 +30,7 @@ The 2.x version is totally written. while keep the most feature of **bootstrap-s
 	</ol>
 	```
 	
-**Migrate from 1.x**  If you have used the previous version of this directive. you need to replace the old code in the template. See the examples below
+**Migrate from 1.x**  If you have used the previous version of this directive. you need to replace the old code in the template.  See the examples below
 
 ##Examples##
 

@@ -48,7 +48,7 @@
       <p class="alert-info"> options4 is {{options4}}</p>
       <button ng-click="changeGroups('options4')">Change Option</button>
       <ol id="static-options" class="nya-bs-select" ng-model="staticModel2" data-container="body">
-        <li value="{{option}}" ng-repeat="option in options4 track by option.name" class="nya-bs-option">
+        <li value="{{option}}" ng-repeat="option in options4 | filter:nameFilter track by option.name" class="nya-bs-option">
           {{option}}
         </li>
       </ol>
@@ -66,12 +66,11 @@
       <p class="alert-info"> options4 is {{options4}}</p>
       <button ng-click="changeGroups('options4')">Change Option</button>
       <button ng-click="changeModel('staticModel', 'options4')">Change model</button>
-      <ol id="track_by_examples" class="nya-bs-select" ng-model="staticModel" data-container="body" multiple>
-        <li nya-bs-option="option in options4 group by option.group track by option.name" style="padding:5px; background: green;">
-          <a style="padding: 10px; background: red;">
-            <span style="padding:5px; background: blue;">
-              <strong>{{option}}</strong>
-            </span>
+      <input type="text" ng-model="nameFilter"/>
+      <ol id="track_by_examples" class="nya-bs-select" ng-model="staticModel" data-container="body" multiple data-live-search="true">
+        <li nya-bs-option="option in options4 | filter:nameFilter group by option.group track by option.name" style="padding:5px; background: green;">
+          <a>
+            <span class="test">{{option}}</span>
           </a>
           <span>{{$group}}</span>
         </li>

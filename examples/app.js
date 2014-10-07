@@ -112,5 +112,5 @@ angular.module('demoApp',['nya.bootstrap.select'])
     };
     $scope.model6 = $scope.changeModelArray('model6', 'options6');
 
-    $scope.staticModel = ['November', 'Oscar'];
+    $scope.changeModel('staticModel', 'options4');
   });
