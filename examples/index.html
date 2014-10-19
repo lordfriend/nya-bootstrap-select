@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <link rel="stylesheet" href="../bower_components/bootstrap-css/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="../dist/css/nya-bs-select.css"/>
   <!--<link rel="stylesheet" href="../bower_components/bootstrap-select/bootstrap-select.css"/>-->
   <link rel="stylesheet" href="main.css"/>
 </head>
@@ -37,24 +38,6 @@
 
   </section>
   <section>
-    <h1 id="example" class="page-header">Example</h1>
-
-    <h3>Static options</h3>
-
-    <p>The select has three hard coded options.</p>
-
-    <form class="form-inline">
-      <p class="alert-info"> You have select {{staticModel}}</p>
-      <p class="alert-info"> options4 is {{options4}}</p>
-      <button ng-click="changeGroups('options4')">Change Option</button>
-      <ol id="static-options" class="nya-bs-select" ng-model="staticModel2" data-container="body">
-        <li value="{{option}}" ng-repeat="option in options4 | filter:nameFilter track by option.name" class="nya-bs-option">
-          {{option}}
-        </li>
-      </ol>
-    </form>
-  </section>
-  <section>
     <h1 id="example2" class="page-header">Example</h1>
 
     <h3>Static options</h3>
@@ -68,14 +51,12 @@
       <button ng-click="changeModel('staticModel', 'options4')">Change model</button>
       <input type="text" ng-model="nameFilter"/>
       <ol id="track_by_examples" class="nya-bs-select" ng-model="staticModel" data-container="body" multiple data-live-search="true">
-        <li nya-bs-option="option in options4 | filter:nameFilter group by option.group track by option.name" style="padding:5px; background: green;">
+        <li nya-bs-option="option in options4 group by option.group track by option.name">
+          <span class="dropdown-header">{{$group}}</span>
           <a>
-            <span class="test">{{option}}</span>
+            {{option.name}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
           </a>
-          <span>{{$group}}</span>
-        </li>
-        <li style="background: yellow; padding: 15px;">
-          not a nya-bs-option element
         </li>
       </ol>
     </form>
@@ -95,8 +76,10 @@
 <!--<script src="../bower_components/bootstrap-css/js/bootstrap.js"></script>-->
 <!--<script src="../bower_components/bootstrap-select/bootstrap-select.js"></script>-->
 
-<script src="../src/nya-bootstrap-select.js"></script>
-
+<script src="../src/nya-bs-public.js"></script>
+<script src="../src/nya-bs-select-ctrl.js"></script>
+<script src="../src/nya-bs-select.js"></script>
+<script src="../src/nya-bs-option.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

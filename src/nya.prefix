@@ -1,0 +1,8 @@
+/**
+ * nya-bootstrap-select v2.0.0+alpha001
+ * Copyright 2014 nyasoft
+ * Licensed under MIT license
+ */
+
+(function(){
+  'use strict';

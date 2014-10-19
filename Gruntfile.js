@@ -11,6 +11,14 @@ module.exports = function(grunt) {
   //Configure grunt
   grunt.initConfig({
 
+    less: {
+      main: {
+        files: {
+          'dist/css/nya-bs-select.css': 'less/nya-bs-select.less'
+        }
+      }
+    },
+
     // The actual grunt server settings
     connect: {
       options: {
@@ -32,6 +40,13 @@ module.exports = function(grunt) {
 
     //Watch files for changes, and run tasks base on the changed files.
     watch: {
+      css: {
+        files: ['less/*.less'],
+        tasks: ['newer:less:main'],
+        options: {
+          livereload: true
+        }
+      },
       js: {
         files: ['src/*.js'],
         tasks: ['newer:jshint:all'],
@@ -85,6 +100,7 @@ module.exports = function(grunt) {
 
   // Creates the 'serve' task
   grunt.registerTask('serve', [
+    'less:main',
     'connect:livereload',
     'watch'
   ]);
