@@ -49,7 +49,6 @@
       <p class="alert-info"> options4 is {{options4}}</p>
       <button ng-click="changeGroups('options4')">Change Option</button>
       <button ng-click="changeModel('staticModel', 'options4')">Change model</button>
-      <input type="text" ng-model="nameFilter"/>
       <ol id="track_by_examples" class="nya-bs-select" ng-model="staticModel" data-container="body" multiple data-live-search="true">
         <li nya-bs-option="option in options4 group by option.group track by option.name">
           <span class="dropdown-header">{{$group}}</span>
@@ -58,6 +57,44 @@
             <span class="glyphicon glyphicon-ok check-mark"></span>
           </a>
         </li>
+      </ol>
+    </form>
+  </section>
+  <section>
+    <h1 id="button-class" class="page-header">Button Class</h1>
+
+    <h3>Color Class</h3>
+
+    <p>set <code>btn-primary</code>, <code>btn-success</code>, <code>btn-info</code>, <code>btn-warning</code>, <code>btn-danger</code> to nya-bs-select</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select btn-primary" ng-model="staticModel">
+        <li class="nya-bs-option" value="a"><a>
+          Alpha
+          <span class="glyphicon glyphicon-ok check-mark"></span>
+        </a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+      <ol class="nya-bs-select btn-success" ng-model="staticModel">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+      <ol class="nya-bs-select btn-info" ng-model="staticModel">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+      <ol class="nya-bs-select btn-warning" ng-model="staticModel">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+      <ol class="nya-bs-select btn-danger" ng-model="staticModel">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
     </form>
   </section>

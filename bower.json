@@ -10,8 +10,7 @@
     "examples"
   ],
   "dependencies": {
-    "angular": "*",
-    "bootstrap-select": "*"
+    "angular": ">=1.2"
   },
   "devDependencies": {
     "bootstrap-css": "~3.0",

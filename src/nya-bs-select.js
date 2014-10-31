@@ -53,16 +53,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
   };
 
   var getClassList = function(element) {
-    var classList = [],
-      className;
-    if(typeof element === 'string') {
+    var classList,
       className = element.className.replace(/[\t\r\n\f]/g, ' ').trim();
-      classList = className.split(' ');
-      for(var i = 0; i < classList.length; i++) {
-        if(/\s+/.test(classList[i])) {
-          classList.splice(i, 1);
-          i--;
-        }
+    classList = className.split(' ');
+    for(var i = 0; i < classList.length; i++) {
+      if(/\s+/.test(classList[i])) {
+        classList.splice(i, 1);
+        i--;
       }
     }
     return classList;
@@ -71,19 +68,20 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
   /**
    * Current support only drill down one level.
+   * case insensitive
    * @param element
    * @param keyword
    */
   var hasKeyword = function(element, keyword) {
     var childElements,
       index, length;
-    if(element.text().indexOf(keyword) !== -1) {
+    if(element.text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
       return true;
     } else {
       childElements = element.children();
       length = childElements.length;
       for(index = 0; index < length; index++) {
-        if(childElements.eq(index).text().indexOf(keyword) !== -1) {
+        if(childElements.eq(index).text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
           return true;
         }
       }
@@ -107,8 +105,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         noSearchResult,
         classList;
 
-      classList = getClassList(tElement);
-
+      classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
         if(/btn-(?:primary)|(?:info)|(?:success)|(?:warning)|(?:danger)|(?:inverse)/.test(className)) {
           tElement.removeClass(className);
@@ -143,7 +140,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
       tElement.append(dropdownContainer);
 
       return function nyaBsSelectLink ($scope, $element, $attrs, ctrls) {
-        var BS_ATTR = ['container', 'countSelectedText', 'dropupAuto', 'header', 'hideDisabled', 'selectedTextFormat', 'size', 'showSubtext', 'showIcon', 'showContent', 'style', 'title', 'width', 'disabled'];
+
         var ngCtrl = ctrls[0];
         var nyaBsSelectCtrl = ctrls[1];
 
@@ -154,13 +151,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             return valueExpGetter(scope, locals);
           };
         }
-
-        $scope.$watch($attrs.bsOptions, function(options) {
-          if(angular.isUndefined(options)) {
-            return;
-          }
-          nyaBsSelectCtrl.bsOptions = options;
-        }, true);
 
         if(isMultiple) {
           nyaBsSelectCtrl.isMultiple = true;
@@ -227,13 +217,15 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         // view --> model
 
         dropdownMenu.on('click', function menuEventHandler (event) {
-
+          if(jqLite(event.target).hasClass('dropdown-header')) {
+            return;
+          }
           var nyaBsOptionNode = filterTarget(event.target, dropdownMenu[0], 'nya-bs-option'),
             nyaBsOption,
             value,
             viewValue,
+            modelValue = ngCtrl.$modelValue,
             index;
-          console.log(nyaBsOptionNode);
           if(nyaBsOptionNode !== null) {
             nyaBsOption = jqLite(nyaBsOptionNode);
             // if user specify the value attribute. we should use the value attribute
@@ -243,7 +235,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
             if(value) {
               if(isMultiple) {
-                viewValue = ngCtrl.$modelValue || [];
+                viewValue = Array.isArray(modelValue) ? modelValue : [];
                 index = viewValue.indexOf(value);
                 if(index === -1) {
                   // check element
@@ -258,7 +250,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
                 }
 
               } else {
-                $element.children().removeClass('selected');
+                dropdownMenu.children().removeClass('selected');
                 viewValue = value;
                 nyaBsOption.addClass('selected');
 
@@ -459,7 +451,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
                     }
                   } else {
-                    if(deepEquals(modelValue)) {
+                    if(deepEquals(modelValue, value)) {
                       optionTitle = nyaBsOption.attr('title');
                       if(optionTitle) {
                         selection.push(document.createTextNode(optionTitle));

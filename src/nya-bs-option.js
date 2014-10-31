@@ -95,7 +95,6 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
         }
 
-        nyaBsSelectCtrl.setCollectionExp(collectionExp);
 
         // Store a list of elements from previous run. This is a hash where key is the item from the
         // iterator, and the value is objects with following properties.
@@ -127,7 +126,10 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
             groupName,
             nextNode,
             group,
-            lastGroup;
+            lastGroup,
+
+            values = [],
+            valueObj; // the collection value
 
           if(groupByFn) {
             group = [];
@@ -154,6 +156,15 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
             key = (collection === collectionKeys) ? index : collectionKeys[index];
             value = collection[key];
             trackById = trackByIdFn(key, value, index);
+
+            // copy the value with scope like structure to notify the select directive.
+            valueObj = {};
+            if(keyIdentifier) {
+              valueObj[keyIdentifier] = key;
+            }
+
+            valueObj[valueIdentifier] = value;
+            values.push(valueObj);
 
             if(groupByFn) {
               groupName = groupByFn(key, value);
@@ -277,6 +288,8 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
           }
 
           lastBlockMap = nextBlockMap;
+
+          nyaBsSelectCtrl.onCollectionChange(values);
         });
       };
     }
