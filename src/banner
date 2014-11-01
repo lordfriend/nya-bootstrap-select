@@ -1,0 +1,5 @@
+/**
+ * <%= pkg.name %> v<%= pkg.version %>
+ * Copyright 2014 Nyasoft
+ * Licensed under MIT license
+ */

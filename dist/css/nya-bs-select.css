@@ -1,8 +1,14 @@
+/**
+ * nya-bootstrap-select v2.0.0
+ * Copyright 2014 Nyasoft
+ * Licensed under MIT license
+ */
 .nya-bs-select {
   /*width: 220px\9; IE8 and below*/
   width: 220px \0;
   /*IE9 and below*/
   padding: 0;
+  margin: 0;
 }
 .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   width: 220px;

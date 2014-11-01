@@ -1,6 +1,6 @@
 nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
-  //00000011111111111111100000000022222222222222200000003333333333333330000000000000004444444444000000000000000000055555555550000000000000000000006666666666000000
+                        //00000011111111111111100000000022222222222222200000003333333333333330000000000000004444444444000000000000000000055555555550000000000000000000006666666666000000
   var BS_OPTION_REGEX = /^\s*(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+group\s+by\s+([\s\S]+?))?(?:\s+track\s+by\s+([\s\S]+?))?\s*$/;
 
   return {
@@ -255,7 +255,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 }
 
                 if(nyaBsSelectCtrl.isMultiple) {
-                  if(contains(ngCtrl.$modelValue, value)) {
+                  if(Array.isArray(ngCtrl.$modelvalue) && contains(ngCtrl.$modelValue, value)) {
                     clone.addClass('selected');
                   }
                 } else {

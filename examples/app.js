@@ -12,7 +12,12 @@ angular.module('demoApp',['nya.bootstrap.select'])
     $scope.options1 = [
       'Alpha',
       'Bravo',
-      'Charlie'
+      'Charlie',
+      'Golf',
+      'Hotel',
+      'Juliet',
+      'Kilo',
+      'Lima'
     ];
 
     $scope.myModel = ['Bravo'];
@@ -26,7 +31,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
       $scope[targetOption] = Object.keys(newOptions);
     };
 
-    $scope.options2 = options.splice(0, 6);
+    $scope.options2 = options.splice(0, 3);
 
     var existInArray = function(value, array) {
       return array.some(function(element){return angular.equals(element, value);});
@@ -98,7 +103,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
       $scope[model] = newModel;
     };
 
-    $scope.changeModel('model4', 'options4');
+    $scope.changeModel('dynModel4', 'options4');
 
     $scope.options6 = [{label: 'Alpha', value: 'alpha', group: 'group1'}, {label: 'Bravo', value: 'bravo', group: 'group1'}, {label: 'Charlie', value: 'charlie', group: 'group1'}];
 

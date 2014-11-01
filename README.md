@@ -88,6 +88,14 @@ Like vanilla `<select>` we can also generate option group with any property in a
 </ol>
 ```
 
+##TODO##
+
+- data-size support
+- data-header support
+- data-container support
+- data-max-options support
+- auto dropup support
+
 ## License ##
 
 Licensed under the MIT license

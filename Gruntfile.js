@@ -11,7 +11,12 @@ module.exports = function(grunt) {
   //Configure grunt
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON('package.json'),
+
     less: {
+      options: {
+        banner: grunt.file.read('src/banner')
+      },
       main: {
         files: {
           'dist/css/nya-bs-select.css': 'less/nya-bs-select.less'
@@ -95,6 +100,36 @@ module.exports = function(grunt) {
         singleRun: true,
         browsers: ['Chrome', 'Firefox', 'PhantomJS']
       }
+    },
+
+    concat: {
+      options:{
+        banner: grunt.file.read('src/banner')
+      },
+      dist: {
+        src: ['src/nya.prefix', 'src/nya-bs-public.js', 'src/nya-bs-select-ctrl.js', 'src/nya-bs-select.js', 'src/nya-bs-option.js', 'src/nya.suffix'],
+        dest: 'dist/js/nya-bs-select.js'
+      }
+    },
+
+    uglify: {
+      options: {
+        banner: grunt.file.read('src/banner')
+      },
+      dist: {
+        src: ['dist/js/nya-bs-select.js'],
+        dest: 'dist/js/nya-bs-select.min.js'
+      }
+    },
+
+    cssmin: {
+      options: {
+        banner: grunt.file.read('src/banner')
+      },
+      dist: {
+        src: ['dist/css/nya-bs-select.css'],
+        dest: 'dist/css/nya-bs-select.min.css'
+      }
     }
   });
 
@@ -110,4 +145,12 @@ module.exports = function(grunt) {
 
   // Creates the 'test-local' task
   grunt.registerTask('test-local', ['karma:locally']);
+
+  // Build distribution files
+  grunt.registerTask('build', [
+    'less:main',
+    'concat:dist',
+    'uglify:dist',
+    'cssmin:dist'
+  ])
 };

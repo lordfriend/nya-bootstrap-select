@@ -175,9 +175,25 @@ var contains = function(array, element) {
   return false;
 };
 
+var indexOf = function(array, element) {
+  var length = array.length,
+    i;
+  if(length === 0) {
+    return -1;
+  }
+  for(i = 0; i < length; i++) {
+    if(deepEquals(element, array[i])) {
+      return i;
+    }
+  }
+  return -1;
+};
+
 // map global property to local variable.
 var jqLite = angular.element;
 
 var deepEquals = angular.equals;
+
+var deepCopy = angular.copy;
 
 var nyaBsSelect = angular.module('nya.bootstrap.select', []);

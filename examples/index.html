@@ -5,9 +5,8 @@
   <title>nya-bootstrap-select demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <link rel="stylesheet" href="../bower_components/bootstrap-css/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
   <link rel="stylesheet" href="../dist/css/nya-bs-select.css"/>
-  <!--<link rel="stylesheet" href="../bower_components/bootstrap-select/bootstrap-select.css"/>-->
   <link rel="stylesheet" href="main.css"/>
 </head>
 <body ng-app="demoApp">
@@ -38,19 +37,21 @@
 
   </section>
   <section>
-    <h1 id="example2" class="page-header">Example</h1>
+    <h1 id="dynamic-examples" class="page-header">Dynamic Examples</h1>
 
-    <h3>Static options</h3>
+    <h3>Group Options</h3>
 
-    <p>The select has three hard coded options.</p>
+    <p>If you want show grouped options. we assume you have an property which being used to group by. add <code>group by property</code> after the
+      <code>collection</code> in your <code>nya-bs-option</code> statement</p>
+    <p>add <code>&lt;span class="dropdown-header"&gt;<span>{{</span><span>$group</span><span>}}</span>&lt;/span&gt;</code> before the <code>&lt;a&gt;</code> element</p>
 
     <form class="form-inline">
-      <p class="alert-info"> You have select {{staticModel}}</p>
+      <p class="alert-info"> You have select {{dynModel4}}</p>
       <p class="alert-info"> options4 is {{options4}}</p>
-      <button ng-click="changeGroups('options4')">Change Option</button>
-      <button ng-click="changeModel('staticModel', 'options4')">Change model</button>
-      <ol id="track_by_examples" class="nya-bs-select" ng-model="staticModel" data-container="body" multiple data-live-search="true">
-        <li nya-bs-option="option in options4 group by option.group track by option.name">
+      <button class="btn btn-default" ng-click="changeGroups('options4')">Change Option</button>
+      <button class="btn btn-default" ng-click="changeModel('dynModel4', 'options4')">Change model</button>
+      <ol id="track_by_examples" class="nya-bs-select" ng-model="dynModel4" multiple>
+        <li nya-bs-option="option in options4 group by option.group">
           <span class="dropdown-header">{{$group}}</span>
           <a>
             {{option.name}}
@@ -61,14 +62,16 @@
     </form>
   </section>
   <section>
-    <h1 id="button-class" class="page-header">Button Class</h1>
+    <h1 id="bs-features" class="page-header">Bootstrap-select Features</h1>
+
+    <p>Features borrowed from Bootstrap-select</p>
 
     <h3>Color Class</h3>
 
-    <p>set <code>btn-primary</code>, <code>btn-success</code>, <code>btn-info</code>, <code>btn-warning</code>, <code>btn-danger</code> to nya-bs-select</p>
+    <p>set <code>btn-primary</code>, <code>btn-success</code>, <code>btn-info</code>, <code>btn-warning</code>, <code>btn-danger</code> to <code>nya-bs-select</code></p>
 
     <form class="form-inline">
-      <ol class="nya-bs-select btn-primary" ng-model="staticModel">
+      <ol class="nya-bs-select btn-primary" ng-model="staticModel2">
         <li class="nya-bs-option" value="a"><a>
           Alpha
           <span class="glyphicon glyphicon-ok check-mark"></span>
@@ -76,27 +79,326 @@
         <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
-      <ol class="nya-bs-select btn-success" ng-model="staticModel">
+      <ol class="nya-bs-select btn-success" ng-model="staticModel2">
         <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
-      <ol class="nya-bs-select btn-info" ng-model="staticModel">
+      <ol class="nya-bs-select btn-info" ng-model="staticModel2">
         <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
-      <ol class="nya-bs-select btn-warning" ng-model="staticModel">
+      <ol class="nya-bs-select btn-warning" ng-model="staticModel2">
         <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
-      <ol class="nya-bs-select btn-danger" ng-model="staticModel">
+      <ol class="nya-bs-select btn-danger" ng-model="staticModel2">
         <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
     </form>
+
+    <h3>Live Search</h3>
+
+    <p>Add <code>data-live-search="true"</code> in <code>nya-bs-select</code> directive to add live search support</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="staticModel3" data-live-search="true">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+    <h3>Alternate selection display</h3>
+
+    <p>You can set <code>title</code> attribute on each <code>nya-bs-option</code> as an alternative to display when an option is selected.</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="staticModel4">
+        <li class="nya-bs-option" value="a" title="Option A"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b" title="Option B"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c" title="Option C"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+    <h3>default selection display</h3>
+
+    <p>
+      To display an default information when nothing is selected. just set <code>title</code> attribute in <code>nya-bs-select</code> directive.<br/>
+      <strong>Note: This only works on <code>multiple nya-bs-select</code>. For <code>single nyab-bs-select</code>You should give your model an default value to avoid the default text to display</strong>
+    </p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="staticModel5" title="Choose one of the following" multiple>
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+
+    <h3>selection display format</h3>
+
+    <p>Using the <code>data-selected-text-format</code> attribute on an <code>multiple nya-bs-select</code> you can specify how the selection is displayed.</p>
+    <ul>
+      <li>
+        <p><code>values</code> A comma delimited list of selected values.(default)</p>
+
+        <form class="form-inline">
+          <ol id="values-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="values" multiple>
+            <li nya-bs-option="option in options1">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </form>
+      </li>
+      <li>
+        <p><code>count</code> If one item is selected, then the value is shown, if more than one is selected then the number of selected items is displayed.</p>
+        <form class="form-inline">
+          <ol id="count-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="count" multiple>
+            <li nya-bs-option="option in options1">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </form>
+      </li>
+      <li>
+        <p><code>count > x</code> Where X is the number of items selected when the display format changes from <code>values</code> to
+          <code>count</code></p>
+        <form class="form-inline">
+          <ol id="count-number-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="count>3" multiple>
+            <li nya-bs-option="option in options1">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </form>
+      </li>
+    </ul>
+
+    <h3>Show Option Tick</h3>
+
+    <p>This feature is implemented by yourself. You don't need add show-tick class to <code>nya-bs-select</code>. you just need to add the tick to each <code>nya-bs-option</code></p>
+    <p>For example, if you want use Bootstrap Glyph. You need to add <code>&lt;span class="glyphicon glyphicon-ok check-mark"&gt;&lt;/span&gt;</code> following the text content of a
+      <code>nya-bs-option</code> as a child of <code>&lt;a&gt;&lt;/a&gt;</code></p>
+    <p>If you want to use glyph in font-awesome, you can replace the <code>glyphicon</code> with font-awesome class, but keep the <code>check-mark</code>.</p>
+    <pre>
+      &lt;ol class="nya-bs-select" ng-model="model2"&gt;
+        &lt;li nya-bs-option="option in option1"&gt;
+          &lt;a&gt;
+            <span>{{</span><span>option</span><span>}}</span>
+            <code style="color:red;">&lt;span class="glyphicon glyphicon-ok check-mark"&gt;&lt;/span&gt;</code>
+          &lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ol&gt;
+    </pre>
+
+    <h3>Show Menu Arrow</h3>
+    <p>Just add <code>show-menu-arrow</code> class to <code>nya-bs-select</code></p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select show-menu-arrow" ng-model="model3">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+
+    <h3>Other styles feature</h3>
+    <p>Thanks to the structure of nya-bs-select. you can easy control the look of an option or the width of the directive</p>
+
+    <p>Change any option styles as you like</p>
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="model4">
+        <li nya-bs-option="option in options2">
+          <a ng-style="{color: $index===2 ? 'red': 'black'}">
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+
+    <p>Add <code>col-lg-*</code>, <code>col-md-*</code> or other grid column class to control the width of the directive</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select col-md-4" ng-model="model5">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <ol class="nya-bs-select col-md-6" ng-model="model5">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <ol class="nya-bs-select col-md-2" ng-model="model5">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+
+    <h3>Disable An Option</h3>
+    <p>Add <code>disabled</code> class to any <code>nya-bs-option</code> you want disabled</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="model6" multiple>
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option disabled" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+    <p><strong>Addition Note: Unlike Bootstrap-select, setting <code>disabled</code> attribute on <code>optgroup</code> to disable entire group options is not supported because we don't have
+      <code>optgroup</code> </strong></p>
+
+    <h3>Divider</h3>
+    <p>Add an <code>&lt;li&gt;</code> element without <code>nya-bs-option</code> attribute and class but with <code>divider</code> class in your option list</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="model7">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="divider"></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="d"><a>Delta<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+    <h3>Subtext</h3>
+    <p>Add a subtext on an <code>nya-bs-option</code> is very straightforward because you have full control what you want to display</p>
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="model8">
+        <li nya-bs-option="option in options2">
+          <a>
+            <span>
+              {{option}}
+              <small>option {{$index}}</small>
+            </span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <ol class="nya-bs-select" ng-model="model8">
+        <li nya-bs-option="option in options2">
+          <a>
+            <span>
+              {{option}}
+            </span>
+            <small>option {{$index}}</small>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+    <pre>
+      <span style="color:gray;">
+      &lt;!-- You can put your subtext with any style inside the first child element of &lt;a&gt; --&gt;
+      </span>
+      &lt;ol class="nya-bs-select" ng-model="model2"&gt;
+        &lt;li nya-bs-option="option in option1"&gt;
+          &lt;a&gt;
+            <code style="color:red;">
+              &lt;span&gt;
+                <span>{{</span><span>option</span><span>}}</span>
+                &lt;small&gt;option <span>{{</span><span>$index</span><span>}}</span>&lt;/small&gt;
+              &lt;/span&gt;
+            </code>
+            &lt;span class="glyphicon glyphicon-ok check-mark"&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ol&gt;
+
+      <span style="color:gray;">
+      &lt;!-- You can also put your subtext with any style aside the first child element of &lt;a&gt;. This format will
+        lead the subtext not shown in button. Note: you still need to wrap your option text with &lt;span&gt; or other inline tag
+      --&gt;
+      </span>
+      &lt;ol class="nya-bs-select" ng-model="model2"&gt;
+        &lt;li nya-bs-option="option in option1"&gt;
+          &lt;a&gt;
+            <code style="color:red;">
+              &lt;span&gt;
+              <span>{{</span><span>option</span><span>}}</span>
+              &lt;/span&gt;
+              &lt;small&gt;option <span>{{</span><span>$index</span><span>}}</span>&lt;/small&gt;
+            </code>
+            &lt;span class="glyphicon glyphicon-ok check-mark"&gt;&lt;/span&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ol&gt;
+    </pre>
+
+    <h3>Custom option content</h3>
+    <p>Custom option content is nothing different with subtext.</p>
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="model9">
+        <li class="nya-bs-option" value="a">
+          <a>
+            <span class="label label-success">Alpha</span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+        <li class="nya-bs-option"  value="b">
+          <a>
+            <span class="label label-warning">Bravo</span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+        <li class="nya-bs-option" value="c">
+          <a>
+            <span class="label label-danger">Charlie</span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <ol class="nya-bs-select" ng-model="model10">
+        <li class="nya-bs-option" value="a">
+          <a>
+            <span><span class="glyphicon glyphicon-euro"></span> Euro Dollar</span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+        <li class="nya-bs-option"  value="b">
+          <a>
+            <span><span class="glyphicon glyphicon-usd"></span> US Dollar</span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+        <li class="nya-bs-option" value="c">
+          <a>
+            <span><span class="glyphicon glyphicon-gbp"></span> Great Britain Pound</span>
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+
   </section>
 </div>
 <footer class="footer">
@@ -108,11 +410,7 @@
 </footer>
 
 
-<!--<script src="../bower_components/jquery/dist/jquery.js"></script>-->
 <script src="../bower_components/angular/angular.js"></script>
-<!--<script src="../bower_components/bootstrap-css/js/bootstrap.js"></script>-->
-<!--<script src="../bower_components/bootstrap-select/bootstrap-select.js"></script>-->
-
 <script src="../src/nya-bs-public.js"></script>
 <script src="../src/nya-bs-select-ctrl.js"></script>
 <script src="../src/nya-bs-select.js"></script>
