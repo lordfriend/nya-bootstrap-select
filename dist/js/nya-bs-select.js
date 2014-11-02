@@ -183,6 +183,92 @@ var contains = function(array, element) {
   return false;
 };
 
+var indexOf = function(array, element) {
+  var length = array.length,
+    i;
+  if(length === 0) {
+    return -1;
+  }
+  for(i = 0; i < length; i++) {
+    if(deepEquals(element, array[i])) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+/**
+ * filter the event target for the nya-bs-option element.
+ * Use this method with event delegate. (attach a event handler on an parent element and listen the special children elements)
+ * @param target event.target node
+ * @param parent {object} the parent, where the event handler attached.
+ * @param selector {string}|{object} a class or DOM element
+ * @return the filtered target or null if no element satisfied the selector.
+ */
+var filterTarget = function(target, parent, selector) {
+  var elem = target,
+    className, type = typeof selector;
+
+  if(target == parent) {
+    return null;
+  } else {
+    do {
+      if(type === 'string') {
+        className = ' ' + elem.className + ' ';
+        if(elem.nodeType === 1 && className.replace(/[\t\r\n\f]/g, ' ').indexOf(selector) >= 0) {
+          return elem;
+        }
+      } else {
+        if(elem == selector) {
+          return elem;
+        }
+      }
+
+    } while((elem = elem.parentNode) && elem != parent && elem.nodeType !== 9);
+
+    return null;
+  }
+
+};
+
+var getClassList = function(element) {
+  var classList,
+    className = element.className.replace(/[\t\r\n\f]/g, ' ').trim();
+  classList = className.split(' ');
+  for(var i = 0; i < classList.length; i++) {
+    if(/\s+/.test(classList[i])) {
+      classList.splice(i, 1);
+      i--;
+    }
+  }
+  return classList;
+
+};
+
+/**
+ * Current support only drill down one level.
+ * case insensitive
+ * @param element
+ * @param keyword
+ */
+var hasKeyword = function(element, keyword) {
+  var childElements,
+    index, length;
+  if(element.text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
+    return true;
+  } else {
+    childElements = element.children();
+    length = childElements.length;
+    for(index = 0; index < length; index++) {
+      if(childElements.eq(index).text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+};
+
+
 // map global property to local variable.
 var jqLite = angular.element;
 
@@ -194,19 +280,24 @@ var nyaBsSelect = angular.module('nya.bootstrap.select', []);
 
 nyaBsSelect.controller('nyaBsSelectCtrl', function(){
 
-    var self = this;
+  var self = this;
 
-    // keyIdentifier and valueIdentifier are set by nyaBsOption directive
-    // used by nyaBsSelect directive to retrieve key and value from each nyaBsOption's child scope.
-    self.keyIdentifier = null;
-    self.valueIdentifier = null;
+  // keyIdentifier and valueIdentifier are set by nyaBsOption directive
+  // used by nyaBsSelect directive to retrieve key and value from each nyaBsOption's child scope.
+  self.keyIdentifier = null;
+  self.valueIdentifier = null;
 
-    self.isMultiple = false;
+  self.isMultiple = false;
 
-    // Should be override by nyaBsSelect directive and called by nyaBsOption directive when collection is changed.
-    self.onCollectionChange = function(){};
+  // Should be override by nyaBsSelect directive and called by nyaBsOption directive when collection is changed.
+  self.onCollectionChange = function(){};
 
-  });
+  // for debug
+  self.setId = function(id) {
+    self.id = id || 'id#' + Math.floor(Math.random() * 10000);
+  };
+
+});
 nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', function ($parse, $document, $timeout) {
 
   var DEFAULT_NONE_SELECTION = 'Nothing selected';
@@ -226,77 +317,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
   var DROPDOWN_MENU = '<ul class="dropdown-menu inner"></ul>';
 
   var NO_SEARCH_RESULT = '<li class="no-search-result"><span>NO SEARCH RESULT</span></li>';
-
-  /**
-   * filter the event target for the nya-bs-option element.
-   * Use this method with event delegate. (attach a event handler on an parent element and listen the special children elements)
-   * @param target event.target node
-   * @param parent {object} the parent, where the event handler attached.
-   * @param selector {string}|{object} a class or DOM element
-   * @return the filtered target or null if no element satisfied the selector.
-   */
-  var filterTarget = function(target, parent, selector) {
-    var elem = target,
-      className, type = typeof selector;
-
-    if(target == parent) {
-      return null;
-    } else {
-      do {
-        if(type === 'string') {
-          className = ' ' + elem.className + ' ';
-          if(elem.nodeType === 1 && className.replace(/[\t\r\n\f]/g, ' ').indexOf(selector) >= 0) {
-            return elem;
-          }
-        } else {
-          if(elem == selector) {
-            return elem;
-          }
-        }
-
-      } while((elem = elem.parentNode) && elem != parent && elem.nodeType !== 9);
-
-      return null;
-    }
-
-  };
-
-  var getClassList = function(element) {
-    var classList,
-      className = element.className.replace(/[\t\r\n\f]/g, ' ').trim();
-    classList = className.split(' ');
-    for(var i = 0; i < classList.length; i++) {
-      if(/\s+/.test(classList[i])) {
-        classList.splice(i, 1);
-        i--;
-      }
-    }
-    return classList;
-
-  };
-
-  /**
-   * Current support only drill down one level.
-   * case insensitive
-   * @param element
-   * @param keyword
-   */
-  var hasKeyword = function(element, keyword) {
-    var childElements,
-      index, length;
-    if(element.text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
-      return true;
-    } else {
-      childElements = element.children();
-      length = childElements.length;
-      for(index = 0; index < length; index++) {
-        if(childElements.eq(index).text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-      return false;
-    }
-  };
 
   return {
     restrict: 'ECA',
@@ -359,6 +379,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
         var ngCtrl = ctrls[0];
         var nyaBsSelectCtrl = ctrls[1];
+
+        // for debug
+        nyaBsSelectCtrl.setId($element.attr('id'));
 
         var valueExpFn,
           valueExpGetter = $parse(nyaBsSelectCtrl.valueExp);
@@ -467,7 +490,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
                 // make a deep copy enforce ngModelController to call its $render method.
                 // See: https://github.com/angular/angular.js/issues/1751
                 viewValue = Array.isArray(modelValue) ? deepCopy(modelValue) : [];
-                index = viewValue.indexOf(value);
+                index = indexOf(viewValue, value);
                 if(index === -1) {
                   // check element
                   viewValue.push(value);
@@ -558,7 +581,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         // model --> view
 
         ngCtrl.$render = function() {
-          console.log($element.attr('id') + ' render');
+          console.log(nyaBsSelectCtrl.id + ' render start', ' ngModel: ', ngCtrl.$modelValue);
           var modelValue = ngCtrl.$modelValue,
             index,
             bsOptionElements = dropdownMenu.children(),
@@ -593,7 +616,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
             }
           }
-
+          console.log(nyaBsSelectCtrl.id + ' render end');
           updateButtonContent();
         };
 
@@ -734,7 +757,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 }]);
 nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
-  //00000011111111111111100000000022222222222222200000003333333333333330000000000000004444444444000000000000000000055555555550000000000000000000006666666666000000
+                        //00000011111111111111100000000022222222222222200000003333333333333330000000000000004444444444000000000000000000055555555550000000000000000000006666666666000000
   var BS_OPTION_REGEX = /^\s*(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+group\s+by\s+([\s\S]+?))?(?:\s+track\s+by\s+([\s\S]+?))?\s*$/;
 
   return {
@@ -781,7 +804,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         };
       }
       return function nyaBsOptionLink($scope, $element, $attr, ctrls, $transclude) {
-        console.log('nya-bs-option link called');
+
         var nyaBsSelectCtrl = ctrls[0],
           ngCtrl = ctrls[1],
           valueExpFn,
@@ -841,7 +864,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         var lastBlockMap = createMap();
 
         $scope.$watchCollection(collectionExp, function nyaBsOptionAction(collection) {
-
+          console.log(nyaBsSelectCtrl.id + ' option watch start', ' ngModel: ', ngCtrl.$modelValue);
           var index,
 
             previousNode = $element[0],     // node that cloned nodes should be inserted after
@@ -938,15 +961,12 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
               }
             }
           }
-          console.log('nextBlockOrder: ', nextBlockOrder, 'group: ', group);
+
           // only resort nextBlockOrder when group found
           if(group && group.length > 0) {
 
             nextBlockOrder = sortByGroup(nextBlockOrder, group, 'group');
           }
-
-          console.log('nextBlockOrder: ', nextBlockOrder, 'collectionLength: ', collectionLength);
-
 
           // remove DOM nodes
           for( var blockKey in lastBlockMap) {
@@ -989,7 +1009,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 }
 
                 if(nyaBsSelectCtrl.isMultiple) {
-                  if(Array.isArray(ngCtrl.$modelvalue) && contains(ngCtrl.$modelValue, value)) {
+                  if(Array.isArray(ngCtrl.$modelValue) && contains(ngCtrl.$modelValue, value)) {
                     clone.addClass('selected');
                   }
                 } else {
@@ -1007,19 +1027,24 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength, block.group);
               });
 
-              // we need to mark the first item of a group
-              if(group) {
-                if(!lastGroup || lastGroup !== block.group) {
-                  block.clone.addClass('first-in-group');
-                }
+            }
 
-                lastGroup = block.group;
-
-                // add special class for indent
-                block.clone.addClass('group-item');
+            // we need to mark the first item of a group
+            if(group) {
+              if(!lastGroup || lastGroup !== block.group) {
+                block.clone.addClass('first-in-group');
+              } else {
+                block.clone.removeClass('first-in-group');
               }
+
+              lastGroup = block.group;
+
+              // add special class for indent
+              block.clone.addClass('group-item');
             }
           }
+
+          console.log(nyaBsSelectCtrl.id + ' option watch finished');
 
           lastBlockMap = nextBlockMap;
 

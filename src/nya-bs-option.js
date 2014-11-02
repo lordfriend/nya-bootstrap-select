@@ -47,7 +47,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         };
       }
       return function nyaBsOptionLink($scope, $element, $attr, ctrls, $transclude) {
-        console.log('nya-bs-option link called');
+
         var nyaBsSelectCtrl = ctrls[0],
           ngCtrl = ctrls[1],
           valueExpFn,
@@ -107,7 +107,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         var lastBlockMap = createMap();
 
         $scope.$watchCollection(collectionExp, function nyaBsOptionAction(collection) {
-
+          console.log(nyaBsSelectCtrl.id + ' option watch start', ' ngModel: ', ngCtrl.$modelValue);
           var index,
 
             previousNode = $element[0],     // node that cloned nodes should be inserted after
@@ -204,15 +204,12 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
               }
             }
           }
-          console.log('nextBlockOrder: ', nextBlockOrder, 'group: ', group);
+
           // only resort nextBlockOrder when group found
           if(group && group.length > 0) {
 
             nextBlockOrder = sortByGroup(nextBlockOrder, group, 'group');
           }
-
-          console.log('nextBlockOrder: ', nextBlockOrder, 'collectionLength: ', collectionLength);
-
 
           // remove DOM nodes
           for( var blockKey in lastBlockMap) {
@@ -255,7 +252,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 }
 
                 if(nyaBsSelectCtrl.isMultiple) {
-                  if(Array.isArray(ngCtrl.$modelvalue) && contains(ngCtrl.$modelValue, value)) {
+                  if(Array.isArray(ngCtrl.$modelValue) && contains(ngCtrl.$modelValue, value)) {
                     clone.addClass('selected');
                   }
                 } else {
@@ -273,19 +270,24 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength, block.group);
               });
 
-              // we need to mark the first item of a group
-              if(group) {
-                if(!lastGroup || lastGroup !== block.group) {
-                  block.clone.addClass('first-in-group');
-                }
+            }
 
-                lastGroup = block.group;
-
-                // add special class for indent
-                block.clone.addClass('group-item');
+            // we need to mark the first item of a group
+            if(group) {
+              if(!lastGroup || lastGroup !== block.group) {
+                block.clone.addClass('first-in-group');
+              } else {
+                block.clone.removeClass('first-in-group');
               }
+
+              lastGroup = block.group;
+
+              // add special class for indent
+              block.clone.addClass('group-item');
             }
           }
+
+          console.log(nyaBsSelectCtrl.id + ' option watch finished');
 
           lastBlockMap = nextBlockMap;
 

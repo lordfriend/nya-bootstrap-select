@@ -18,77 +18,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
   var NO_SEARCH_RESULT = '<li class="no-search-result"><span>NO SEARCH RESULT</span></li>';
 
-  /**
-   * filter the event target for the nya-bs-option element.
-   * Use this method with event delegate. (attach a event handler on an parent element and listen the special children elements)
-   * @param target event.target node
-   * @param parent {object} the parent, where the event handler attached.
-   * @param selector {string}|{object} a class or DOM element
-   * @return the filtered target or null if no element satisfied the selector.
-   */
-  var filterTarget = function(target, parent, selector) {
-    var elem = target,
-      className, type = typeof selector;
-
-    if(target == parent) {
-      return null;
-    } else {
-      do {
-        if(type === 'string') {
-          className = ' ' + elem.className + ' ';
-          if(elem.nodeType === 1 && className.replace(/[\t\r\n\f]/g, ' ').indexOf(selector) >= 0) {
-            return elem;
-          }
-        } else {
-          if(elem == selector) {
-            return elem;
-          }
-        }
-
-      } while((elem = elem.parentNode) && elem != parent && elem.nodeType !== 9);
-
-      return null;
-    }
-
-  };
-
-  var getClassList = function(element) {
-    var classList,
-      className = element.className.replace(/[\t\r\n\f]/g, ' ').trim();
-    classList = className.split(' ');
-    for(var i = 0; i < classList.length; i++) {
-      if(/\s+/.test(classList[i])) {
-        classList.splice(i, 1);
-        i--;
-      }
-    }
-    return classList;
-
-  };
-
-  /**
-   * Current support only drill down one level.
-   * case insensitive
-   * @param element
-   * @param keyword
-   */
-  var hasKeyword = function(element, keyword) {
-    var childElements,
-      index, length;
-    if(element.text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
-      return true;
-    } else {
-      childElements = element.children();
-      length = childElements.length;
-      for(index = 0; index < length; index++) {
-        if(childElements.eq(index).text().toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
-          return true;
-        }
-      }
-      return false;
-    }
-  };
-
   return {
     restrict: 'ECA',
     require: ['ngModel', 'nyaBsSelect'],
@@ -150,6 +79,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
         var ngCtrl = ctrls[0];
         var nyaBsSelectCtrl = ctrls[1];
+
+        // for debug
+        nyaBsSelectCtrl.setId($element.attr('id'));
 
         var valueExpFn,
           valueExpGetter = $parse(nyaBsSelectCtrl.valueExp);
@@ -349,7 +281,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         // model --> view
 
         ngCtrl.$render = function() {
-          console.log($element.attr('id') + ' render');
+          console.log(nyaBsSelectCtrl.id + ' render start', ' ngModel: ', ngCtrl.$modelValue);
           var modelValue = ngCtrl.$modelValue,
             index,
             bsOptionElements = dropdownMenu.children(),
@@ -384,7 +316,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
             }
           }
-
+          console.log(nyaBsSelectCtrl.id + ' render end');
           updateButtonContent();
         };
 

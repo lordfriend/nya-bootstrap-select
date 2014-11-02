@@ -149,6 +149,7 @@ module.exports = function(grunt) {
   // Build distribution files
   grunt.registerTask('build', [
     'less:main',
+    'test',
     'concat:dist',
     'uglify:dist',
     'cssmin:dist'

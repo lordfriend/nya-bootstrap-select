@@ -39,6 +39,25 @@
   <section>
     <h1 id="dynamic-examples" class="page-header">Dynamic Examples</h1>
 
+    <h3>Track by</h3>
+
+    <p>Track by is nothing different with ng-repeat</p>
+
+    <form class="form-inline">
+      <p class="alert-info"> You have select {{dynModel2}}</p>
+      <p class="alert-info"> options4 is {{options4}}</p>
+      <button class="btn btn-default" ng-click="changeGroups('options4')">Change Option</button>
+      <button class="btn btn-default" ng-click="changeModel('dynModel2', 'options4')">Change model</button>
+      <ol id="track_by_examples" class="nya-bs-select" ng-model="dynModel2" multiple>
+        <li nya-bs-option="option in options4 track by option.name">
+          <a>
+            {{option.name}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+
     <h3>Group Options</h3>
 
     <p>If you want show grouped options. we assume you have an property which being used to group by. add <code>group by property</code> after the
@@ -46,15 +65,38 @@
     <p>add <code>&lt;span class="dropdown-header"&gt;<span>{{</span><span>$group</span><span>}}</span>&lt;/span&gt;</code> before the <code>&lt;a&gt;</code> element</p>
 
     <form class="form-inline">
-      <p class="alert-info"> You have select {{dynModel4}}</p>
+      <p class="alert-info"> You have select {{dynModel3}}</p>
       <p class="alert-info"> options4 is {{options4}}</p>
       <button class="btn btn-default" ng-click="changeGroups('options4')">Change Option</button>
-      <button class="btn btn-default" ng-click="changeModel('dynModel4', 'options4')">Change model</button>
-      <ol id="track_by_examples" class="nya-bs-select" ng-model="dynModel4" multiple>
+      <button class="btn btn-default" ng-click="changeModel('dynModel3', 'options4')">Change model</button>
+      <input type="text" ng-model="element"/>
+      <button class="btn btn-default" ng-click="addElement('options4')">Add Element</button>
+      <ol id="group_by_examples" class="nya-bs-select" ng-model="dynModel3" multiple>
         <li nya-bs-option="option in options4 group by option.group">
           <span class="dropdown-header">{{$group}}</span>
           <a>
             {{option.name}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+
+    <h3>Object Collection</h3>
+    <p>Like ng-repeat, object collection is also supported</p>
+
+    <form class="form-inline">
+      <p class="alert-info"> You have select {{dynModel4}}</p>
+      <p class="alert-info"> options4 is {{options5}}</p>
+      <button class="btn btn-default" ng-click="changeGroups('options5')">Change Option</button>
+      <button class="btn btn-default" ng-click="changeModel('dynModel4', 'options5')">Change model</button>
+      <input type="text" ng-model="element"/>
+      <button class="btn btn-default" ng-click="addElement('options5')">Add Element</button>
+      <ol id="object_examples" class="nya-bs-select" ng-model="dynModel4" multiple>
+        <li nya-bs-option="(key, value) in options5 group by value.group">
+          <span class="dropdown-header">{{$group}}</span>
+          <a>
+            {{key}}
             <span class="glyphicon glyphicon-ok check-mark"></span>
           </a>
         </li>

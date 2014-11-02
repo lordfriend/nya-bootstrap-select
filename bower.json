@@ -10,7 +10,8 @@
     "node_modules",
     "bower_components",
     "test",
-    "examples"
+    "examples",
+    "src"
   ],
   "keywords": ["bootstrap", "bootstrap-select", "dropdown", "angular"],
   "dependencies": {

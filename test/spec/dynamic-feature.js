@@ -1,0 +1,205 @@
+/**
+ * Features which is concerns data-binding. and other angularJS features
+ */
+
+describe('Features contains ngModel, option auto generate, etc;', function() {
+
+  var $scope,
+    $compile;
+
+
+  var options = ['Alpha', 'Bravo', 'Charlie', 'Delta',
+    'Echo', 'Foxtrot', 'Golf', 'Hotel', 'Juliet', 'Kilo', 'Lima',
+    'Mike', 'November', 'Oscar', 'Papa', 'Quebec', 'Romeo', 'Sierra',
+    'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
+  ];
+
+  beforeEach(module('nya.bootstrap.select'));
+
+  beforeEach(inject(function(_$rootScope_, _$compile_){
+    $scope = _$rootScope_.$new();
+    $compile = _$compile_;
+  }));
+
+  it('should generate corresponding options with array and populate some meta property in each sub-scope of nya-bs-option', function() {
+    $scope.options = changeGroups('options');
+
+    $scope.$digest();
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model">' +
+      '<li nya-bs-option="option in options group by option.group">' +
+      '<a>{{option.name}}</a>' +
+      '</li>' +
+      '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+
+    var list = selectElement.find('ul').children();
+    var total = 0,
+      value,
+      scopeOfOption,
+      i, length = list.length,
+      liElement;
+    for(i = 0; i < length; i++) {
+      liElement = list.eq(i);
+      if(liElement.hasClass('nya-bs-option')) {
+        scopeOfOption = liElement.scope();
+        value = {
+          name: scopeOfOption.option.name,
+          group: scopeOfOption.$group
+        };
+        expect($scope.options).toContains(value);
+        total++;
+      }
+    }
+    expect(total).toEqual($scope.options.length);
+  });
+
+  it('should generate corresponding options with object and populate some meta property in each sub-scope of nya-bs-option', function() {
+    $scope.options = changeObject('options');
+
+    $scope.$digest();
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model">' +
+      '<li nya-bs-option="(key, value) in options group by value.group">' +
+      '<a>{{key}}</a>' +
+      '</li>' +
+      '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+
+    var list = selectElement.find('ul').children();
+    var total = 0,
+      value,
+      scopeOfOption,
+      i, length = list.length,
+      liElement;
+    for(i = 0; i < length; i++) {
+      liElement = list.eq(i);
+      if(liElement.hasClass('nya-bs-option')) {
+        scopeOfOption = liElement.scope();
+        value = {
+          name: scopeOfOption.value.name,
+          group: scopeOfOption.$group
+        };
+        expect($scope.options[scopeOfOption.key]).toDeepEqual(value);
+        total++;
+      }
+    }
+    expect(total).toEqual(Object.keys($scope.options).length);
+  });
+
+  it('should synchronize selected class with ng-model', function() {
+
+
+    // check list whether an selected element has a selected class
+    function check() {
+      var list = selectElement.find('ul').children();
+      var i, length = list.length,
+        liElement,
+        scopeOfOption,
+        value;
+      for(i = 0; i < length; i++) {
+        liElement = list.eq(i);
+        if(liElement.hasClass('nya-bs-option')) {
+          scopeOfOption = liElement.scope();
+          value = scopeOfOption.option;
+          if(existInArray(value, $scope.model)) {
+            expect(liElement).toHaveClass('selected');
+          } else {
+            expect(liElement).not.toHaveClass('selected');
+          }
+        }
+      }
+    }
+
+    // string array
+    $scope.options = options;
+    $scope.model = changeModel($scope.options);
+    $scope.$digest();
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model" multiple>' +
+      '<li nya-bs-option="option in options">' +
+      '<a>{{option}}</a>' +
+      '</li>' +
+      '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+
+    check();
+    var index;
+    for(index = 0; index < 1000; index++) {
+      $scope.model = changeModel($scope.options);
+      $scope.$digest();
+
+      check();
+    }
+
+    //object array
+    $scope.options = changeGroups(options);
+    $scope.model = changeModel($scope.options);
+    $scope.$digest();
+
+    check();
+
+    for(index = 0; index < 1000; index++) {
+      $scope.model = changeModel($scope.options);
+      $scope.$digest();
+
+      check();
+    }
+
+  });
+
+  it('should modify ng-model when option collection changed', function() {
+
+    function check() {
+      $scope.model.forEach(function(value){
+        expect(existInArray(value, $scope.options)).toBeTruthy();
+      });
+    }
+
+    $scope.options = changeGroups(options);
+    $scope.model = angular.copy($scope.options);
+
+    $scope.$digest();
+
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model" multiple>' +
+      '<li nya-bs-option="option in options">' +
+      '<a>{{option}}</a>' +
+      '</li>' +
+      '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+
+    var index, length, start, count;
+    for(index = 0; index < 1000; index++) {
+      length = $scope.options.length;
+      if(length > 3) {
+        start = Math.floor(Math.random() * length);
+        count = Math.floor(Math.random() * (length - start));
+        $scope.options.splice(start, count);
+      } else {
+        $scope.options = changeGroups(options);
+        $scope.model = angular.copy($scope.options);
+      }
+      $scope.$digest();
+
+      check();
+    }
+  });
+
+  it('should work with array using track by', function() {
+
+  });
+
+  it('should using result specified by the value expression', function() {
+
+  });
+
+  it('should give the first option of a group a first-in-group class whenever option collection changed', function() {
+
+  });
+
+});
