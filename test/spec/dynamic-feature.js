@@ -191,14 +191,91 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
   });
 
   it('should work with array using track by', function() {
+    $scope.options = changeGroups(options);
+    $scope.$digest();
 
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model">' +
+      '<li nya-bs-option="option in options track by option.name">' +
+      '<a>{{option.name}}</a>' +
+      '</li>' +
+      '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+
+    //what shall we test? Maybe no exception occur is enough.
   });
 
   it('should using result specified by the value expression', function() {
+    $scope.options = changeGroups(options);
+    $scope.$digest();
 
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model" multiple>' +
+      '<li nya-bs-option="option in options track by option.name" value="option.name">' +
+      '<a>{{option.name}}</a>' +
+      '</li>' +
+      '</ol>');
+    $compile(selectElement)($scope);
+
+    // we don't mock user click in this unit test. we will test user interaction in e2e test.
+
+    $scope.model = changeModel($scope.options);
+
+    var list = selectElement.find('ul').children(),
+      index,
+      length = list.length,
+      liElement,
+      scopeOfOption,
+      value;
+    for(index = 0; index < length; index++) {
+      liElement = list.eq(index);
+      if(liElement.hasClass('nya-bs-option')) {
+        scopeOfOption = liElement.scope();
+        value = scopeOfOption.option.name;
+        if(indexOfWithProperty({name: value}, $scope.model, ['name'])) {
+          expect(liElement).toHaveClass('selected');
+        } else {
+          expect(liElement).not.toHaveClass('selected');
+        }
+      }
+    }
   });
 
   it('should give the first option of a group a first-in-group class whenever option collection changed', function() {
+    $scope.options = changeGroups(options);
+
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model">' +
+    '<li nya-bs-option="option in options group by option.group">' +
+    '<a>{{option.name}}</a>' +
+    '</li>' +
+    '</ol>');
+    $compile(selectElement)($scope);
+
+    var list = selectElement.find('ul').children(),
+      index,
+      length = list.length,
+      liElement,
+      scopeOfOption,
+      group,
+      lastGroup;
+
+    for(index = 0; index < length; index++) {
+      liElement = list.eq(index);
+      if(liElement.hasClass('nya-bs-option')) {
+        scopeOfOption = liElement.scope();
+        group = scopeOfOption.$group;
+        if(!lastGroup || group != lastGroup) {
+          // this is the first item in the group. should have class "first-in-group"
+
+          expect(liElement).hasClass('first-in-group');
+        } else {
+
+          // otherwise, shouldn't have that class.
+          expect(liElement).not.hasClass('first-in-group');
+        }
+        lastGroup = group;
+      }
+    }
 
   });
 
