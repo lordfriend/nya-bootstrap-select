@@ -90,7 +90,6 @@ Like vanilla `<select>` we can also generate option group with any property in a
 
 ##TODO##
 
-- data-size support
 - data-header support
 - data-container support
 - data-max-options support

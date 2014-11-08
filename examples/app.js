@@ -4,7 +4,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
   .controller('MainCtrl', function($scope){
 
     var options = ['Alpha', 'Bravo', 'Charlie', 'Delta',
-      'Echo', 'Foxtrot', 'Golf', 'Hotel', 'Juliet', 'Kilo', 'Lima',
+      'Echo', 'Foxtrot', 'Golf', 'Hotel', 'India', 'Juliet', 'Kilo', 'Lima',
       'Mike', 'November', 'Oscar', 'Papa', 'Quebec', 'Romeo', 'Sierra',
       'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
     ];

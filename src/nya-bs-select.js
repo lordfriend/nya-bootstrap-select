@@ -80,6 +80,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         var ngCtrl = ctrls[0];
         var nyaBsSelectCtrl = ctrls[1];
 
+        var liHeight;
+
         // for debug
         nyaBsSelectCtrl.setId($element.attr('id'));
 
@@ -237,6 +239,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
         dropdownToggle.on('click', function() {
           $element.toggleClass('open');
+          if($element.hasClass('open') && typeof liHeight === 'undefined') {
+            calcMenuSize();
+          }
           if($attrs.liveSearch === 'true' && $element.hasClass('open')) {
             searchBox.children().eq(0)[0].focus();
           }
@@ -454,6 +459,30 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
 
             });
+          }
+
+        }
+
+        // will called only once.
+        function calcMenuSize(){
+
+          var liElements = dropdownMenu.find('li'),
+            length = liElements.length,
+            liElement,
+            i;
+          for(i = 0; i < length; i++) {
+            liElement = liElements.eq(i);
+            if(liElement.hasClass('nya-bs-option') || liElement.attr('nya-bs-option')) {
+              liHeight = liElement[0].clientHeight;
+              console.log('liHeight', liHeight);
+              break;
+            }
+          }
+
+          if(/\d+/.test($attrs.size)) {
+            var dropdownSize = parseInt($attrs.size, 10);
+            dropdownMenu.css('max-height', (dropdownSize * liHeight) + 'px');
+            dropdownMenu.css('overflow-y', 'auto');
           }
 
         }
