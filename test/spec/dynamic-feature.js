@@ -217,9 +217,12 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
       '</ol>');
     $compile(selectElement)($scope);
 
+
     // we don't mock user click in this unit test. we will test user interaction in e2e test.
 
     $scope.model = changeModel($scope.options);
+
+    $scope.$digest();
 
     var list = selectElement.find('ul').children(),
       index,
@@ -232,7 +235,7 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
       if(liElement.hasClass('nya-bs-option')) {
         scopeOfOption = liElement.scope();
         value = scopeOfOption.option.name;
-        if(indexOfWithProperty({name: value}, $scope.model, ['name'])) {
+        if(indexOfWithProperty({name: value}, $scope.model, ['name']) !== -1) {
           expect(liElement).toHaveClass('selected');
         } else {
           expect(liElement).not.toHaveClass('selected');
@@ -251,6 +254,8 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
     '</ol>');
     $compile(selectElement)($scope);
 
+    $scope.$digest();
+
     var list = selectElement.find('ul').children(),
       index,
       length = list.length,
@@ -267,11 +272,11 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
         if(!lastGroup || group != lastGroup) {
           // this is the first item in the group. should have class "first-in-group"
 
-          expect(liElement).hasClass('first-in-group');
+          expect(liElement).toHaveClass('first-in-group');
         } else {
 
           // otherwise, shouldn't have that class.
-          expect(liElement).not.hasClass('first-in-group');
+          expect(liElement).not.toHaveClass('first-in-group');
         }
         lastGroup = group;
       }
@@ -279,4 +284,63 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
 
   });
 
+  it('should work with ngRequired and required directive in single selection mode', function() {
+    $scope.options = changeGroups(options);
+
+    // single selection
+    var formElement = angular.element('<form name="testForm">' +
+    '<ol class="nya-bs-select" ng-model="model" required>' +
+    '<li nya-bs-option="option in options group by option.group">' +
+    '<a>{{option.name}}</a>' +
+    '</li>' +
+    '</ol>' +
+    '</form>');
+    $compile(formElement)($scope);
+
+    var selectElement = formElement.children();
+    $scope.$digest();
+
+    // should have an invalid class
+    expect(selectElement).toHaveClass('ng-invalid-required');
+    expect(selectElement).not.toHaveClass('ng-valid-required');
+
+    // should have an valid class
+
+    $scope.model = $scope.options[0];
+
+    $scope.$digest();
+
+    expect(selectElement).toHaveClass('ng-valid-required');
+    expect(selectElement).not.toHaveClass('ng-invalid-required');
+  });
+
+  it('should work with ngRequired and required directive in multiple selection mode', function() {
+    $scope.options = changeGroups(options);
+    $scope.model = [];
+    // single selection
+    var formElement = angular.element('<form name="testForm">' +
+    '<ol class="nya-bs-select" ng-model="model" required multiple>' +
+    '<li nya-bs-option="option in options group by option.group">' +
+    '<a>{{option.name}}</a>' +
+    '</li>' +
+    '</ol>' +
+    '</form>');
+    $compile(formElement)($scope);
+
+    var selectElement = formElement.children();
+    $scope.$digest();
+
+    // should have an invalid class
+    expect(selectElement).toHaveClass('ng-invalid-required');
+    expect(selectElement).not.toHaveClass('ng-valid-required');
+
+    // should have an valid class
+
+    $scope.model = changeModel($scope.options);
+
+    $scope.$digest();
+
+    expect(selectElement).toHaveClass('ng-valid-required');
+    expect(selectElement).not.toHaveClass('ng-invalid-required');
+  });
 });

@@ -83,6 +83,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         // for debug
         nyaBsSelectCtrl.setId($element.attr('id'));
 
+        // required validator
+        if (isMultiple) {
+          ngCtrl.$isEmpty = function(value) {
+            return !value || value.length === 0;
+          };
+        }
+
         var valueExpFn,
           valueExpGetter = $parse(nyaBsSelectCtrl.valueExp);
         if(nyaBsSelectCtrl.valueExp) {
