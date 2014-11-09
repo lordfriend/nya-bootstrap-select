@@ -21,6 +21,11 @@ module.exports = function(grunt) {
         files: {
           'dist/css/nya-bs-select.css': 'less/nya-bs-select.less'
         }
+      },
+      docs: {
+        files: {
+          'docs/dist/css/main.css': 'docs/src/less/main.less'
+        }
       }
     },
 
