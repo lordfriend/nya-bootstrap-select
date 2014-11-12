@@ -350,8 +350,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
         function getOptionText(nyaBsOption) {
           var item = nyaBsOption.find('a');
-          if(item.children().eq(0).hasClass('check-mark')) {
-            // if the first child is check-mark, means the option text is text node
+          if(item.children().length === 0 || item.children().eq(0).hasClass('check-mark')) {
+            // if the first child is check-mark or has no children, means the option text is text node
             return item[0].firstChild.cloneNode(false);
           } else {
             // otherwise we clone the first element of the item

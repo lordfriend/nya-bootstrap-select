@@ -13,12 +13,19 @@
     "examples",
     "src"
   ],
-  "keywords": ["bootstrap", "bootstrap-select", "dropdown", "angular"],
+  "keywords": [
+    "bootstrap",
+    "bootstrap-select",
+    "dropdown",
+    "angular"
+  ],
   "dependencies": {
     "angular": ">=1.2"
   },
   "devDependencies": {
+    "jquery": "~2.1.1",
     "bootstrap": "~3.3.0",
-    "angular-mocks": "*"
+    "angular-mocks": "*",
+    "angular-ui-router": "~0.2.11"
   }
 }

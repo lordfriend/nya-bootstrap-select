@@ -45,6 +45,14 @@ module.exports = function(grunt) {
             'examples'
           ]
         }
+      },
+      docs: {
+        options: {
+          open: true,
+          base: [
+            'docs/dist'
+          ]
+        }
       }
     },
 
@@ -72,8 +80,30 @@ module.exports = function(grunt) {
           'examples/*.html',
           'examples/{,*/*.js}',
           'examples{,*/}*.css',
-          'examples/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          'examples/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'docs/dist/*.html'
         ]
+      },
+      'docs-less': {
+        files: ['docs/src/less/*.less'],
+        tasks: ['newer:less:docs'],
+        options: {
+          livereload: true
+        }
+      },
+      'docs-js': {
+        files: ['docs/dist/js/*.js'],
+        tasks: ['newer:jshint:docs'],
+        options: {
+          livereload: true
+        }
+      },
+      'docs-md': {
+        files: ['docs/src/content/{,*/}*.md'],
+        tasks: ['newer:markdown:docs'],
+        options: {
+          livereload: true
+        }
       }
     },
 
@@ -87,8 +117,10 @@ module.exports = function(grunt) {
         'Gruntfile.js',
         'src/*.js',
         'examples/{,*/}*.js'
+      ],
+      docs: [
+        'docs/dist/js/*.js'
       ]
-
     },
 
     // Test
@@ -135,6 +167,77 @@ module.exports = function(grunt) {
         src: ['dist/css/nya-bs-select.css'],
         dest: 'dist/css/nya-bs-select.min.css'
       }
+    },
+
+    copy: {
+      docs: {
+        files:[
+          {
+            expand: true,
+            cwd: 'bower_components/',
+            flatten: true,
+            src: [
+              'angular/angular.js',
+              'angular-ui-router/release/angular-ui-router.js',
+              'jquery/dist/jquery.js',
+              'bootstrap/dist/js/bootstrap.js'
+            ],
+            dest: 'docs/dist/js/'
+          },
+          {
+            expand: true,
+            flatten: true,
+            src: ['dist/js/nya-bs-select.js'],
+            dest: 'docs/dist/js/'
+          },
+          {
+            expand: true,
+            flatten: true,
+            src: ['dist/css/nya-bs-select.css'],
+            dest: 'docs/dist/css/'
+          }
+        ]
+      }
+    },
+
+    markdown: {
+      docs: {
+        options:{
+          postCompile: function(src, context) {
+            // prevent {{ }} being parsed by angular
+            var match = src.match(/<pre>[\s\S]+?<\/pre>/mg);
+            if(match && match.length > 0) {
+              match.forEach(function(str) {
+                var subMatch = str.match(/{{[\s\S]+?}}/mg);
+                var group, newStr = str;
+                if(subMatch && subMatch.length > 0) {
+                  for( var i = 0; i < subMatch.length; i++) {
+                    group = subMatch[i].match(/{{([\s\S]+?)}}/m);
+                    newStr = newStr.replace(subMatch[i], '<span>{{</span>' + group[1] + '<span>}}</span>');
+                  }
+                }
+                src = src.replace(str, newStr);
+              });
+            }
+
+            return src;
+          },
+          template: 'docs/src/markdown-template.html',
+          markdownOption: {
+            gfm: true,
+            highlight: 'manual'
+          }
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'docs/src/content/',
+            src: '**/*.md',
+            dest: 'docs/dist/partials/',
+            ext: '.html'
+          }
+        ]
+      }
     }
   });
 
@@ -158,5 +261,16 @@ module.exports = function(grunt) {
     'concat:dist',
     'uglify:dist',
     'cssmin:dist'
-  ])
+  ]);
+
+  grunt.registerTask('buildDocs', [
+    'less:docs',
+    'copy:docs'
+  ]);
+  grunt.registerTask('serveDocs', [
+    'markdown',
+    'less:docs',
+    'connect:docs',
+    'watch'
+  ]);
 };
