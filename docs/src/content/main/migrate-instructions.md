@@ -93,3 +93,7 @@ If you have used some features of Bootstrap-select in the 1.x version. Those fea
  
 - disable an option, disable a group.
   just add a class to nya-bs-option which you want to disable. if you need to disable a group, you have to disable its every element.
+
+- disable a select control
+  unlike Bootstrap-select to just add an attribute. you need to give `disabled` a expression which can be evaluated to true or false. when it's true, the control will be disabled.
+  otherwise it will be enabled again.

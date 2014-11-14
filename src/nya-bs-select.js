@@ -104,6 +104,18 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
           nyaBsSelectCtrl.isMultiple = true;
         }
 
+        var isDisabled = false;
+
+        $scope.$watch($attrs.disabled, function(disabled){
+          if(!!disabled) {
+            dropdownToggle.addClass('disabled');
+            isDisabled = true;
+          } else {
+            dropdownToggle.removeClass('disabled');
+            isDisabled = false;
+          }
+        });
+
         /**
          * Do some check on modelValue. remove no existing value
          * @param values
@@ -175,6 +187,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         // view --> model
 
         dropdownMenu.on('click', function menuEventHandler (event) {
+          if(isDisabled) {
+            return;
+          }
+
           if(jqLite(event.target).hasClass('dropdown-header')) {
             return;
           }
