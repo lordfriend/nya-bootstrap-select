@@ -237,6 +237,12 @@ var getClassList = function(element) {
 
 };
 
+// work with node element
+var hasClass = function(element, className) {
+  var classList = getClassList(element);
+  return classList.indexOf(className) !== -1;
+};
+
 /**
  * Current support only drill down one level.
  * case insensitive
@@ -259,6 +265,11 @@ var hasKeyword = function(element, keyword) {
     return false;
   }
 };
+
+function sibling( cur, dir ) {
+  while ( (cur = cur[dir]) && cur.nodeType !== 1) {}
+  return cur;
+}
 
 
 // map global property to local variable.
