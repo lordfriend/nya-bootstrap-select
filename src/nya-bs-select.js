@@ -46,10 +46,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
           dropdownToggle.addClass(className);
         }
 
-        if(/btn-(?:lg)|(?:sm)|(?:xs)/.test(className)) {
-          tELement.removeClass(className);
-          dropdownToggle.addClass(className);
-        }
+        //if(/btn-(?:lg)|(?:sm)|(?:xs)/.test(className)) {
+        //  tElement.removeClass(className);
+        //  dropdownToggle.addClass(className);
+        //}
 
         if(className = 'form-control') {
           dropdownToggle.addClass(className);

@@ -13,6 +13,14 @@
 .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   width: 220px;
 }
+.nya-bs-select.form-control {
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+}
+.nya-bs-select.form-control:not([class*="col-"]) {
+  width: 100%;
+}
 .nya-bs-select > .btn {
   width: 100%;
   padding-right: 25px;

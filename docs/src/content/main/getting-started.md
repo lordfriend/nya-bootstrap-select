@@ -41,14 +41,19 @@ In view file, use `nya-bs-select` as element, attribute or class to build an boo
 To make your select options, you will need `nya-bs-option` directive to populate options from an collection, or you can using `nya-bs-option` as an class
 of `<li>` element to make static options. If you are using static options, you should also add an value attribute on `<li>` element to explicitly set to value of each option.
 
-
-<form class="form-inline">
-  <ol class="nya-bs-select" ng-model="model1">
+<example>
+<file name="index.html">
+<p class="bg-info">model1 is {{model1}}</p>
+<p class="bg-info">model2 is {{model2}}</p>
+<form>
+  <!-- options from collection -->
+  <ol id="dynamic-options" class="nya-bs-select" ng-model="model1">
     <li nya-bs-option="option in options">
-      <a>{{option}}</a>
+      <a>{{ option }}</a>
     </li>
   </ol>
-  <ol class="nya-bs-select" ng-model="model2">
+  <!-- options in static -->
+  <ol id="static-options" class="nya-bs-select" ng-model="model2">
     <li class="nya-bs-option" value="alpha">
       <a>Alpha</a>
     </li>
@@ -60,27 +65,11 @@ of `<li>` element to make static options. If you are using static options, you s
     </li>
   </ol>
 </form>
-
-```html
-<!-- options from collection -->
-<ol class="nya-bs-select" ng-model="model1">
-  <li nya-bs-option="option in options">
-    <a>{{ option }}</a>
-  </li>
-</ol>
-
-<!-- options in static -->
-<ol class="nya-bs-select" ng-model="model2">
-  <li class="nya-bs-option" value="alpha">
-    <a>Alpha</a>
-  </li>
-  <li class="nya-bs-option" value="bravo">
-    <a>Bravo</a>
-  </li>
-  <li class="nya-bs-option" value="charlie">
-    <a>Charlie</a>
-  </li>
-</ol>
-```
-
-
+</file>
+<file name="script.js">
+  $scope.options = [
+    'Alpha', 'Bravo', 'Charlie', 'Delta',
+    'Echo'
+  ];
+</file>
+</example>

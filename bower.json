@@ -26,6 +26,7 @@
     "jquery": "~2.1.1",
     "bootstrap": "~3.3.0",
     "angular-mocks": "*",
-    "angular-ui-router": "~0.2.11"
+    "angular-ui-router": "~0.2.11",
+    "prismjs": "*"
   }
 }

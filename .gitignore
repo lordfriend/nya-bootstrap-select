@@ -1,3 +1,6 @@
+docs/dist/partials/examples
+docs/dist/partials/main
+docs/dist/examples
 node_modules
 bower_components
 .idea

@@ -22,6 +22,16 @@
     width: @width-default;
   }
 
+  &.form-control {
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+
+    &:not([class*="col-"]) {
+      width: 100%;
+    }
+  }
+
   & > .btn {
     width: 100%;
     padding-right: 25px;

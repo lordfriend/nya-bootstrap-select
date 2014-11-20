@@ -8,6 +8,8 @@ module.exports = function(grunt) {
   // Time how long grunt task take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var exampleCount = 0;
+
   //Configure grunt
   grunt.initConfig({
 
@@ -186,6 +188,15 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
+            cwd: 'bower_components',
+            flatten: true,
+            src: [
+              'bootstrap/dist/fonts/*'
+            ],
+            dest: 'docs/dist/fonts/'
+          },
+          {
+            expand: true,
             flatten: true,
             src: ['dist/js/nya-bs-select.js'],
             dest: 'docs/dist/js/'
@@ -203,30 +214,7 @@ module.exports = function(grunt) {
     markdown: {
       docs: {
         options:{
-          postCompile: function(src, context) {
-            // prevent {{ }} being parsed by angular
-            var match = src.match(/<pre>[\s\S]+?<\/pre>/mg);
-            if(match && match.length > 0) {
-              match.forEach(function(str) {
-                var subMatch = str.match(/{{[\s\S]+?}}/mg);
-                var group, newStr = str;
-                if(subMatch && subMatch.length > 0) {
-                  for( var i = 0; i < subMatch.length; i++) {
-                    group = subMatch[i].match(/{{([\s\S]+?)}}/m);
-                    newStr = newStr.replace(subMatch[i], '<span>{{</span>' + group[1] + '<span>}}</span>');
-                  }
-                }
-                src = src.replace(str, newStr);
-              });
-            }
-
-            return src;
-          },
-          template: 'docs/src/markdown-template.html',
-          markdownOption: {
-            gfm: true,
-            highlight: 'manual'
-          }
+          template: 'docs/src/markdown-template.html'
         },
         files: [
           {
@@ -240,6 +228,8 @@ module.exports = function(grunt) {
       }
     }
   });
+
+  require('./docs/tasks/markdown')(grunt);
 
   // Creates the 'serve' task
   grunt.registerTask('serve', [
@@ -268,6 +258,7 @@ module.exports = function(grunt) {
     'copy:docs'
   ]);
   grunt.registerTask('serveDocs', [
+    'copy:docs',
     'markdown',
     'less:docs',
     'connect:docs',
