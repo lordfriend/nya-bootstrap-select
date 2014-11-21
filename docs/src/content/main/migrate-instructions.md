@@ -52,9 +52,6 @@ If you have used some features of Bootstrap-select in the 1.x version. Those fea
 ####Features Not supported
 
 - **data-container** this feature is buggy and have compatible issue with the model dialog of ui-bootstrap. So it may not be supported any more.
-
-  **to overcome the overflow constraints of the container. use the `z-index` attribute in the `nya-bs-select` directive.**
-  
 - **dropup** this feature, in fact, can be supported in current version. But I found the implementation in Bootstrap-select is also not very functional. It need user to click 
   the dropdown-toggle button at least one time to calculate the height of the dropdown-menu. Then a scroll event listener is attached to calculate the distance between dropdown-toggle button and the edge of viewport.
   automatically add `dropup` class to dropdown-menu-container. This implementation may impact the performance when too many controls in a page.

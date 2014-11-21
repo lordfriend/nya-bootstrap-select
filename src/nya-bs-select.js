@@ -336,6 +336,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
             }
           }
+          console.log(nyaBsSelectCtrl.id + ' render end');
           updateButtonContent();
         };
 
@@ -367,9 +368,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
           }
 
           if(toggleButton) {
+            console.log('toggleButton');
 
             // press enter to active dropdown
             if((keyCode === 13 || keyCode === 38 || keyCode === 40) && !$element.hasClass('open')) {
+
               event.stopPropagation();
 
               $element.addClass('open');

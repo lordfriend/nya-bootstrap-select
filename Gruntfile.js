@@ -254,8 +254,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('buildDocs', [
-    'less:docs',
-    'copy:docs'
+    'copy:docs',
+    'markdown',
+    'less:docs'
   ]);
   grunt.registerTask('serveDocs', [
     'copy:docs',

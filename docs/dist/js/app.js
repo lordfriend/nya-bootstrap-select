@@ -46,7 +46,12 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'filters', 'contr
         'layout-and-styles',
         'live-search',
         'alternative-display',
-        'select-text-format'
+        'select-text-format',
+        'tick-icon',
+        'custom-content',
+        'disable-an-option',
+        'control-dropdown-menu-size',
+        'show-menu-arrow'
       ]
       //api: [
       //
@@ -54,7 +59,8 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'filters', 'contr
     };
 
     $urlRouterProvider
-      .when('/main', '/main/'+ pages.main[0]);
+      .when('/main', '/main/'+ pages.main[0])
+      .when('/examples', '/examples/' + pages.examples[0]);
 
     angular.forEach(pages, function(children, stateName){
       $stateProvider.state(stateName, {

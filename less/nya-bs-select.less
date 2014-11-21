@@ -251,4 +251,15 @@
       margin-top: -1px;
     }
   }
+
+  &.on-modal {
+    
+    .dropdown-menu {
+      z-index: @zindex-select-dropdown + 5;
+    }
+
+    &.open > .btn {
+      z-index:@zindex-select-dropdown + 6;
+    }
+  }
 }
