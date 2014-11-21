@@ -107,7 +107,6 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         var lastBlockMap = createMap();
 
         $scope.$watchCollection(collectionExp, function nyaBsOptionAction(collection) {
-          console.log(nyaBsSelectCtrl.id + ' option watch start', ' ngModel: ', ngCtrl.$modelValue);
           var index,
 
             previousNode = $element[0],     // node that cloned nodes should be inserted after
@@ -286,8 +285,6 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
               block.clone.addClass('group-item');
             }
           }
-
-          console.log(nyaBsSelectCtrl.id + ' option watch finished');
 
           lastBlockMap = nextBlockMap;
 

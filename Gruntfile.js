@@ -83,7 +83,8 @@ module.exports = function(grunt) {
           'examples/{,*/*.js}',
           'examples{,*/}*.css',
           'examples/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          'docs/dist/*.html'
+          'docs/dist/*.html',
+          'docs/dist/partials/*.html'
         ]
       },
       'docs-less': {
@@ -95,7 +96,6 @@ module.exports = function(grunt) {
       },
       'docs-js': {
         files: ['docs/dist/js/*.js'],
-        tasks: ['newer:jshint:docs'],
         options: {
           livereload: true
         }

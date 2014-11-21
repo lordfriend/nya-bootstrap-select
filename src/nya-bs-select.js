@@ -40,13 +40,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
-        if(/btn-(?:primary)|(?:info)|(?:success)|(?:warning)|(?:danger)|(?:inverse)/.test(className)) {
+        if(/btn-(?:primary|info|success|warning|danger|inverse)/.test(className)) {
           tElement.removeClass(className);
           dropdownToggle.removeClass('btn-default');
           dropdownToggle.addClass(className);
         }
 
-        //if(/btn-(?:lg)|(?:sm)|(?:xs)/.test(className)) {
+        //if(/btn-(?:lg|sm|xs)/.test(className)) {
         //  tElement.removeClass(className);
         //  dropdownToggle.addClass(className);
         //}
@@ -137,7 +137,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
          * @param values
          */
         nyaBsSelectCtrl.onCollectionChange = function (values) {
-          console.log('collection changed! ', values);
           var valuesForSelect = [],
             index,
             length,
@@ -224,7 +223,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
         // if click the outside of dropdown menu, close the dropdown menu
         $document.on('click', function(event) {
-          console.log('click document');
           if(filterTarget(event.target, $element.parent()[0], $element[0]) === null) {
             $element.removeClass('open');
           }
@@ -304,7 +302,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         // model --> view
 
         ngCtrl.$render = function() {
-          console.log(nyaBsSelectCtrl.id + ' render start', ' ngModel: ', ngCtrl.$modelValue);
           var modelValue = ngCtrl.$modelValue,
             index,
             bsOptionElements = dropdownMenu.children(),
@@ -339,7 +336,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
             }
           }
-          console.log(nyaBsSelectCtrl.id + ' render end');
           updateButtonContent();
         };
 
@@ -371,11 +367,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
           }
 
           if(toggleButton) {
-            console.log('toggleButton');
 
             // press enter to active dropdown
             if((keyCode === 13 || keyCode === 38 || keyCode === 40) && !$element.hasClass('open')) {
-              console.log('open toggleButton');
               event.stopPropagation();
 
               $element.addClass('open');
@@ -408,7 +402,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             //  event.stopPropagation();
             //}
           } else if(menuContainer) {
-            console.log('menuContainer');
 
             if(keyCode === 27) {
               // escape pressed
@@ -452,7 +445,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
             }
           } else if(searchBoxContainer) {
-            console.log('searchBoxContainer');
             if(keyCode === 27) {
               dropdownToggle[0].focus();
               $element.removeClass('open');
@@ -774,7 +766,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             liElement = liElements.eq(i);
             if(liElement.hasClass('nya-bs-option') || liElement.attr('nya-bs-option')) {
               liHeight = liElement[0].clientHeight;
-              console.log('liHeight', liHeight);
               break;
             }
           }

@@ -43,7 +43,10 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'filters', 'contr
         'basic-usage',
         'groups-and-more',
         'form-control-feature',
-        'layout-and-styles'
+        'layout-and-styles',
+        'live-search',
+        'alternative-display',
+        'select-text-format'
       ]
       //api: [
       //
