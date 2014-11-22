@@ -226,6 +226,14 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+
+    'gh-pages': {
+      options: {
+        base: 'docs/dist',
+        dotfiles: true
+      },
+      src: ['**']
     }
   });
 
@@ -256,7 +264,8 @@ module.exports = function(grunt) {
   grunt.registerTask('buildDocs', [
     'copy:docs',
     'markdown',
-    'less:docs'
+    'less:docs',
+    'gh-pages'
   ]);
   grunt.registerTask('serveDocs', [
     'copy:docs',

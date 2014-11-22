@@ -91,9 +91,17 @@ Like vanilla `<select>` we can also generate option group with any property in a
 ##TODO
 
 - data-header support
-- data-container support
+- ~~data-container support~~ may not be supported any more
 - data-max-options support
 - auto dropup support
+
+##How to Contribute
+
+This project is built by Grunt, fork this project. and clone to your local repository. run `npm install`, `bower install` to install all development dependencies.
+
+Source files are separated to several files. run `grunt build` will do some karma unit test and combine these files to one single file and compress the js and css files.
+
+e2e test is not available temporarily, I will add those test in the future.
 
 ## License ##
 
