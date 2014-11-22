@@ -128,7 +128,8 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'fi
 
     $urlRouterProvider
       .when('/main', '/main/'+ pages.main[0])
-      .when('/examples', '/examples/' + pages.examples[0]);
+      .when('/examples', '/examples/' + pages.examples[0])
+      .otherwise('/main/' + pages.main[0]);
 
     angular.forEach(pages, function(children, stateName){
       $stateProvider.state(stateName, {
