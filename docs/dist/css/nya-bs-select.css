@@ -188,3 +188,9 @@
   top: auto;
   margin-top: -1px;
 }
+.nya-bs-select.on-modal .dropdown-menu {
+  z-index: 1040;
+}
+.nya-bs-select.on-modal.open > .btn {
+  z-index: 1041;
+}

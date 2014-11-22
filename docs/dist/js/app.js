@@ -28,6 +28,15 @@ angular.module('controllers', [])
         title: $filter('camelCase')(stateName)
       });
     });
+  })
+  .controller('ApiCtrl', function($scope, pages){
+    $scope.articles = [];
+    angular.forEach(pages, function(stateName){
+      $scope.articles.push({
+        state: stateName,
+        title: stateName
+      });
+    });
   });
 
 
@@ -52,10 +61,11 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'filters', 'contr
         'disable-an-option',
         'control-dropdown-menu-size',
         'show-menu-arrow'
+      ],
+      api: [
+        'nya-bs-select',
+        'nya-bs-option'
       ]
-      //api: [
-      //
-      //]
     };
 
     $urlRouterProvider
