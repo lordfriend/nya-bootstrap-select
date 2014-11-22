@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-lg-2">
+    <ul class="nav nav-pills nav-stacked">
+      <li ng-repeat="article in articles">
+        <a ui-sref="{{article.state}}">{{article.title}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-10">
+    <div ui-view></div>
+  </div>
+</div>

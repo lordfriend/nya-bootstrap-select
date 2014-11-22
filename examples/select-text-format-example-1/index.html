@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="SelectTextFormatExample1App">
+  <div ng-controller="MainController">
+    <ul>
+  <li>
+    <p><code>values</code></p>
+
+    <form class="form-inline">
+      <ol id="values-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="values" multiple>
+        <li nya-bs-option="option in options1">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+  </li>
+  <li>
+    <p><code>count</code></p>
+    <form class="form-inline">
+      <ol id="count-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="count" multiple>
+        <li nya-bs-option="option in options1">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+  </li>
+  <li>
+    <p><code>count > 3</code></p>
+    <form class="form-inline">
+      <ol id="count-number-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="count>3" multiple>
+        <li nya-bs-option="option in options1">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+    </form>
+  </li>
+</ul>
+  </div>
+</body>
+</html>

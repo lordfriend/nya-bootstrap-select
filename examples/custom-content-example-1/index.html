@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="CustomContentExample1App">
+  <div ng-controller="MainController">
+    <!-- Use label class -->
+<ol class="nya-bs-select" ng-model="model1">
+  <li nya-bs-option="option in options">
+    <a>
+      <span class="label" ng-class="option.bg">{{ option.name }}</span>
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+<!-- Use icon in option -->
+<ol class="nya-bs-select" ng-model="model2">
+  <li nya-bs-option="option in options2">
+    <a>
+      <span><span class="glyphicon" ng-class="option.icon"></span> {{ option.name }}</span>
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+<p>Subtext</p>
+<!-- wrap whole content, subtext will displayed on dropdown-toggle button -->
+<ol class="nya-bs-select" ng-model="model3">
+  <li nya-bs-option="option in options3">
+    <a>
+      <span>
+        {{ option }}
+        <small>planet No.{{ $index + 1 }}</small>
+      </span>
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+<!-- make small element as a sibling of your content. it will ignored on dropdown-toggle button -->
+<ol class="nya-bs-select" ng-model="model3">
+  <li nya-bs-option="option in options3">
+    <a>
+      <span>{{ option }}</span>
+      <small>planet No.{{ $index + 1 }}</small>
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+<p>Custom option style</p>
+<ol class="nya-bs-select" ng-model="model4">
+  <li nya-bs-option="option in options3">
+    <a ng-style="{color: $index=== 2 ? 'blue' : 'black'}">
+      {{ option }}
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+  </div>
+</body>
+</html>

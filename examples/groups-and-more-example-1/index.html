@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="GroupsAndMoreExample1App">
+  <div ng-controller="MainController">
+    <form>
+  <div class="form-group">
+    <p class="form-control-static">select: {{ model }}</p>
+    <label for="array-collection">Array Collection</label>
+    <ol id="array-collection" class="nya-bs-select" ng-model="model">
+      <li nya-bs-option="option in arrayCollection group by option.class">
+        <span class="dropdown-header">{{$group}}</span>
+        <a>
+          {{option.name}}
+        </a>
+      </li>
+    </ol>
+  </div>
+  <div class="form-group">
+  <p class="form-control-static">select: {{ model2 }}</p>
+    <label for="object-collection">Object Collection, select: {{ model2 }}</label>
+    <ol id="object-collection" class="nya-bs-select" ng-model="model2">
+      <li nya-bs-option="(key, value) in objCollection group by value.group">
+        <span class="dropdown-header">{{$group}}</span>
+        <a>
+          {{key}}
+        </a>
+      </li>
+    </ol>
+  </div>
+</form>
+  </div>
+</body>
+</html>

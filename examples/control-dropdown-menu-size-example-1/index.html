@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="ControlDropdownMenuSizeExample1App">
+  <div ng-controller="MainController">
+    <p><code>data-size="auto"</code> or not set</p>
+<ol class="nya-bs-select" ng-model="model" data-size="auto">
+  <li nya-bs-option="option in options">
+    <a>
+      {{ option }}
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+<p><code>data-size="5"</code></p>
+<ol class="nya-bs-select" ng-model="model" data-size="5">
+  <li nya-bs-option="option in options">
+    <a>
+      {{ option }}
+      <span class="glyphicon glyphicon-ok check-mark"></span>
+    </a>
+  </li>
+</ol>
+  </div>
+</body>
+</html>

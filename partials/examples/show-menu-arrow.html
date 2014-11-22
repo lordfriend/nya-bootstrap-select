@@ -1,0 +1,26 @@
+<section>
+  <h1 id="show-menu-arrow">Show Menu Arrow</h1>
+<p>To enable an menu arrow on dropdown menu. just add a class <code>show-menu-arrow</code> on <code>nya-bs-select</code> element.</p>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select show-menu-arrow&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.options=[<span class="hljs-string">&#39;Alpha&#39;</span>, <span class="hljs-string">&#39;Bravo&#39;</span>, <span class="hljs-string">&#39;Charlie&#39;</span>];
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/show-menu-arrow-example-1/index.html"></iframe>
+
+</section>

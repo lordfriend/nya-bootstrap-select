@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="LiveSearchExample1App">
+  <div ng-controller="MainController">
+    <form class="form-inline">
+  <ol class="nya-bs-select" ng-model="model" data-live-search="true">
+    <li nya-bs-option="option in options">
+      <!-- the text content of anchor element will be used for search -->
+      <a>
+        {{ option }}
+        <span class="glyphicon glyphicon-ok check-mark"></span>
+      </a>
+    </li>
+  </ol>
+  <ol class="nya-bs-select" ng-model="model" data-live-search="true">
+    <li nya-bs-option="option in options2 group by option.group">
+      <span class="dropdown-header">{{$group}}</span> <!-- group header cannot be searched -->
+      <a>
+        <span>{{ option.name }}</span> <!-- this content will be search first -->
+        <span class="small">{{ option.subtitle }}</span> <!-- if the name failed, this will be used -->
+        <span class="glyphicon glyphicon-ok check-mark"></span>
+      </a>
+    </li>
+  </ol>
+</form>
+  </div>
+</body>
+</html>

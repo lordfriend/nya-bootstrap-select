@@ -1,0 +1,120 @@
+<section>
+  <h1 id="nya-bs-select">nya-bs-select</h1>
+<p>nya-bs-select is the main directive of this module. You can consider it as a select directive. It manipulates the the dropdown-toggle content and all user interaction. </p>
+<h3 id="usage">Usage</h3>
+<p>as element:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">nya-bs-select</span>
+  <span class="hljs-attribute">ng-mode</span>=<span class="hljs-value">""</span>
+  [<span class="hljs-attribute">multiple</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">live-search</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">required</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">ng-required</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">disabled</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">size</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">select-text-format</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-title">nya-bs-select</span>&gt;</span>
+</code></pre>
+<p>as attribute:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">ANY</span>
+  <span class="hljs-attribute">nya-bs-select</span>
+  <span class="hljs-attribute">ng-mode</span>=<span class="hljs-value">""</span>
+  [<span class="hljs-attribute">multiple</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">live-search</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">required</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">ng-required</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">disabled</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">size</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">select-text-format</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-title">ANY</span>&gt;</span>
+</code></pre>
+<p>as class:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">ANY</span>
+  <span class="hljs-attribute">class</span>=<span class="hljs-value">"nya-bs-select"</span>
+  <span class="hljs-attribute">ng-mode</span>=<span class="hljs-value">""</span>
+  [<span class="hljs-attribute">multiple</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">live-search</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">required</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">ng-required</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">disabled</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">size</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">select-text-format</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-title">ANY</span>&gt;</span>
+</code></pre>
+<h3 id="arguments">Arguments</h3>
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>ngModel</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>Assignable angular expression to data-bind to</td>
+  </tr>
+  <tr>
+    <td>multiple(optional)</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>Act as a multiple select control if multiple attribute is set.</td>
+  </tr>
+  <tr>
+    <td>live-search(optional)</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>Provide a input box to search through all option content only if <code>live-search=&quot;true&quot;</code></td>
+  </tr>
+  <tr>
+    <td>required</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>The control is considered valid if ngModel value is defined or not an empty array(for multiple)</td>
+  </tr>
+  <tr>
+    <td>ng-required</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>Adds required attribute and required validation constraints to the element when the ngRequired expression evaluates to true. Use <code>ngRequired</code> instead of required when you want to data-bind to the required attribute</td>
+  </tr>
+  <tr>
+    <td>disabled</td>
+    <td><small class="label label-info">expression</small></td>
+    <td>if the expression is truthy, then the whole control will be disabled.</td>
+  </tr>
+  <tr>
+    <td>size</td>
+    <td><small class="label label-danger">number</small></td>
+    <td>Sets max number which the dropdown-menu can show. if the number of options exceed the limit. an scrollbar will be shown.</td>
+  </tr>
+  <tr>
+    <td>select-text-format</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>
+      <span>Sets the content format of dropdown-toggle.</span>
+      <ul>
+        <li>
+          if sets to <code>value</code>, the dropdown-toggle button will show content user has selected, this is default value.
+        </li>
+        <li>
+          if sets to <code>count</code>, the dropdown-toggle button will show the number of options user has selected.
+          </li>
+        <li>
+          if sets to <code>count&gt;x</code>, the dropdown-toggle button will show the number of user selected options when the number of options greater than x. otherwise, show the content.
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>title</td>
+    <td><small class="label label-primary">string</small></td>
+    <td>provide a replacement for default text when nothing is selected.</td>
+  </tr>
+</tbody>
+</table>
+
+</section>

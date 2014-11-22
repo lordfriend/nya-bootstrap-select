@@ -1,0 +1,115 @@
+<section>
+  <h1 id="layout-and-styles">Layout And Styles</h1>
+<p>nya-bootstrap-select is a Bootstrap component. Bootstrap 3&#39;s grid layout class <code>col-*</code> and button style class <code>btn-*</code> are fully supported. so is the <code>form-control</code> class.</p>
+<h3 id="layout">Layout</h3>
+<p>Just add <code>col-*</code>, <code>form-control</code> on <code>nya-bs-select</code> element to control your select size.</p>
+<blockquote>
+<p>Currently. The Bootstrap-select feature <strong>data-width</strong> is not supported. </p>
+</blockquote>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-group&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;col-sm-3 control-label&quot;</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">&quot;form-control-example&quot;</span>&gt;</span>form control example<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;col-sm-9&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select form-control&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model1&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;form-control-example&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+            </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
+            <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>col-* example<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select col-sm-2&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model2&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select col-sm-4&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model3&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select col-sm-6&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model4&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.options = [
+  <span class="hljs-string">&#39;Alpha&#39;</span>,
+  <span class="hljs-string">&#39;Bravo&#39;</span>,
+  <span class="hljs-string">&#39;Charlie&#39;</span>,
+  <span class="hljs-string">&#39;Golf&#39;</span>,
+  <span class="hljs-string">&#39;Hotel&#39;</span>,
+  <span class="hljs-string">&#39;Juliet&#39;</span>,
+  <span class="hljs-string">&#39;Kilo&#39;</span>,
+  <span class="hljs-string">&#39;Lima&#39;</span>
+];
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/layout-and-styles-example-1/index.html"></iframe>
+
+<h3 id="styles">Styles</h3>
+<p>These Button classes are supported: <code>btn-primary</code>, <code>btn-success</code>, <code>btn-info</code>, <code>btn-warning</code>, <code>btn-danger</code>.</p>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-inline&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select btn-primary&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;staticModel2&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select btn-success&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;staticModel2&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select btn-info&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;staticModel2&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select btn-warning&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;staticModel2&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select btn-danger&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;staticModel2&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.staticModel2 = <span class="hljs-string">&#39;a&#39;</span>;
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/layout-and-styles-example-2/index.html"></iframe>
+
+</section>

@@ -1,0 +1,104 @@
+<section>
+  <h1 id="basic-usage">Basic Usage</h1>
+<p>nya-bootstrap-select is an directive combination. The main directive is <code>nya-bs-select</code>. This directive maintain the value of ng-model and dropdown and toggle button presentation.
+You need to add your options using <code>&lt;li&gt;</code> element as children of <code>nya-bs-select</code>. You can either add static options or generate options using <code>nya-bs-option</code>.</p>
+<p>An option is, in fact, an dropdown list element. So you need to add an anchor element as a direct child of <code>&lt;li&gt;</code> element, then add your own content as the menu item.</p>
+<p>To make multiple selection. just add <code>multiple</code> into <code>nya-bs-select</code> element.</p>
+<h3 id="static-options">Static Options</h3>
+<p>Static Options don&#39;t change. you need to add <code>nya-bs-option</code> class to each of your <code>&lt;li&gt;</code> element to make them as options. Beside, you also need to use <code>value</code> attribute to specify the value of each option.</p>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;alert-info&quot;</span>&gt;</span>Single Selection, model is </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">model</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;alert-info&quot;</span>&gt;</span>Multiple Selection, model2 is </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">model</span>2<span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model2&quot;</span> <span class="hljs-attribute">multiple</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;a&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Alpha<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;b&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Bravo<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-option&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;c&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>Charlie<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.model2 = [<span class="hljs-string">&#39;b&#39;</span>, <span class="hljs-string">&#39;c&#39;</span>];
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/basic-usage-example-1/index.html"></iframe>
+
+
+<h3 id="dynamic-options">Dynamic Options</h3>
+<p>If you want to generate options from a collection, <code>nya-bs-option</code> directive is right for you. Just think it is an alias of <code>ng-repeat</code>, with some tweak and magic to support our options and groups.</p>
+<p>This example demonstrate how how to use <code>nya-bs-option</code> directive to generate options from collections.</p>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-inline&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;alert-info&quot;</span>&gt;</span> You have select </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">dynModel</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;alert-info&quot;</span>&gt;</span> options is </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">options</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-default&quot;</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">&quot;changeGroups(&#39;options&#39;)&quot;</span>&gt;</span>Change Option<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;dynModel&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+        </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option.name</span><span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> options = [<span class="hljs-string">&#39;Alpha&#39;</span>, <span class="hljs-string">&#39;Bravo&#39;</span>, <span class="hljs-string">&#39;Charlie&#39;</span>, <span class="hljs-string">&#39;Delta&#39;</span>,
+  <span class="hljs-string">&#39;Echo&#39;</span>, <span class="hljs-string">&#39;Foxtrot&#39;</span>, <span class="hljs-string">&#39;Golf&#39;</span>, <span class="hljs-string">&#39;Hotel&#39;</span>, <span class="hljs-string">&#39;India&#39;</span>, <span class="hljs-string">&#39;Juliet&#39;</span>, <span class="hljs-string">&#39;Kilo&#39;</span>, <span class="hljs-string">&#39;Lima&#39;</span>,
+  <span class="hljs-string">&#39;Mike&#39;</span>, <span class="hljs-string">&#39;November&#39;</span>, <span class="hljs-string">&#39;Oscar&#39;</span>, <span class="hljs-string">&#39;Papa&#39;</span>, <span class="hljs-string">&#39;Quebec&#39;</span>, <span class="hljs-string">&#39;Romeo&#39;</span>, <span class="hljs-string">&#39;Sierra&#39;</span>,
+  <span class="hljs-string">&#39;Tango&#39;</span>, <span class="hljs-string">&#39;Uniform&#39;</span>, <span class="hljs-string">&#39;Victor&#39;</span>, <span class="hljs-string">&#39;Whiskey&#39;</span>, <span class="hljs-string">&#39;X-ray&#39;</span>, <span class="hljs-string">&#39;Yankee&#39;</span>, <span class="hljs-string">&#39;Zulu&#39;</span>
+];
+<span class="hljs-comment">// randomly generate options from options array</span>
+$scope.changeGroups = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(targetOptions)</span> </span>{
+  <span class="hljs-keyword">var</span> length = <span class="hljs-built_in">Math</span>.max(<span class="hljs-built_in">Math</span>.min(<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() <em> options.length), <span class="hljs-number">10</span>), <span class="hljs-number">3</span>);
+  <span class="hljs-keyword">var</span> newOptions = {};
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) {
+    newOptions[options[<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() </em> options.length)]] = <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">var</span> newOptionArray = [];
+  <span class="hljs-keyword">var</span> groupCount = <span class="hljs-built_in">Math</span>.max(<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() <em> length / <span class="hljs-number">2</span>), <span class="hljs-number">2</span>);
+  angular.forEach(newOptions, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, key)</span> </span>{
+    <span class="hljs-keyword">var</span> group = <span class="hljs-built_in">Math</span>.max(<span class="hljs-built_in">Math</span>.ceil(<span class="hljs-built_in">Math</span>.random() </em> groupCount), <span class="hljs-number">1</span>);
+    newOptionArray.push({
+      name: key,
+      group: <span class="hljs-string">&#39;Group &#39;</span> + group
+    });
+  });
+
+  $scope[targetOptions] = newOptionArray;
+};
+
+
+$scope.changeGroups(<span class="hljs-string">&#39;options&#39;</span>);
+</code></pre>
+
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/basic-usage-example-2/index.html"></iframe>
+
+</section>

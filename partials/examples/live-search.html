@@ -1,0 +1,63 @@
+<section>
+  <h1 id="live-search">Live Search</h1>
+<p>This feature is borrowed from Bootstrap-select. It give you ability to search through the options. To use this feature. Add <code>data-live-search=&quot;true&quot;</code> or <code>live-search=&quot;true&quot;</code> on the <code>nya-bs-select</code> element.</p>
+<blockquote>
+<p><strong>Note:</strong> live-search search through your content of all direct children elements of anchor element except the <code>check-mark</code> element. If no children element exists. the text content of anchor element will be used.
+currently, only one level children element can be search through. If you want your content to be searched. don&#39;t nest too many levels of children element.</p>
+</blockquote>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-inline&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">data-live-search</span>=<span class="hljs-value">&quot;true&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+      <span class="hljs-comment">&lt;!-- the text content of anchor element will be used for search --&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+        </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">data-live-search</span>=<span class="hljs-value">&quot;true&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options2 group by option.group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;dropdown-header&quot;</span>&gt;</span></span><span class="hljs-expression"><span>{{</span>$<span class="hljs-variable">group</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span> <span class="hljs-comment">&lt;!-- group header cannot be searched --&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span></span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option.name</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span> <span class="hljs-comment">&lt;!-- this content will be search first --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;small&quot;</span>&gt;</span></span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option.subtitle</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span> <span class="hljs-comment">&lt;!-- if the name failed, this will be used --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript">$scope.options = [
+  <span class="hljs-string">&#39;Alpha&#39;</span>,
+  <span class="hljs-string">&#39;Bravo&#39;</span>,
+  <span class="hljs-string">&#39;Charlie&#39;</span>,
+  <span class="hljs-string">&#39;Golf&#39;</span>,
+  <span class="hljs-string">&#39;Hotel&#39;</span>,
+  <span class="hljs-string">&#39;Juliet&#39;</span>,
+  <span class="hljs-string">&#39;Kilo&#39;</span>,
+  <span class="hljs-string">&#39;Lima&#39;</span>
+];
+$scope.options2 = [
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Alpha&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group1&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Bravo&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group2&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Charlie&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group1&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Golf&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group1&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Hotel&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group1&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Juliet&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Joe&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group2&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Kilo&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Kate&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group2&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Lima&#39;</span>, <span class="hljs-string">subtitle:</span> <span class="hljs-string">&#39;Laura&#39;</span>, <span class="hljs-string">group:</span> <span class="hljs-string">&#39;Group2&#39;</span>}
+];
+</code></pre>
+
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/live-search-example-1/index.html"></iframe>
+
+</section>

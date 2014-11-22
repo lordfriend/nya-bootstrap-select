@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="FormControlFeatureExample1App">
+  <div ng-controller="MainController">
+    <form>
+<button class="btn btn-default" ng-click="disable=!disable">
+  {{ disable ? "Enable select" : "Disable select" }}
+</button>
+<ol class="nya-bs-select" ng-model="model" disabled="disable">
+  <li nya-bs-option="option in options">
+    <a>
+      {{option}}
+    </a>
+  </li>
+</ol>
+</form>
+  </div>
+</body>
+</html>

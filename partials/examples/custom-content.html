@@ -1,0 +1,99 @@
+<section>
+  <h1 id="custom-content">Custom Content</h1>
+<p>As you already know, the content of <code>nya-bs-option</code> is all depend on your needs. there are only few restrictions on the content.</p>
+<ul>
+<li>Anchor element should always the child of <code>nya-bs-option</code> and parent of your content.</li>
+<li>Add <code>dropdown-header</code> before anchor element as a sibling.</li>
+<li>If you want search the content. don&#39;t nest your content elements too deep. currently we only support one level depth.</li>
+<li>You content element should always be <code>inline</code> element. Use <code>block</code> or <code>inline-block</code> may result in unknown behavior.</li>
+<li>If you use subtext or any custom content. you should wrap your text content with <code>&lt;span&gt;</code> or it may not be displayed on dropdown-toggle when selected.</li>
+<li>Only the first wrapped element will be used to be displayed on dropdown button. This is useful, when you want to ignore some extra information provided in option.</li>
+</ul>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-comment">&lt;!-- Use label class --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model1&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;label&quot;</span> <span class="hljs-attribute">ng-class</span>=<span class="hljs-value">&quot;option.bg&quot;</span>&gt;</span></span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option.name</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- Use icon in option --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model2&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options2&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon&quot;</span> <span class="hljs-attribute">ng-class</span>=<span class="hljs-value">&quot;option.icon&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span> </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option.name</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Subtext<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- wrap whole content, subtext will displayed on dropdown-toggle button --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model3&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options3&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
+        </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+        <span class="hljs-tag">&lt;<span class="hljs-title">small</span>&gt;</span>planet No.</span><span class="hljs-expression"><span>{{</span> $<span class="hljs-variable">index</span> + 1 <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">small</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- make small element as a sibling of your content. it will ignored on dropdown-toggle button --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model3&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options3&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span></span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">small</span>&gt;</span>planet No.</span><span class="hljs-expression"><span>{{</span> $<span class="hljs-variable">index</span> + 1 <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">small</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Custom option style<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model4&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options3&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">ng-style</span>=<span class="hljs-value">&quot;{color: $index=== 2 ? &#39;blue&#39; : &#39;black&#39;}&quot;</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript">$scope.options = [
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;AngularJS&#39;</span>, <span class="hljs-string">bg:</span> <span class="hljs-string">&#39;label-danger&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Bootstrap&#39;</span>, <span class="hljs-string">bg:</span> <span class="hljs-string">&#39;label-primary&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Foundation&#39;</span>, <span class="hljs-string">bg:</span> <span class="hljs-string">&#39;label-success&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Polymer&#39;</span>, <span class="hljs-string">bg:</span> <span class="hljs-string">&#39;label-warning&#39;</span>}
+];
+$scope.model1 = {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;AngularJS&#39;</span>, <span class="hljs-string">bg:</span> <span class="hljs-string">&#39;label-danger&#39;</span>};
+$scope.options2 = [
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Euro Dollar&#39;</span>, <span class="hljs-string">icon:</span> <span class="hljs-string">&#39;glyphicon-euro&#39;</span>},
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;US Dollar&#39;</span>, <span class="hljs-string">icon:</span> <span class="hljs-string">&#39;glyphicon-usd&#39;</span> },
+  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;Great Britain Pound&#39;</span>, <span class="hljs-string">icon:</span> <span class="hljs-string">&#39;glyphicon-gbp&#39;</span>}
+];
+$scope.model2 = {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;US Dollar&#39;</span>, <span class="hljs-string">icon:</span> <span class="hljs-string">&#39;glyphicon-usd&#39;</span> };
+$scope.options3 = [
+  <span class="hljs-string">&#39;Mercury&#39;</span>,
+  <span class="hljs-string">&#39;Venus&#39;</span>,
+  <span class="hljs-string">&#39;Earth&#39;</span>,
+  <span class="hljs-string">&#39;Mars&#39;</span>,
+  <span class="hljs-string">&#39;Jupiter&#39;</span>,
+  <span class="hljs-string">&#39;Saturn&#39;</span>,
+  <span class="hljs-string">&#39;Uranus&#39;</span>,
+  <span class="hljs-string">&#39;Neptune&#39;</span>
+];
+$scope.model3 = <span class="hljs-string">&#39;Jupiter&#39;</span>;
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/custom-content-example-1/index.html"></iframe>
+
+</section>

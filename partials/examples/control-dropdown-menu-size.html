@@ -1,0 +1,42 @@
+<section>
+  <h1 id="control-dropdown-menu-size">Control Dropdown Menu Size</h1>
+<p>This feature is borrowed from Bootstrap-select. It give you ability to control the height of dropdown menu to display certain number of options. To use this feature, add an attribute <code>data-size</code> or <code>size</code>
+on <code>nya-bs-select</code> element. the value of the attribute is the max number of options you want to display. If the number exceed the limit, an scrollbar will be shown on the dropdown menu.</p>
+<p>The default value is <code>auto</code> which does not limit the size of dropdown menu.</p>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">code</span>&gt;</span>data-size=&quot;auto&quot;<span class="hljs-tag">&lt;/<span class="hljs-title">code</span>&gt;</span> or not set<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">data-size</span>=<span class="hljs-value">&quot;auto&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">code</span>&gt;</span>data-size=&quot;5&quot;<span class="hljs-tag">&lt;/<span class="hljs-title">code</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">data-size</span>=<span class="hljs-value">&quot;5&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+      </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.options = [<span class="hljs-string">&#39;Alpha&#39;</span>, <span class="hljs-string">&#39;Bravo&#39;</span>, <span class="hljs-string">&#39;Charlie&#39;</span>, <span class="hljs-string">&#39;Delta&#39;</span>,
+  <span class="hljs-string">&#39;Echo&#39;</span>, <span class="hljs-string">&#39;Foxtrot&#39;</span>, <span class="hljs-string">&#39;Golf&#39;</span>, <span class="hljs-string">&#39;Hotel&#39;</span>, <span class="hljs-string">&#39;India&#39;</span>, <span class="hljs-string">&#39;Juliet&#39;</span>, <span class="hljs-string">&#39;Kilo&#39;</span>, <span class="hljs-string">&#39;Lima&#39;</span>,
+  <span class="hljs-string">&#39;Mike&#39;</span>, <span class="hljs-string">&#39;November&#39;</span>, <span class="hljs-string">&#39;Oscar&#39;</span>, <span class="hljs-string">&#39;Papa&#39;</span>, <span class="hljs-string">&#39;Quebec&#39;</span>, <span class="hljs-string">&#39;Romeo&#39;</span>, <span class="hljs-string">&#39;Sierra&#39;</span>,
+  <span class="hljs-string">&#39;Tango&#39;</span>, <span class="hljs-string">&#39;Uniform&#39;</span>, <span class="hljs-string">&#39;Victor&#39;</span>, <span class="hljs-string">&#39;Whiskey&#39;</span>, <span class="hljs-string">&#39;X-ray&#39;</span>, <span class="hljs-string">&#39;Yankee&#39;</span>, <span class="hljs-string">&#39;Zulu&#39;</span>
+];
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="/examples/control-dropdown-menu-size-example-1/index.html"></iframe>
+
+</section>
