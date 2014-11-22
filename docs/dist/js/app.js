@@ -39,8 +39,66 @@ angular.module('controllers', [])
     });
   });
 
+angular.module('directives', [])
+  .directive('example', function() {
+    return {
+      template: '<div class="panel panel-default example-panel">' +
+                  '<div class="panel-heading">EXAMPLE</div>' +
+                  '<div class="panel-body">' +
+                    '<ul class="nav nav-tabs">' +
+                      '<li ng-repeat="file in fileList" ng-class="{active: currentFile===file}">' +
+                        '<a ng-click="changeTab(file)">{{file}}</a>' +
+                      '</li>' +
+                    '</ul>' +
+                    '<div class="file-container" ng-transclude=""></div>' +
+                  '</div>' +
+                '</div>',
+      transclude: true,
+      restrict: 'E',
+      scope: {},
+      controller: function($scope) {
+        $scope.fileList = [];
+        this.addFile = function(name) {
+          $scope.fileList.push(name);
+          if(!$scope.currentFile) {
+            $scope.currentFile = $scope.fileList[0];
+          }
+        };
 
-angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'filters', 'controllers'])
+      },
+      link: function($scope, $element) {
+        $element.find('.panel-body').append($element.next());
+        $scope.changeTab = function(file) {
+          $scope.currentFile = file;
+        };
+
+        $scope.$watch('currentFile', function(file) {
+          console.log('currentFile', file);
+          if(file){
+            $element.find('file:not([name="'+ file +'"])').hide();
+            $element.find('file[name="'+ file +'"]').show();
+          }
+        })
+      }
+    };
+  })
+  .directive('file', function() {
+    return {
+      restrict: 'E',
+      require: '^example',
+      template: '<div class="example-file" ng-transclude=""></div>',
+      scope: {
+        fileName: '@name'
+      },
+      transclude: true,
+      link: function postLink($scope, $element, $attrs, $ctrl) {
+        $ctrl.addFile($scope.fileName);
+      }
+    };
+  });
+
+
+angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'filters', 'controllers'])
   .config(function($stateProvider, $urlRouterProvider){
 
     var pages = {

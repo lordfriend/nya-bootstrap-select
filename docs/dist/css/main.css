@@ -6333,3 +6333,16 @@ li > a {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+.example-panel .nav.nav-tabs {
+  border-bottom-color: #cccccc;
+}
+.example-panel .nav.nav-tabs > li.active > a {
+  color: #333333;
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-bottom-color: transparent;
+}
+.example-panel .example-file > pre {
+  border-radius: 0 0 4px 4px;
+  border-top: none;
+}
