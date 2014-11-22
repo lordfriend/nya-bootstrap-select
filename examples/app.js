@@ -4,7 +4,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
   .controller('MainCtrl', function($scope){
 
     var options = ['Alpha', 'Bravo', 'Charlie', 'Delta',
-      'Echo', 'Foxtrot', 'Golf', 'Hotel', 'Juliet', 'Kilo', 'Lima',
+      'Echo', 'Foxtrot', 'Golf', 'Hotel', 'India', 'Juliet', 'Kilo', 'Lima',
       'Mike', 'November', 'Oscar', 'Papa', 'Quebec', 'Romeo', 'Sierra',
       'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
     ];
@@ -12,7 +12,12 @@ angular.module('demoApp',['nya.bootstrap.select'])
     $scope.options1 = [
       'Alpha',
       'Bravo',
-      'Charlie'
+      'Charlie',
+      'Golf',
+      'Hotel',
+      'Juliet',
+      'Kilo',
+      'Lima'
     ];
 
     $scope.myModel = ['Bravo'];
@@ -26,7 +31,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
       $scope[targetOption] = Object.keys(newOptions);
     };
 
-    $scope.options2 = options.splice(0, 6);
+    $scope.options2 = options.splice(0, 3);
 
     var existInArray = function(value, array) {
       return array.some(function(element){return angular.equals(element, value);});
@@ -98,9 +103,7 @@ angular.module('demoApp',['nya.bootstrap.select'])
       $scope[model] = newModel;
     };
 
-    $scope.changeModel('model4', 'options4');
-
-    $scope.options6 = [{label: 'Alpha', value: 'alpha', group: 'group1'}, {label: 'Bravo', value: 'bravo', group: 'group1'}, {label: 'Charlie', value: 'charlie', group: 'group1'}];
+    $scope.changeModel('dynModel4', 'options4');
 
     $scope.changeModelArray = function(model, options) {
       var length = Math.max(Math.min(Math.floor(Math.random() * $scope[options].length), 10), 3);
@@ -110,9 +113,8 @@ angular.module('demoApp',['nya.bootstrap.select'])
       }
       $scope[model] = Object.keys(newOptions);
     };
-    $scope.model6 = $scope.changeModelArray('model6', 'options6');
 
-    $('#ngOptions-track-by-example').on('change', function(){
-      console.log($('#ngOptions-track-by-example').val());
-    });
+    $scope.addElement = function(options) {
+      $scope[options].unshift(JSON.parse($scope.element));
+    };
   });

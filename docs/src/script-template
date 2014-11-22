@@ -1,0 +1,8 @@
+(function(angular) {
+ 'use strict';
+  var myApp = angular.module('<%= appName %>', ['nya.bootstrap.select']);
+
+  myApp.controller('MainController', ['$scope', function($scope){
+  <%= jsContent %>
+  }]);
+})(window.angular);
