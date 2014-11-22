@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         }
 
         newExample = newExample +
-        '\n\n<iframe class="runnable-example-frame" src="/examples/' + folderName +'/' + htmlFileName + '"></iframe>';
+        '\n\n<iframe class="runnable-example-frame" src="examples/' + folderName +'/' + htmlFileName + '"></iframe>';
 
         src = src.replace(example, newExample);
 
