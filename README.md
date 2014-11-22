@@ -1,7 +1,7 @@
 # nya-bootstrap-select
 
-**nya-bootstrap-select 2** is an AngularJS directive set inspired by @silviomoreto 's [bootstrap-select](https://github.com/silviomoreto/bootstrap-select) .  With this directive you can built an **bootstrap-select** with data-binding feature of angularjs. 
-The 2.x version is totally written. while keep the most feature of **bootstrap-select** but no longer depends jquery and bootstrap-select plugin.
+**nya-bootstrap-select v2** is an AngularJS directive set inspired by @silviomoreto 's [bootstrap-select](https://github.com/silviomoreto/bootstrap-select) .  With this directive you can built an **bootstrap-select** with data-binding feature of angularjs. 
+The 2.x version is totally rewritten. while keep the most feature of **bootstrap-select** but no longer depends jquery and bootstrap-select plugin.
 
 Require: angular 1.2+
 
