@@ -119,7 +119,9 @@ angular.module('directives', [])
 
 
 angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'filters', 'controllers'])
-  .config(function($stateProvider, $urlRouterProvider){
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider){
+
+    $locationProvider.hashPrefix('!');
 
     var pages = {
       main: [
