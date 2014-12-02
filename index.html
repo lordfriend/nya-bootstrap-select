@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/nya-bs-select.css"/>
 </head>
 <body ng-app="docApp">
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default nya-docs-nav" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar">
@@ -23,13 +23,13 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar">
       <ul class="nav navbar-nav">
-        <li>
+        <li ui-sref-active="active">
           <a ui-sref="main">Getting Started</a>
         </li>
-        <li>
+        <li ui-sref-active="active">
           <a ui-sref="examples">Examples</a>
         </li>
-        <li>
+        <li ui-sref-active="active">
           <a ui-sref="api">API Reference</a>
         </li>
       </ul>
@@ -37,8 +37,19 @@
   </div>
 </nav>
 
+<div class="nya-docs-header" ng-controller="HeaderCtrl">
+  <div class="container">
+    <h1>{{headerContents[currentState.parent].heading}}</h1>
+    <p>{{headerContents[currentState.parent].desc}}</p>
+  </div>
+</div>
+
 <div class="container">
-  <div ui-view></div>
+  <div ui-view>
+    <div class="loading-container">
+      <img class="loading-icon" src="svg-loaders/grid.svg" alt="Loading..."/>
+    </div>
+  </div>
 </div>
 
 <footer class="doc-footer" role="contentinfo">
