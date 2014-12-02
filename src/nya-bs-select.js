@@ -114,23 +114,24 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             return !value || value.length === 0;
           };
         }
-
-        $scope.$watch($attrs.disabled, function(disabled){
-          if(!!disabled) {
-            dropdownToggle.addClass('disabled');
-            previousTabIndex = dropdownToggle.attr('tabindex');
-            dropdownToggle.attr('tabindex', '-1');
-            isDisabled = true;
-          } else {
-            dropdownToggle.removeClass('disabled');
-            if(previousTabIndex) {
-              dropdownToggle.attr('tabindex', previousTabIndex);
+        if(typeof $attrs.disabled !== 'undefined') {
+          $scope.$watch($attrs.disabled, function(disabled){
+            if(!!disabled) {
+              dropdownToggle.addClass('disabled');
+              previousTabIndex = dropdownToggle.attr('tabindex');
+              dropdownToggle.attr('tabindex', '-1');
+              isDisabled = true;
             } else {
-              dropdownToggle.removeAttr('tabindex');
+              dropdownToggle.removeClass('disabled');
+              if(previousTabIndex) {
+                dropdownToggle.attr('tabindex', previousTabIndex);
+              } else {
+                dropdownToggle.removeAttr('tabindex');
+              }
+              isDisabled = false;
             }
-            isDisabled = false;
-          }
-        });
+          });
+        }
 
         /**
          * Do some check on modelValue. remove no existing value
