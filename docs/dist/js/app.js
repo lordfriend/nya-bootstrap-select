@@ -11,6 +11,26 @@ angular.module('filters', [])
   });
 
 angular.module('controllers', [])
+  .controller('HeaderCtrl', function($scope, $state){
+    $scope.headerContents = {
+      main: {
+        heading: 'Getting Started',
+        desc: 'An overview of nya-bootstrap-select, how to install and use, basic usages and examples. migrate instructions from old version.'
+      },
+      examples: {
+        heading: 'Examples',
+        desc: 'Examples to demonstrate how to utilities the power of nya-bootstrap-select, also, contains some features from Bootstrap-select'
+      },
+      api: {
+        heading: 'API Reference',
+        desc: 'Reference for nya-bs-select and nya-bs-option directives'
+      }
+    };
+    $scope.$on('$stateChangeSuccess', function() {
+      $scope.currentState = $state.current;
+    });
+
+  })
   .controller('MainCtrl', function($scope, pages, $filter){
     $scope.articles = [];
     angular.forEach(pages, function(stateName){
@@ -129,6 +149,7 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'fi
     $urlRouterProvider
       .when('/main', '/main/'+ pages.main[0])
       .when('/examples', '/examples/' + pages.examples[0])
+      .when('/api', '/api/' + pages.api[0])
       .otherwise('/main/' + pages.main[0]);
 
     angular.forEach(pages, function(children, stateName){
