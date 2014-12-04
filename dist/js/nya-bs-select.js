@@ -251,6 +251,33 @@ var hasClass = function(element, className) {
   return classList.indexOf(className) !== -1;
 };
 
+// query children by class(one or more)
+var queryChildren = function(element, classList) {
+  var children = element.children(),
+    length = children.length,
+    child,
+    valid = true,
+    classes;
+  if(length > 0) {
+    for(var i = 0; i < length; i++) {
+      child = children.eq(i);
+      classes = getClassList(child[0]);
+      if(classes.length > 0) {
+        for(var j = 0; j < classList.length; j++) {
+          if(classes.indexOf(classList[j]) === -1) {
+            valid = false;
+            break;
+          }
+        }
+      }
+      if(valid) {
+        return child;
+      }
+    }
+  }
+  return [];
+};
+
 /**
  * Current support only drill down one level.
  * case insensitive
@@ -335,7 +362,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
     require: ['ngModel', 'nyaBsSelect'],
     controller: 'nyaBsSelectCtrl',
     compile: function nyaBsSelectCompile (tElement, tAttrs){
-
+      
       tElement.addClass('btn-group');
 
       var options = tElement.children(),
@@ -347,8 +374,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         classList,
         length,
         index,
-        liElement,
-        isMultiple = typeof tAttrs.multiple !== 'undefined';
+        liElement;
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
@@ -400,14 +426,22 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
       tElement.append(dropdownContainer);
 
       return function nyaBsSelectLink ($scope, $element, $attrs, ctrls) {
-
+        
         var ngCtrl = ctrls[0],
           nyaBsSelectCtrl = ctrls[1],
           liHeight,
           isDisabled = false,
           previousTabIndex,
           valueExpFn,
-          valueExpGetter = $parse(nyaBsSelectCtrl.valueExp);
+          valueExpGetter = $parse(nyaBsSelectCtrl.valueExp),
+          isMultiple = typeof $attrs.multiple !== 'undefined';
+
+        // find element from current $element root. because the compiled element may be detached from DOM tree by ng-if or ng-switch.
+        var dropdownToggle = queryChildren($element, ['dropdown-toggle']),
+          dropdownContainer = dropdownToggle.next(),
+          dropdownMenu = queryChildren(dropdownContainer, ['dropdown-menu', 'inner']),
+          searchBox = queryChildren(dropdownContainer, ['bs-searchbox']),
+          noSearchResult = queryChildren(dropdownMenu, ['no-search-result']);
 
         if(nyaBsSelectCtrl.valueExp) {
           valueExpFn = function(scope, locals) {
@@ -540,7 +574,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             $element.removeClass('open');
           }
         });
-
+        
         dropdownToggle.on('click', function() {
           var nyaBsOptionNode;
           $element.toggleClass('open');
@@ -649,7 +683,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
             }
           }
-          console.log(nyaBsSelectCtrl.id + ' render end');
+          
           updateButtonContent();
         };
 
@@ -681,7 +715,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
           }
 
           if(toggleButton) {
-            console.log('toggleButton');
+            
 
             // press enter to active dropdown
             if((keyCode === 13 || keyCode === 38 || keyCode === 40) && !$element.hasClass('open')) {

@@ -23,7 +23,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
     require: ['ngModel', 'nyaBsSelect'],
     controller: 'nyaBsSelectCtrl',
     compile: function nyaBsSelectCompile (tElement, tAttrs){
-
+      console.log(tElement.attr('id') + ' compiled');
       tElement.addClass('btn-group');
 
       var options = tElement.children(),
@@ -35,8 +35,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         classList,
         length,
         index,
-        liElement,
-        isMultiple = typeof tAttrs.multiple !== 'undefined';
+        liElement;
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
@@ -88,14 +87,22 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
       tElement.append(dropdownContainer);
 
       return function nyaBsSelectLink ($scope, $element, $attrs, ctrls) {
-
+        console.log(tElement.attr('id') + ' linked');
         var ngCtrl = ctrls[0],
           nyaBsSelectCtrl = ctrls[1],
           liHeight,
           isDisabled = false,
           previousTabIndex,
           valueExpFn,
-          valueExpGetter = $parse(nyaBsSelectCtrl.valueExp);
+          valueExpGetter = $parse(nyaBsSelectCtrl.valueExp),
+          isMultiple = typeof $attrs.multiple !== 'undefined';
+
+        // find element from current $element root. because the compiled element may be detached from DOM tree by ng-if or ng-switch.
+        var dropdownToggle = queryChildren($element, ['dropdown-toggle']),
+          dropdownContainer = dropdownToggle.next(),
+          dropdownMenu = queryChildren(dropdownContainer, ['dropdown-menu', 'inner']),
+          searchBox = queryChildren(dropdownContainer, ['bs-searchbox']),
+          noSearchResult = queryChildren(dropdownMenu, ['no-search-result']);
 
         if(nyaBsSelectCtrl.valueExp) {
           valueExpFn = function(scope, locals) {
@@ -228,7 +235,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             $element.removeClass('open');
           }
         });
-
+        console.log(dropdownToggle[0]==$element.find('button').eq(0)[0]);
         dropdownToggle.on('click', function() {
           var nyaBsOptionNode;
           $element.toggleClass('open');

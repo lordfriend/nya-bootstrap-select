@@ -8,8 +8,6 @@ module.exports = function(grunt) {
   // Time how long grunt task take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  var exampleCount = 0;
-
   //Configure grunt
   grunt.initConfig({
 
@@ -240,10 +238,18 @@ module.exports = function(grunt) {
         dotfiles: true
       },
       src: ['**']
+    },
+
+    'remove-logging': {
+      dist: {
+        src: ['dist/js/nya-bs-select.js'],
+        dest: 'dist/js/nya-bs-select.js'
+      }
     }
   });
 
   require('./docs/tasks/markdown')(grunt);
+  require('./tasks/remove-logging')(grunt);
 
   // Creates the 'serve' task
   grunt.registerTask('serve', [
@@ -264,7 +270,8 @@ module.exports = function(grunt) {
     'test',
     'concat:dist',
     'uglify:dist',
-    'cssmin:dist'
+    'cssmin:dist',
+    'remove-logging:dist'
   ]);
 
   grunt.registerTask('buildDocs', [

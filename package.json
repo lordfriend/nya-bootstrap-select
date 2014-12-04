@@ -7,6 +7,7 @@
     "url": "git://github.com/lordfriend/nya-bootstrap-select.git"
   },
   "devDependencies": {
+    "groundskeeper": "^0.1.11",
     "grunt": "~0.4.2",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-connect": "~0.6.0",

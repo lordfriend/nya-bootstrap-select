@@ -469,6 +469,33 @@
         <li class="nya-bs-option" value="d"><a>Juliet<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
       </ol>
     </form>
+    <h3>ngSwitch</h3>
+    <p>for test</p>
+
+    <form class="form-inline">
+      <p>
+        <select ng-model="condition">
+          <option value="condition1">condition1</option>
+          <option value="condition2">condition2</option>
+        </select>
+      </p>
+      <div ng-switch="condition">
+        <div ng-switch-when="condition1">
+          <ol id="ngSwitchExample" class="nya-bs-select" ng-model="model8">
+            <li nya-bs-option="option in options2">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </div>
+        <div ng-switch-when="condition2">
+          <p>condition2</p>
+        </div>
+      </div>
+
+    </form>
   </section>
 </div>
 <footer class="footer">

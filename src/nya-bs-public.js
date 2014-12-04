@@ -243,6 +243,33 @@ var hasClass = function(element, className) {
   return classList.indexOf(className) !== -1;
 };
 
+// query children by class(one or more)
+var queryChildren = function(element, classList) {
+  var children = element.children(),
+    length = children.length,
+    child,
+    valid = true,
+    classes;
+  if(length > 0) {
+    for(var i = 0; i < length; i++) {
+      child = children.eq(i);
+      classes = getClassList(child[0]);
+      if(classes.length > 0) {
+        for(var j = 0; j < classList.length; j++) {
+          if(classes.indexOf(classList[j]) === -1) {
+            valid = false;
+            break;
+          }
+        }
+      }
+      if(valid) {
+        return child;
+      }
+    }
+  }
+  return [];
+};
+
 /**
  * Current support only drill down one level.
  * case insensitive

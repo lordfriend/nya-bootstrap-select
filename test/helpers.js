@@ -76,7 +76,7 @@ var changeObject = function(options) {
 };
 
 var changeModel = function(options) {
-  var length = Math.floor(Math.random() * options.length);
+  var length = Math.max(Math.floor(Math.random() * options.length), 1);
   var newModel = [];
   for(var i = 0; i < length; i++) {
     var newValue = options[Math.floor(Math.random() * options.length)];
