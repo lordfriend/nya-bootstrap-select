@@ -248,11 +248,12 @@ var queryChildren = function(element, classList) {
   var children = element.children(),
     length = children.length,
     child,
-    valid = true,
+    valid,
     classes;
   if(length > 0) {
     for(var i = 0; i < length; i++) {
       child = children.eq(i);
+      valid = true;
       classes = getClassList(child[0]);
       if(classes.length > 0) {
         for(var j = 0; j < classList.length; j++) {
