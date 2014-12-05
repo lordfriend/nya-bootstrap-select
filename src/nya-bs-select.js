@@ -593,7 +593,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
           value = getOptionValue(nyaBsOption);
 
-          if(value) {
+          if(typeof value !== 'undefined') {
             if(isMultiple) {
               // make a deep copy enforce ngModelController to call its $render method.
               // See: https://github.com/angular/angular.js/issues/1751
