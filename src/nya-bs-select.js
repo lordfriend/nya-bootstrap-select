@@ -2,7 +2,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
   var DEFAULT_NONE_SELECTION = 'Nothing selected';
 
-  var DROPDOWN_TOGGLE = '<button class="btn btn-default dropdown-toggle">' +
+  var DROPDOWN_TOGGLE = '<button class="btn btn-default dropdown-toggle" type="button">' +
     '<span class="pull-left filter-option"></span>' +
     '&nbsp;' +
     '<span class="caret"></span>' +
