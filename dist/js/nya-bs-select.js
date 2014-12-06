@@ -390,7 +390,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         //  dropdownToggle.addClass(className);
         //}
 
-        if(className = 'form-control') {
+        if(className === 'form-control') {
           dropdownToggle.addClass(className);
         }
       });
@@ -586,6 +586,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             searchBox.children().eq(0)[0].focus();
             nyaBsOptionNode = findFocus(true);
             if(nyaBsOptionNode) {
+              dropdownMenu.children().removeClass('active');
               jqLite(nyaBsOptionNode).addClass('active');
             }
           } else if($element.hasClass('open')) {
@@ -736,6 +737,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
                 // find the focusable node but we will use active
                 nyaBsOptionNode = findFocus(true);
                 if(nyaBsOptionNode) {
+                  // remove previous active state
+                  dropdownMenu.children().removeClass('active');
+                  // set active to first focusable element
                   jqLite(nyaBsOptionNode).addClass('active');
                 }
               } else {

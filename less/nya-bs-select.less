@@ -237,6 +237,11 @@
     & input.form-control {
       margin-bottom: 0;
       width: 100%;
+      float: none;
+      z-index: inherit;
+      display: block;
+      position: static;
+      border-radius: 4px;
     }
   }
 
@@ -253,7 +258,7 @@
   }
 
   &.on-modal {
-    
+
     .dropdown-menu {
       z-index: @zindex-select-dropdown + 5;
     }
