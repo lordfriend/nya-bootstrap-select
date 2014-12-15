@@ -75,7 +75,8 @@ as attribute:
 ```html
 <li
   nya-bs-option=""
-  [value=""]>
+  [value=""]
+  [deep-watch=""]>
   <a>
     ...
   </a>
@@ -156,6 +157,15 @@ as attribute:
         For example: `<li nya-bs-option="album in artist.albums" value="album.album_name"></li>`. 
         the value of each option will be album_name instead of the album object.
       </p>
+    </td>
+  </tr>
+  <tr>
+    <td>deep-watch</td>
+    <td><span class="label label-primary">string</span></td>
+    <td>
+      When set to true, enable a deep watch to collection_expression. `nya-bs-option` will use $watch(exp, listener, true) to make a deep watch. Turn on this feature will impact the performance. even cause expection.
+      It is not recommended.
+      By default. `nya-bs-option` will use $watchCollection to watch the collection_expression.
     </td>
   </tr>
 </tbody>

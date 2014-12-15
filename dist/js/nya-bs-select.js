@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.0.4
+ * nya-bootstrap-select v2.0.5
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -1246,7 +1246,14 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         // hasOwnProperty.
         var lastBlockMap = createMap();
 
-        $scope.$watchCollection(collectionExp, function nyaBsOptionAction(collection) {
+        // deepWatch will impact performance. use with caution.
+        if($attr.deepWatch === 'true') {
+          $scope.$watch(collectionExp, nyaBsOptionAction, true);
+        } else {
+          $scope.$watchCollection(collectionExp, nyaBsOptionAction);
+        }
+
+        function nyaBsOptionAction(collection) {
           var index,
 
             previousNode = $element[0],     // node that cloned nodes should be inserted after
@@ -1429,7 +1436,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
           lastBlockMap = nextBlockMap;
 
           nyaBsSelectCtrl.onCollectionChange(values);
-        });
+        }
       };
     }
   }
