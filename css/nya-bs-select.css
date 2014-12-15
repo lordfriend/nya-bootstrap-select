@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.0.4
+ * nya-bootstrap-select v2.0.5
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -179,6 +179,11 @@
 .nya-bs-select .bs-searchbox input.form-control {
   margin-bottom: 0;
   width: 100%;
+  float: none;
+  z-index: inherit;
+  display: block;
+  position: static;
+  border-radius: 4px;
 }
 .nya-bs-select.fit-width .btn .filter-option {
   position: static;
