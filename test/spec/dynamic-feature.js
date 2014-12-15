@@ -5,7 +5,8 @@
 describe('Features contains ngModel, option auto generate, etc;', function() {
 
   var $scope,
-    $compile;
+    $compile,
+    $timeout;
 
 
   var options = ['Alpha', 'Bravo', 'Charlie', 'Delta',
@@ -16,9 +17,10 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
 
   beforeEach(module('nya.bootstrap.select'));
 
-  beforeEach(inject(function(_$rootScope_, _$compile_){
+  beforeEach(inject(function(_$rootScope_, _$compile_, _$timeout_){
     $scope = _$rootScope_.$new();
     $compile = _$compile_;
+    $timeout = _$timeout_;
   }));
 
   it('should generate corresponding options with array and populate some meta property in each sub-scope of nya-bs-option', function() {
@@ -342,5 +344,35 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
 
     expect(selectElement).toHaveClass('ng-valid-required');
     expect(selectElement).not.toHaveClass('ng-invalid-required');
+  });
+
+  it('should update button label with deepWatch options when collection changed.', function() {
+
+    $scope.options = [
+      {name: 'Alpha', value: 'a'},
+      {name: 'Bravo', value: 'b'}
+    ];
+
+    $scope.model = 'b';
+    $scope.$digest();
+
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model">' +
+    '<li nya-bs-option="option in options" value="option.value" deep-watch="true">' +
+    '<a>{{option.name}}</a>' +
+    '</li>' +
+    '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+    $timeout.flush();
+    expect(selectElement.find('button').children().eq(0).text()).toBe('Bravo');
+
+    // now change property of options.
+
+    $scope.options[1].name = 'Beta';
+
+    $scope.$digest();
+    $timeout.flush();
+    expect(selectElement.find('button').children().eq(0).text()).toBe('Beta');
   });
 });
