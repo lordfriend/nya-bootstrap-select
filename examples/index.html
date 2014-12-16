@@ -10,6 +10,24 @@
   <link rel="stylesheet" href="main.css"/>
 </head>
 <body ng-app="demoApp">
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">nya-bootstrap-select</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="#">Basic Examples</a>
+      </li>
+      <li>
+        <a href="localization/default.html">Localized Default Examples</a>
+      </li>
+      <li>
+        <a href="localization/manual.html">Localized Manual Examples</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="masthead">
   <div class="container">
     <h1>nya-bootstrap-select</h1>
@@ -19,23 +37,6 @@
   </div>
 </div>
 <div class="container" ng-controller="MainCtrl">
-  <section>
-    <h1 id="overview" class="page-header">Overview</h1>
-
-    <p>This is an angular directive wrapping for popular custom select <strong><a
-        href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>.
-      Unlike other <strong>directives</strong>. This directive support <code>ng-repeat</code> in <code>option</code>.
-    </p>
-
-    <p>All of the <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>'s
-      function is supported.
-      The select result is bound to a model, so you don't need to use
-      <strong><a href="http://silviomoreto.github.io/bootstrap-select/">Bootstrap-select</a></strong>'s api to get
-      value.
-      just write your select in the angular way
-    </p>
-
-  </section>
   <section>
     <h1 id="dynamic-examples" class="page-header">Dynamic Examples</h1>
 
@@ -509,6 +510,7 @@
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../src/nya-bs-public.js"></script>
+<script src="../src/nya-bs-config.js"></script>
 <script src="../src/nya-bs-select-ctrl.js"></script>
 <script src="../src/nya-bs-select.js"></script>
 <script src="../src/nya-bs-option.js"></script>

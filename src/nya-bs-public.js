@@ -307,4 +307,6 @@ var deepEquals = angular.equals;
 
 var deepCopy = angular.copy;
 
+var extend = angular.extend;
+
 var nyaBsSelect = angular.module('nya.bootstrap.select', []);

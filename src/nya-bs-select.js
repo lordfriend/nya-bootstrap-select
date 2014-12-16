@@ -1,4 +1,4 @@
-nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', function ($parse, $document, $timeout) {
+nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsConfig', function ($parse, $document, $timeout, nyaBsConfig) {
 
   var DEFAULT_NONE_SELECTION = 'Nothing selected';
 
@@ -24,7 +24,31 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
     controller: 'nyaBsSelectCtrl',
     compile: function nyaBsSelectCompile (tElement, tAttrs){
       console.log(tElement.attr('id') + ' compiled');
+
       tElement.addClass('btn-group');
+
+      var getDefaultNoneSelectionContent = function() {
+        // text node or jqLite element.
+        var content;
+
+        if(tAttrs.titleTpl) {
+          // use title-tpl attribute value.
+          content = jqLite(tAttrs.titleTpl);
+        } else if(tAttrs.title) {
+          // use title attribute value.
+          content = document.createTextNode(tAttrs.title);
+        } else if(localizedText.defaultNoneSelectionTpl){
+          // use localized text template.
+          content = jqLite(localizedText.defaultNoneSelectionTpl);
+        } else if(localizedText.defaultNoneSelection) {
+          // use localized text.
+          content = document.createTextNode(localizedText.defaultNoneSelection);
+        } else {
+          // use default.
+          content = document.createTextNode(DEFAULT_NONE_SELECTION);
+        }
+        return content;
+      };
 
       var options = tElement.children(),
         dropdownToggle = jqLite(DROPDOWN_TOGGLE),
@@ -35,7 +59,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
         classList,
         length,
         index,
-        liElement;
+        liElement,
+        localizedText = nyaBsConfig.getLocalizedText();
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
@@ -69,17 +94,21 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
 
       if(tAttrs.liveSearch === 'true') {
         searchBox = jqLite(SEARCH_BOX);
+
+        // set localized text
+        if(localizedText.noSearchResultTpl) {
+          NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', localizedText.noSearchResultTpl);
+        } else if(localizedText.noSearchResult) {
+          NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', localizedText.noSearchResult);
+        }
+
         noSearchResult = jqLite(NO_SEARCH_RESULT);
         dropdownContainer.append(searchBox);
         dropdownMenu.append(noSearchResult);
       }
 
       // set default none selection text
-      if(tAttrs.title) {
-        dropdownToggle.children().eq(0).text(tAttrs.title);
-      } else {
-        dropdownToggle.children().eq(0).text(DEFAULT_NONE_SELECTION);
-      }
+      dropdownToggle.children().eq(0).append(getDefaultNoneSelectionContent());
 
       dropdownContainer.append(dropdownMenu);
 
@@ -673,15 +702,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
             return;
           }
           if(isMultiple && modelValue.length === 0) {
-            if($attrs.title) {
-              // use title attribute value.
-              filterOption.empty();
-              filterOption.append(document.createTextNode($attrs.title));
-            } else {
-              // use default text.
-              filterOption.empty();
-              filterOption.append(document.createTextNode(DEFAULT_NONE_SELECTION));
-            }
+            filterOption.empty();
+            filterOption.append(getDefaultNoneSelectionContent());
           } else {
             $timeout(function() {
 
@@ -704,7 +726,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               // data-selected-text-format="count" or data-selected-text-format="count>x"
               if((typeof count !== 'undefined') && modelValue.length > count) {
                 filterOption.empty();
-                filterOption.append(document.createTextNode(modelValue.length + ' items selected'));
+                if(localizedText.numberItemSelectedTpl) {
+                  filterOption.append(jqLite(localizedText.numberItemSelectedTpl.replace('%d', modelValue.length)));
+                } else if(localizedText.numberItemSelected) {
+                  filterOption.append(document.createTextNode(localizedText.numberItemSelected.replace('%d', modelValue.length)));
+                } else {
+                  filterOption.append(document.createTextNode(modelValue.length + ' items selected'));
+                }
                 return;
               }
 
@@ -742,15 +770,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', functio
               }
 
               if(selection.length === 0) {
-                if($attrs.title) {
-                  // use title attribute value.
-                  filterOption.empty();
-                  filterOption.append(document.createTextNode($attrs.title));
-                } else {
-                  // use default text.
-                  filterOption.empty();
-                  filterOption.append(document.createTextNode(DEFAULT_NONE_SELECTION));
-                }
+                filterOption.empty();
+                filterOption.append(getDefaultNoneSelectionContent());
               } else if(selection.length === 1) {
                 // either single or multiple selection will show the only selected content.
                 filterOption.empty();

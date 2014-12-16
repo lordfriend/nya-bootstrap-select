@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>nya-bootstrap-select demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="../../dist/css/nya-bs-select.css"/>
+  <link rel="stylesheet" href="../main.css"/>
+</head>
+<body ng-app="demoApp">
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">nya-bootstrap-select</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/">Basic Examples</a>
+      </li>
+      <li>
+        <a href="default.html">Localized Default Examples</a>
+      </li>
+      <li class="active">
+        <a href="#">Localized Manual Examples</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="masthead">
+  <div class="container">
+    <h1>nya-bootstrap-select</h1>
+
+    <p>An angular wrapper for Bootstrap-select with dynamic loading options support</p>
+    <a class="btn btn-default btn-lg" href="#">View on Github</a>
+  </div>
+</div>
+<div class="container" ng-controller="MainCtrl">
+  <section>
+    <h1 id="bs-features" class="page-header">Bootstrap-select Features</h1>
+
+    <h3>Live Search</h3>
+
+    <p>Add <code>data-live-search="true"</code> in <code>nya-bs-select</code> directive to add live search support</p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="staticModel3" data-live-search="true">
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+    <h3>default selection display</h3>
+
+    <p>
+      To display an default information when nothing is selected. just set <code>title</code> attribute in <code>nya-bs-select</code> directive.<br/>
+      You can also set a template for default information when nothing is selected.
+      <strong>Note: This only works on <code>multiple nya-bs-select</code>. For <code>single nyab-bs-select</code>You should give your model an default value to avoid the default text to display</strong>
+    </p>
+
+    <form class="form-inline">
+      <ol class="nya-bs-select" ng-model="staticModel5" title="Choose one of the following" multiple>
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+      <ol class="nya-bs-select" ng-model="staticModel5" title-tpl="<span class='text-muted'>Choose one of the following</span>" multiple>
+        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+      </ol>
+    </form>
+
+
+    <h3>selection display format</h3>
+
+    <p>Using the <code>data-selected-text-format</code> attribute on an <code>multiple nya-bs-select</code> you can specify how the selection is displayed.</p>
+    <ul>
+      <li>
+        <p><code>values</code> A comma delimited list of selected values.(default)</p>
+
+        <form class="form-inline">
+          <ol id="values-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="values" multiple>
+            <li nya-bs-option="option in options1">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </form>
+      </li>
+      <li>
+        <p><code>count</code> If one item is selected, then the value is shown, if more than one is selected then the number of selected items is displayed.</p>
+        <form class="form-inline">
+          <ol id="count-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="count" multiple>
+            <li nya-bs-option="option in options1">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </form>
+      </li>
+      <li>
+        <p><code>count > x</code> Where X is the number of items selected when the display format changes from <code>values</code> to
+          <code>count</code></p>
+        <form class="form-inline">
+          <ol id="count-number-example" class="nya-bs-select" ng-model="model1" data-selected-text-format="count>3" multiple>
+            <li nya-bs-option="option in options1">
+              <a>
+                {{option}}
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ol>
+        </form>
+      </li>
+    </ul>
+
+
+  </section>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p>Designed and built by <a href="http://nya.io">Nyasoft</a></p>
+
+    <p>Code licensed under MIT License</p>
+  </div>
+</footer>
+
+
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../../src/nya-bs-public.js"></script>
+<script src="../../src/nya-bs-config.js"></script>
+<script src="../../src/nya-bs-select-ctrl.js"></script>
+<script src="../../src/nya-bs-select.js"></script>
+<script src="../../src/nya-bs-option.js"></script>
+<script src="manual.js"></script>
+</body>
+</html>

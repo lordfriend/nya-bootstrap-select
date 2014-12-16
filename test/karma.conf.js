@@ -17,6 +17,7 @@ module.exports = function(config) {
 
       // load our directive
       '../src/nya-bs-public.js',
+      '../src/nya-bs-config.js',
       '../src/nya-bs-select-ctrl.js',
       '../src/nya-bs-select.js',
       '../src/nya-bs-option.js',
