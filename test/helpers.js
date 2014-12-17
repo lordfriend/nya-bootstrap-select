@@ -121,13 +121,13 @@ beforeEach(function() {
 //    },
     toContains: function(value) {
       this.message = function() {
-        return "Expected '" + angular.mock.dump(this.actual) + "' to contains '" + value + "'.";
+        return "Expected '" + angular.mock.dump(this.actual) + "' to contains '" + angular.mock.dump(value) + "'.";
       };
       return existInArray(value, this.actual);
     },
     toDeepEqual: function(value) {
       this.message = function() {
-        return "Expected '" + angular.mock.dump(this.actual) + "' to deep equal '" + value + "'.";
+        return "Expected '" + angular.mock.dump(this.actual) + "' to deep equal '" + angular.mock.dump(value) + "'.";
       };
       return angular.equals(this.actual, value);
     }

@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('demoApp', ['nya.bootstrap.select'])
-  .run(function(nyaBsConfig) {
-    nyaBsConfig.setLocalizedText('zh-cn', {
+  .config(function(nyaBsConfigProvider) {
+    nyaBsConfigProvider.setLocalizedText('zh-cn', {
       defaultNoneSelection: '无选择',
       noSearchResult: '无匹配结果',
       numberItemSelected: '选中%d项'
     });
-    nyaBsConfig.setLocalizedText('en-us', {
+    nyaBsConfigProvider.setLocalizedText('en-us', {
       defaultNoneSelectionTpl: '<span class="label label-warning">Nothing selected</span>',
       noSearchResultTpl: '<span style="color: red;">NO MATCHED RESULT</span>',
       numberItemSelectedTpl: '<strong>%d items selected</strong>'

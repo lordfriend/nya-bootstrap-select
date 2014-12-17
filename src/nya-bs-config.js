@@ -1,9 +1,7 @@
 /**
  * A service for configuration. the configuration is shared globally.
  */
-nyaBsSelect.service('nyaBsConfig', ['$locale', function($locale) {
-  // service instance
-  var self = this;
+nyaBsSelect.provider('nyaBsConfig', function() {
 
   var locale = null;
 
@@ -24,7 +22,7 @@ nyaBsSelect.service('nyaBsConfig', ['$locale', function($locale) {
    * @param localeId a string formatted as languageId-countryId
    * @param obj localized text object.
    */
-  self.setLocalizedText = function(localeId, obj) {
+  this.setLocalizedText = function(localeId, obj) {
     if(!localeId) {
       throw new Error('localeId must be a string formatted as languageId-countryId');
     }
@@ -38,7 +36,7 @@ nyaBsSelect.service('nyaBsConfig', ['$locale', function($locale) {
    * Force to use a special locale id. if localeId is null. reset to user-agent locale.
    * @param localeId a string formatted as languageId-countryId
    */
-  self.useLocale = function(localeId) {
+  this.useLocale = function(localeId) {
     locale = localeId;
   };
 
@@ -46,7 +44,7 @@ nyaBsSelect.service('nyaBsConfig', ['$locale', function($locale) {
    * get the localized text according current locale or forced locale
    * @returns localizedText
    */
-  self.getLocalizedText = function() {
+  this.$get = ['$locale', function($locale){
     var localizedText;
     if(locale) {
       localizedText = interfaceText[locale];
@@ -57,7 +55,6 @@ nyaBsSelect.service('nyaBsConfig', ['$locale', function($locale) {
       localizedText = defaultText['en-us'];
     }
     return localizedText;
-  };
+  }];
 
-
-}]);
+});

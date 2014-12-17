@@ -60,7 +60,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         length,
         index,
         liElement,
-        localizedText = nyaBsConfig.getLocalizedText();
+        localizedText = nyaBsConfig;
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {

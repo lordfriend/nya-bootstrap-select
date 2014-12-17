@@ -7,6 +7,7 @@ describe('nyaBsConfig service', function() {
     $compile,
     $timeout,
     $locale,
+    $nyaBsConfigProvider,
     nyaBsConfig;
 
   var options = ['Alpha', 'Bravo', 'Charlie', 'Delta',
@@ -15,13 +16,14 @@ describe('nyaBsConfig service', function() {
     'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
   ];
 
-  beforeEach(module('nya.bootstrap.select'));
+  beforeEach(module('nya.bootstrap.select', function(nyaBsConfigProvider){
+    $nyaBsConfigProvider = nyaBsConfigProvider;
+  }));
 
-  beforeEach(inject(function(_$rootScope_, _$compile_, _$timeout_, _nyaBsConfig_, _$locale_){
+  beforeEach(inject(function(_$rootScope_, _$compile_, _$timeout_, _$locale_){
     $scope = _$rootScope_.$new();
     $compile = _$compile_;
     $timeout = _$timeout_;
-    nyaBsConfig = _nyaBsConfig_;
     $locale = _$locale_;
   }));
 
@@ -31,12 +33,16 @@ describe('nyaBsConfig service', function() {
       noSearchResult: 'NOT MATCHED',
       numberItemSelected: '%d selected'
     };
-    nyaBsConfig.setLocalizedText('en-gb', localizedText);
+    $nyaBsConfigProvider.setLocalizedText('en-gb', localizedText);
 
     // change locale
     $locale.id = 'en-gb';
 
-    expect(nyaBsConfig.getLocalizedText()).toDeepEqual(localizedText);
+    inject(function(_nyaBsConfig_) {
+      nyaBsConfig = _nyaBsConfig_;
+    });
+
+    expect(nyaBsConfig).toDeepEqual(localizedText);
 
   });
 
@@ -46,13 +52,15 @@ describe('nyaBsConfig service', function() {
       noSearchResult: 'NOT MATCHED',
       numberItemSelected: '%d selected'
     };
-    nyaBsConfig.setLocalizedText('en-gb', localizedText);
+    $nyaBsConfigProvider.setLocalizedText('en-gb', localizedText);
 
-    nyaBsConfig.useLocale('en-gb');
+    $nyaBsConfigProvider.useLocale('en-gb');
     // change locale
     $locale.id = 'en-us';
-
-    expect(nyaBsConfig.getLocalizedText()).toDeepEqual(localizedText);
+    inject(function(_nyaBsConfig_) {
+      nyaBsConfig = _nyaBsConfig_;
+    });
+    expect(nyaBsConfig).toDeepEqual(localizedText);
   });
 
   it('should use template', function() {
@@ -61,7 +69,7 @@ describe('nyaBsConfig service', function() {
       noSearchResultTpl: '<span class="nothing">NOT MATCHED</span>',
       numberItemSelectedTpl: '<span class="item-count">%d selected</span>'
     };
-    nyaBsConfig.setLocalizedText('en-us', localizedText);
+    $nyaBsConfigProvider.setLocalizedText('en-us', localizedText);
 
     // change locale
     $locale.id = 'en-us';
