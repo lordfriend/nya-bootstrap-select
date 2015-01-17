@@ -144,7 +144,7 @@ module.exports = function(grunt) {
         banner: grunt.file.read('src/banner')
       },
       dist: {
-        src: ['src/nya.prefix', 'src/nya-bs-public.js', 'src/nya-bs-select-ctrl.js', 'src/nya-bs-select.js', 'src/nya-bs-option.js', 'src/nya.suffix'],
+        src: ['src/nya.prefix', 'src/nya-bs-public.js', 'src/nya-bs-config.js', 'src/nya-bs-select-ctrl.js', 'src/nya-bs-select.js', 'src/nya-bs-option.js', 'src/nya.suffix'],
         dest: 'dist/js/nya-bs-select.js'
       }
     },
