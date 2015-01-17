@@ -1,6 +1,6 @@
-#nya-bs-select
+#nyaBsSelect
 
-nya-bs-select is the main directive of this module. You can consider it as a select directive. It manipulates the the dropdown-toggle content and all user interaction. 
+nyaBsSelect is the main directive of this module. You can consider it as a select directive. It manipulates the the dropdown-toggle content and all user interaction. 
 
 ###Usage
 

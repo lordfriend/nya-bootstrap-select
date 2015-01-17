@@ -52,9 +52,13 @@ angular.module('controllers', [])
   .controller('ApiCtrl', function($scope, pages){
     $scope.articles = [];
     angular.forEach(pages, function(stateName){
+      var words = stateName.split('-');
+      var title = words.map(function(word, index) {
+        return index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1);
+      }).join('');
       $scope.articles.push({
         state: stateName,
-        title: stateName
+        title: title
       });
     });
   });
@@ -144,7 +148,8 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'fi
       ],
       api: [
         'nya-bs-select',
-        'nya-bs-option'
+        'nya-bs-option',
+        'nya-bs-config-provider'
       ]
     };
 

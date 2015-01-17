@@ -1,9 +1,9 @@
-#nya-bs-option
+#nyaBsOption
 
 The main function of this directive is manipulating an option list base on given collection. 
 its expression is very similar as `ng-repeat` but add a little magic to support the special scenario of select component.
 
-The `nya-bs-option` instantiates a template once per item from a collection. Each template instance gets its own scope, 
+The `nyaBsOption` instantiates a template once per item from a collection. Each template instance gets its own scope, 
 where the given loop variable is set to the current collection item,
 and `$index` is set to the item index or key. If `group by` expression is provided. 
 the generated options list will resorted by the result of the expression, and `$group` is set to each template scope.
@@ -61,7 +61,7 @@ the generated options list will resorted by the result of the expression, and `$
 
 ###Special class generated on each element.
 
-When using `group by` expression, the `nya-bs-option` will generate a class `group-item` on each repeated element. 
+When using `group by` expression, the `nyaBsOption` will generate a class `group-item` on each repeated element. 
 To identify the first element of each group. It will also add a class `first-in-group` on the first element of a group.
 Theses class has some special styles to build the group header.
 
@@ -163,9 +163,9 @@ as attribute:
     <td>deep-watch</td>
     <td><span class="label label-primary">string</span></td>
     <td>
-      When set to true, enable a deep watch to collection_expression. `nya-bs-option` will use $watch(exp, listener, true) to make a deep watch. Turn on this feature will impact the performance. even cause expection.
+      When set to true, enable a deep watch to collection_expression. `nyaBsOption` will use $watch(exp, listener, true) to make a deep watch. Turn on this feature will impact the performance. even cause expection.
       It is not recommended.
-      By default. `nya-bs-option` will use $watchCollection to watch the collection_expression.
+      By default. `nyaBsOption` will use $watchCollection to watch the collection_expression.
     </td>
   </tr>
 </tbody>
