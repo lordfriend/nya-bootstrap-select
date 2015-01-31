@@ -269,9 +269,9 @@ module.exports = function(grunt) {
     'less:main',
     'test',
     'concat:dist',
+    'remove-logging:dist',
     'uglify:dist',
-    'cssmin:dist',
-    'remove-logging:dist'
+    'cssmin:dist'
   ]);
 
   grunt.registerTask('buildDocs', [
