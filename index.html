@@ -28,7 +28,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">nya-bootstrap-select</a>
+      <a class="navbar-brand" ui-sref="home">nya-bootstrap-select</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar">
@@ -48,14 +48,75 @@
 </nav>
 
 <div class="nya-docs-header" ng-controller="HeaderCtrl">
-  <div class="container">
+  <div class="container" ng-if="!isHome">
     <h1 ng-cloak>{{headerContents[currentState.parent].heading}}</h1>
     <p ng-cloak>{{headerContents[currentState.parent].desc}}</p>
+  </div>
+  <div class="container" ng-if="isHome">
+    <h1>nya-bootstrap-select</h1>
+    <p>An Bootstrap dropdown component and replacement of vanilla select element, designed for AngularJS</p>
+    <p>
+      <a class="btn btn-outline-inverse btn-lg" href="https://github.com/lordfriend/nya-bootstrap-select">
+        Code on GitHub
+      </a>
+      <a class="btn btn-outline-inverse btn-lg" href="https://github.com/lordfriend/nya-bootstrap-select/releases">
+        <i class="glyphicon glyphicon-download-alt"></i>
+        &nbsp;&nbsp;Download&nbsp;&nbsp;
+      </a>
+    </p>
   </div>
 </div>
 
 <div class="container">
-  <div ui-view>
+  <div class="home-desc" ng-if="isHome">
+    <p class="lead">
+      nya-bootstrap-select helps you build select element or dropdown with Bootstrap style and an angular way. Generate options with collection, get user select value with model.
+      Define various styles of the select options as you wish.
+    </p>
+  </div>
+  <div class="feature-list" ng-if="isHome">
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <h4>
+          Better Select Element
+        </h4>
+        Support both single and multiple select mode, make it a better replacement of select element than others.
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <h4>
+          No JQuery Required
+        </h4>
+        The only angular and bootstrap css are required. no longer depends on jquery.
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <h4>
+          Customize Option Style Is Easy
+        </h4>
+        Build you option aka dropdown element is very easy. write your template under each list element to make any appearance. No attribute content needed any more.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <h4>
+          Live Search through The Options
+        </h4>
+        Just add a attribute live-search="true", you can add an live search component into your dropdown.
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <h4>
+          Control the Button Content.
+        </h4>
+        You can use some feature like select-text-format or alternative display to control the button content when user select or un-select options.
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <h4>
+          Layout With Bootstrap 3
+        </h4>
+        You can use bootstrap grid system to layout size and position of your dropdown.
+      </div>
+    </div>
+  </div>
+  <div ui-view ng-if="!isHome">
     <div class="loading-container">
       <img class="loading-icon" src="svg-loaders/grid.svg" alt="Loading..."/>
     </div>

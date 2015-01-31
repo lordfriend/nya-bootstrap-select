@@ -11,7 +11,7 @@ angular.module('filters', [])
   });
 
 angular.module('controllers', [])
-  .controller('HeaderCtrl', function($scope, $state){
+  .controller('HeaderCtrl', function($scope, $state, $rootScope){
     $scope.headerContents = {
       main: {
         heading: 'Getting Started',
@@ -28,8 +28,12 @@ angular.module('controllers', [])
     };
     $scope.$on('$stateChangeSuccess', function() {
       $scope.currentState = $state.current;
+      $rootScope.isHome = $state.is('home');
     });
 
+    $scope.$watch('isHome', function(newValue) {
+      console.log('isHome: ', newValue);
+    });
   })
   .controller('MainCtrl', function($scope, pages, $filter){
     $scope.articles = [];
@@ -157,7 +161,11 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'fi
       .when('/main', '/main/'+ pages.main[0])
       .when('/examples', '/examples/' + pages.examples[0])
       .when('/api', '/api/' + pages.api[0])
-      .otherwise('/main/' + pages.main[0]);
+      .otherwise('/');
+
+    $stateProvider.state('home', {
+      url: '/'
+    });
 
     angular.forEach(pages, function(children, stateName){
       $stateProvider.state(stateName, {
