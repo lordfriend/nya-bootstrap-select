@@ -581,6 +581,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             firstLiElement = dropdownMenu.children().eq(dropdownMenu.children().length - 1);
           }
 
+          // focus on selected element
+          for(var i = 0; i < dropdownMenu.children().length; i++) {
+            if(dropdownMenu.children().eq(i).hasClass('selected')) {
+              return dropdownMenu.children().eq(i)[0];
+            }
+          }
+
           if(firstLiElement.hasClass('nya-bs-option') && !firstLiElement.hasClass('disabled') && !firstLiElement.hasClass('not-match')) {
             return firstLiElement[0];
           } else {
