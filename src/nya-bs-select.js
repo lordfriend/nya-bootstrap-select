@@ -699,6 +699,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           var modelValue = ngCtrl.$modelValue;
           var filterOption = dropdownToggle.children().eq(0);
           if(typeof modelValue === 'undefined') {
+            /**
+             * Select empty option when model is undefined.
+             */
+            filterOption.empty();
+            filterOption.append(getDefaultNoneSelectionContent());
             return;
           }
           if(isMultiple && modelValue.length === 0) {
