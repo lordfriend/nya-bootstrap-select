@@ -1101,7 +1101,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         function updateButtonContent() {
           var modelValue = ngCtrl.$modelValue;
           var filterOption = dropdownToggle.children().eq(0);
-          if(!modelValue) {
+          if(typeof modelValue === 'undefined') {
             return;
           }
           if(isMultiple && modelValue.length === 0) {
