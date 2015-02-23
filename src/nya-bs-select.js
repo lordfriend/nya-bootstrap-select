@@ -22,7 +22,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
     restrict: 'ECA',
     require: ['ngModel', 'nyaBsSelect'],
     controller: 'nyaBsSelectCtrl',
-    scope: true,
     compile: function nyaBsSelectCompile (tElement, tAttrs){
       console.log(tElement.attr('id') + ' compiled');
 
@@ -659,7 +658,6 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
             }
           }
-
           // update view value regardless
           ngCtrl.$setViewValue(viewValue);
           $scope.$digest();
