@@ -657,9 +657,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               nyaBsOption.addClass('selected');
 
             }
-            ngCtrl.$setViewValue(viewValue);
-            $scope.$digest();
           }
+          // update view value regardless
+          ngCtrl.$setViewValue(viewValue);
+          $scope.$digest();
 
           if(!isMultiple) {
             // in single selection mode. close the dropdown menu
