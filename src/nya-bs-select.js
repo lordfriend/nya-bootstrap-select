@@ -581,6 +581,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             firstLiElement = dropdownMenu.children().eq(dropdownMenu.children().length - 1);
           }
 
+          // focus on selected element
+          for(var i = 0; i < dropdownMenu.children().length; i++) {
+            if(dropdownMenu.children().eq(i).hasClass('selected')) {
+              return dropdownMenu.children().eq(i)[0];
+            }
+          }
+
           if(firstLiElement.hasClass('nya-bs-option') && !firstLiElement.hasClass('disabled') && !firstLiElement.hasClass('not-match')) {
             return firstLiElement[0];
           } else {
@@ -650,9 +657,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               nyaBsOption.addClass('selected');
 
             }
-            ngCtrl.$setViewValue(viewValue);
-            $scope.$digest();
           }
+          // update view value regardless
+          ngCtrl.$setViewValue(viewValue);
+          $scope.$digest();
 
           if(!isMultiple) {
             // in single selection mode. close the dropdown menu
@@ -669,14 +677,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
          * @param nyaBsOption a jqLite wrapped `nya-bs-option` element
          */
         function getOptionValue(nyaBsOption) {
-          var scopeOfOption;
+          var scopeOfOption = nyaBsOption.scope();
           if(valueExpFn) {
-            scopeOfOption = nyaBsOption.scope();
             return valueExpFn(scopeOfOption);
           } else {
-            if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
-              scopeOfOption = nyaBsOption.scope();
-              return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
+            if(typeof nyaBsSelectCtrl.valueIdentifier !== 'undefined') {
+              return scopeOfOption[nyaBsSelectCtrl.valueIdentifier];
+            } else if(typeof nyaBsSelectCtrl.keyIdentifier !== 'undefined') {
+              return scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
               return nyaBsOption.attr('value');
             }
@@ -698,7 +706,12 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         function updateButtonContent() {
           var modelValue = ngCtrl.$modelValue;
           var filterOption = dropdownToggle.children().eq(0);
-          if(!modelValue) {
+          if(typeof modelValue === 'undefined') {
+            /**
+             * Select empty option when model is undefined.
+             */
+            filterOption.empty();
+            filterOption.append(getDefaultNoneSelectionContent());
             return;
           }
           if(isMultiple && modelValue.length === 0) {
