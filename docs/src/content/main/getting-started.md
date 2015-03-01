@@ -25,7 +25,7 @@ Load the script and css and other dependencies **jquery and bootstrap script are
 <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 <link href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" rel="stylesheet">
 
-<script src="bower_components/angular/angular.js">
+<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
 ```
 
