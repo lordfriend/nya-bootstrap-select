@@ -261,10 +261,19 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         // if click the outside of dropdown menu, close the dropdown menu
         $document.on('click', function(event) {
           if(filterTarget(event.target, $element.parent()[0], $element[0]) === null) {
+            if($element.hasClass('open')) {
+              $element.triggerHandler('blur');
+            }
             $element.removeClass('open');
           }
         });
         console.log(dropdownToggle[0]==$element.find('button').eq(0)[0]);
+
+        dropdownToggle.on('blur', function() {
+          if(!$element.hasClass('open')) {
+            $element.triggerHandler('blur');
+          }
+        });
         dropdownToggle.on('click', function() {
           var nyaBsOptionNode;
           $element.toggleClass('open');
@@ -450,6 +459,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             if(keyCode === 27) {
               // escape pressed
               dropdownToggle[0].focus();
+              if($element.hasClass('open')) {
+                $element.triggerHandler('blur');
+              }
               $element.removeClass('open');
               event.stopPropagation();
 
@@ -664,6 +676,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
           if(!isMultiple) {
             // in single selection mode. close the dropdown menu
+            if($element.hasClass('open')) {
+              $element.triggerHandler('blur');
+            }
             $element.removeClass('open');
           }
           updateButtonContent();
@@ -705,6 +720,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
         function updateButtonContent() {
           var modelValue = ngCtrl.$modelValue;
+          $element.triggerHandler('change');
+
           var filterOption = dropdownToggle.children().eq(0);
           if(typeof modelValue === 'undefined') {
             /**
