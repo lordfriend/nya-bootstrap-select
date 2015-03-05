@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.0.9
+ * nya-bootstrap-select v2.0.10
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -664,10 +664,19 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         // if click the outside of dropdown menu, close the dropdown menu
         $document.on('click', function(event) {
           if(filterTarget(event.target, $element.parent()[0], $element[0]) === null) {
+            if($element.hasClass('open')) {
+              $element.triggerHandler('blur');
+            }
             $element.removeClass('open');
           }
         });
         
+
+        dropdownToggle.on('blur', function() {
+          if(!$element.hasClass('open')) {
+            $element.triggerHandler('blur');
+          }
+        });
         dropdownToggle.on('click', function() {
           var nyaBsOptionNode;
           $element.toggleClass('open');
@@ -853,6 +862,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             if(keyCode === 27) {
               // escape pressed
               dropdownToggle[0].focus();
+              if($element.hasClass('open')) {
+                $element.triggerHandler('blur');
+              }
               $element.removeClass('open');
               event.stopPropagation();
 
@@ -1067,6 +1079,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
           if(!isMultiple) {
             // in single selection mode. close the dropdown menu
+            if($element.hasClass('open')) {
+              $element.triggerHandler('blur');
+            }
             $element.removeClass('open');
           }
           updateButtonContent();
@@ -1080,14 +1095,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
          * @param nyaBsOption a jqLite wrapped `nya-bs-option` element
          */
         function getOptionValue(nyaBsOption) {
-          var scopeOfOption = nyaBsOption.scope();
+          var scopeOfOption;
           if(valueExpFn) {
+            scopeOfOption = nyaBsOption.scope();
             return valueExpFn(scopeOfOption);
           } else {
-            if(typeof nyaBsSelectCtrl.valueIdentifier !== 'undefined') {
-              return scopeOfOption[nyaBsSelectCtrl.valueIdentifier];
-            } else if(typeof nyaBsSelectCtrl.keyIdentifier !== 'undefined') {
-              return scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
+            if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
+              scopeOfOption = nyaBsOption.scope();
+              return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
               return nyaBsOption.attr('value');
             }
@@ -1108,6 +1123,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
         function updateButtonContent() {
           var modelValue = ngCtrl.$modelValue;
+          $element.triggerHandler('change');
+
           var filterOption = dropdownToggle.children().eq(0);
           if(typeof modelValue === 'undefined') {
             /**
