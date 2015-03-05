@@ -692,14 +692,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
          * @param nyaBsOption a jqLite wrapped `nya-bs-option` element
          */
         function getOptionValue(nyaBsOption) {
-          var scopeOfOption = nyaBsOption.scope();
+          var scopeOfOption;
           if(valueExpFn) {
+            scopeOfOption = nyaBsOption.scope();
             return valueExpFn(scopeOfOption);
           } else {
-            if(typeof nyaBsSelectCtrl.valueIdentifier !== 'undefined') {
-              return scopeOfOption[nyaBsSelectCtrl.valueIdentifier];
-            } else if(typeof nyaBsSelectCtrl.keyIdentifier !== 'undefined') {
-              return scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
+            if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
+              scopeOfOption = nyaBsOption.scope();
+              return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
               return nyaBsOption.attr('value');
             }
