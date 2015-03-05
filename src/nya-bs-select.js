@@ -756,7 +756,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               // data-selected-text-format="count" or data-selected-text-format="count>x"
               if((typeof count !== 'undefined') && modelValue.length > count) {
                 filterOption.empty();
-                if(localizedText.numberItemSelectedTpl) {
+                if ( $attrs.countSelectedText ) {
+                  filterOption.append(document.createTextNode($attrs.countSelectedText));
+                } else if(localizedText.numberItemSelectedTpl) {
                   filterOption.append(jqLite(localizedText.numberItemSelectedTpl.replace('%d', modelValue.length)));
                 } else if(localizedText.numberItemSelected) {
                   filterOption.append(document.createTextNode(localizedText.numberItemSelected.replace('%d', modelValue.length)));
