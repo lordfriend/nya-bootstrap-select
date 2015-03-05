@@ -426,7 +426,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
     require: ['ngModel', 'nyaBsSelect'],
     controller: 'nyaBsSelectCtrl',
     compile: function nyaBsSelectCompile (tElement, tAttrs){
-      console.log(tElement.attr('id') + ' compiled');
+      
 
       tElement.addClass('btn-group');
 
@@ -519,7 +519,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
       tElement.append(dropdownContainer);
 
       return function nyaBsSelectLink ($scope, $element, $attrs, ctrls) {
-        console.log($element.attr('id') + ' linked');
+        
         var ngCtrl = ctrls[0],
           nyaBsSelectCtrl = ctrls[1],
           liHeight,
@@ -670,7 +670,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             $element.removeClass('open');
           }
         });
-        console.log(dropdownToggle[0]==$element.find('button').eq(0)[0]);
+        
 
         dropdownToggle.on('blur', function() {
           if(!$element.hasClass('open')) {
@@ -786,7 +786,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               }
             }
           }
-          console.log(nyaBsSelectCtrl.id + ' render end');
+          
           updateButtonContent();
         };
 
@@ -818,7 +818,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           }
 
           if(toggleButton) {
-            console.log('toggleButton');
+            
 
             // press enter to active dropdown
             if((keyCode === 13 || keyCode === 38 || keyCode === 40) && !$element.hasClass('open')) {
