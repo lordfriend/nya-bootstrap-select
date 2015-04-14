@@ -173,8 +173,20 @@
 .nya-bs-select.show-menu-arrow.open > .dropdown-toggle:after {
   display: block;
 }
-.nya-bs-select .bs-searchbox {
+.nya-bs-select .bs-searchbox,
+.nya-bs-select .bs-actionsbox {
   padding: 4px 8px;
+}
+.nya-bs-select .bs-actionsbox {
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+.nya-bs-select .bs-actionsbox .btn-group button {
+  width: 50%;
+}
+.nya-bs-select .bs-searchbox + .bs-actionsbox {
+  padding: 0 8px 4px;
 }
 .nya-bs-select .bs-searchbox input.form-control {
   margin-bottom: 0;
