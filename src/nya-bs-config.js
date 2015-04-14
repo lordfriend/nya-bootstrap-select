@@ -10,7 +10,9 @@ nyaBsSelect.provider('nyaBsConfig', function() {
     'en-us': {
       defaultNoneSelection: 'Nothing selected',
       noSearchResult: 'NO SEARCH RESULT',
-      numberItemSelected: '%d item selected'
+      numberItemSelected: '%d item selected',
+      selectAll: 'Select All',
+      deselectAll: 'Deselect All'
     }
   };
 
