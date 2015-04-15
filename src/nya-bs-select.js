@@ -692,7 +692,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             for (var i = 0; i < liElements.length; i++) {
               var nyaBsOption = jqLite(liElements[i]);
               if (nyaBsOption.hasClass('disabled'))
-                break;
+                continue;
 
               var value, index;
 
