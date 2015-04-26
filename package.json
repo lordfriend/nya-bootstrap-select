@@ -25,6 +25,7 @@
     "jshint-stylish": "~0.1.5",
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.8",
+    "karma-jasmine": "^0.1.5",
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-ng-scenario": "^0.1.0",
     "karma-phantomjs-launcher": "^0.1.4",
