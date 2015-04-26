@@ -134,6 +134,8 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
             group,
             lastGroup,
 
+            removedClone, // removed clone node, should also remove isolateScope function as well
+
             values = [],
             valueObj; // the collection value
 
@@ -220,7 +222,10 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
           // remove DOM nodes
           for( var blockKey in lastBlockMap) {
             block = lastBlockMap[blockKey];
-            getBlockNodes(block.clone).remove();
+            removedClone = getBlockNodes(block.clone);
+            // remove the isolateScope closure to detach scope from this clone
+            removedClone.removeData('isolateScope');
+            removedClone.remove();
             block.scope.$destroy();
           }
 
@@ -239,6 +244,9 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
               updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength, block.group);
             } else {
               $transclude(function nyaBsOptionTransclude(clone, scope) {
+                // in case of the debugInfoEnable is set to false, we have to bind the scope to the clone node.
+                setElementIsolateScope(clone, scope);
+
                 block.scope = scope;
 
                 var endNode = nyaBsOptionEndComment.cloneNode(false);
@@ -247,7 +255,6 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 jqLite(previousNode).after(clone);
 
                 // add nya-bs-option class
-
                 clone.addClass('nya-bs-option');
 
                 // for newly created item we need to ensure its selected status from the model value.

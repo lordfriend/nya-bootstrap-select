@@ -161,6 +161,10 @@ var updateScope = function(scope, index, valueIdentifier, value, keyIdentifier, 
   }
 };
 
+var setElementIsolateScope = function(element, scope) {
+  element.data('isolateScope', scope);
+};
+
 var contains = function(array, element) {
   var length = array.length,
     i;
