@@ -53,6 +53,13 @@ module.exports = function(grunt) {
             'docs/dist'
           ]
         }
+      },
+      e2e: {
+        options: {
+          open: false,
+          port: 8081,
+          base: ['docs/dist']
+        }
       }
     },
 
@@ -245,6 +252,20 @@ module.exports = function(grunt) {
         src: ['dist/js/nya-bs-select.js'],
         dest: 'dist/js/nya-bs-select.js'
       }
+    },
+
+    protractor: {
+      options: {
+        keepAlive: true,
+        args: {
+          baseUrl: 'http://localhost:8081/examples/'
+        }
+      },
+      e2e: {
+        options: {
+          configFile: 'e2e-test/config.js'
+        }
+      }
     }
   });
 
@@ -286,5 +307,11 @@ module.exports = function(grunt) {
     'less:docs',
     'connect:docs',
     'watch'
+  ]);
+
+  // e2e test
+  grunt.registerTask('e2e', [
+    'connect:e2e',
+    'protractor'
   ]);
 };

@@ -13,8 +13,8 @@ Static Options don't change. you need to add `nya-bs-option` class to each of yo
 
 <example>
 <file name="index.html">
-<p class="alert-info">Single Selection, model is {{model}}</p>
-<ol class="nya-bs-select" ng-model="model">
+<p class="alert-info">Single Selection, model is <span>{{model}}</span></p>
+<ol id="singleSelection" class="nya-bs-select" ng-model="model">
   <li class="nya-bs-option" value="a">
     <a>Alpha</a>
   </li>
@@ -25,8 +25,8 @@ Static Options don't change. you need to add `nya-bs-option` class to each of yo
     <a>Charlie</a>
   </li>
 </ol>
-<p class="alert-info">Multiple Selection, model2 is {{model2}}</p>
-<ol class="nya-bs-select" ng-model="model2" multiple>
+<p class="alert-info">Multiple Selection, model2 is <span>{{model2}}</span></p>
+<ol id="multipleSelection" class="nya-bs-select" ng-model="model2" multiple>
   <li class="nya-bs-option" value="a">
     <a>Alpha</a>
   </li>
