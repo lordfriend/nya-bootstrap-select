@@ -134,7 +134,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
             group,
             lastGroup,
 
-            removedClone, // removed clone node, should also remove isolateScope function as well
+            removedClone, // removed clone node, should also remove isolateScope data as well
 
             values = [],
             valueObj; // the collection value
@@ -223,7 +223,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
           for( var blockKey in lastBlockMap) {
             block = lastBlockMap[blockKey];
             removedClone = getBlockNodes(block.clone);
-            // remove the isolateScope closure to detach scope from this clone
+            // remove the isolateScope data to detach scope from this clone
             removedClone.removeData('isolateScope');
             removedClone.remove();
             block.scope.$destroy();
