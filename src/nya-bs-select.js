@@ -635,7 +635,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
           // focus on selected element
           for(var i = 0; i < dropdownMenu.children().length; i++) {
-            if(dropdownMenu.children().eq(i).hasClass('selected')) {
+            var childElement = dropdownMenu.children().eq(i); 
+            if (!childElement.hasClass('not-match') && childElement.hasClass('selected')) {
               return dropdownMenu.children().eq(i)[0];
             }
           }
