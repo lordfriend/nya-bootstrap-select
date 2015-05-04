@@ -631,7 +631,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
           // focus on selected element
           for(var i = 0; i < dropdownMenu.children().length; i++) {
-            if(dropdownMenu.children().eq(i).hasClass('selected')) {
+            var childElement = dropdownMenu.children().eq(i); 
+            if (!childElement.hasClass('not-match') && childElement.hasClass('selected')) {
               return dropdownMenu.children().eq(i)[0];
             }
           }
@@ -782,11 +783,12 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         function getOptionValue(nyaBsOption) {
           var scopeOfOption;
           if(valueExpFn) {
-            scopeOfOption = nyaBsOption.scope();
+            // here we use the scope bound by ourselves in the nya-bs-option.
+            scopeOfOption = nyaBsOption.data('isolateScope');
             return valueExpFn(scopeOfOption);
           } else {
             if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
-              scopeOfOption = nyaBsOption.scope();
+              scopeOfOption = nyaBsOption.data('isolateScope');
               return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
               return nyaBsOption.attr('value');
