@@ -211,14 +211,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             return;
           }
 
-          if(!values || values.length === 0) {
-            if(isMultiple) {
-              modelValue = [];
-            } else {
-              modelValue = null;
-            }
-          } else {
-
+          /**
+           * Behavior change, since 2.1.0, we don't want to reset model to null or empty array when options' collection is not prepared.
+           */
+          if(Array.isArray(values) && values.length > 0) {
             if(valueExpFn) {
               for(index = 0; index < values.length; index++) {
                 valuesForSelect.push(valueExpFn($scope, values[index]));
