@@ -79,10 +79,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           dropdownToggle.addClass(className);
         }
 
-        //if(/btn-(?:lg|sm|xs)/.test(className)) {
-        //  tElement.removeClass(className);
-        //  dropdownToggle.addClass(className);
-        //}
+        if(/btn-(?:lg|sm|xs)/.test(className)) {
+          tElement.removeClass(className);
+          dropdownToggle.addClass(className);
+        }
 
         if(className === 'form-control') {
           dropdownToggle.addClass(className);
@@ -635,7 +635,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
           // focus on selected element
           for(var i = 0; i < dropdownMenu.children().length; i++) {
-            var childElement = dropdownMenu.children().eq(i); 
+            var childElement = dropdownMenu.children().eq(i);
             if (!childElement.hasClass('not-match') && childElement.hasClass('selected')) {
               return dropdownMenu.children().eq(i)[0];
             }
