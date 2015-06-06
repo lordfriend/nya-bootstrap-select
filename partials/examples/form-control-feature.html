@@ -39,54 +39,61 @@ an select being disabled or enabled. Note that <code>ng-disabled</code> are not 
 <iframe class="runnable-example-frame" src="examples/form-control-feature-example-1/index.html"></iframe>
 
 <h3 id="ng-required">ng-required</h3>
-<p><code>ng-required</code> and <code>required</code> directive are supported. when you add one of these directives. it will check your ng-model and add <code>ng-valid-required</code> or <code>ng-invalid-required</code> class
-on your <code>nya-bs-select</code> element. You need to define the css by yourself.</p>
-<p>When selection is multiple, an empty array or undefined model is invalid. When selection is single, an undefined model is invalid.</p>
+<p><code>ng-required</code> and <code>required</code> directive are supported. when you add one of these directives. it will check your ng-model and set its <code>$valid</code> and <code>$invalid</code> property. For details, see <a href="https://docs.angularjs.org/api/ng/type/ngModel.NgModelController">ngModelController</a>
+When selection is multiple, an empty array or undefined model is invalid. When selection is single, an undefined, empty string, NaN, null model is invalid.</p>
+<p>When using with form or ngForm, the valid status of form is also affected by this directive.</p>
 <blockquote>
 <p>Note that, the <code>ng-valid-required</code> and <code>ng-invalid-required</code> class are add to the container element. but the dropdown toggle button is its child element. so you need to define a style using a descendant selector.</p>
 </blockquote>
 <example>
 <file name="index.html">
-<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
-<span class="hljs-tag">form</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">20px</span></span></span>;
-  <span class="hljs-rule"><span class="hljs-attribute">border</span>:<span class="hljs-value"> <span class="hljs-number">1px</span> solid</span></span>;
-<span class="hljs-rule">}</span></span>
-<span class="hljs-tag">form</span><span class="hljs-class">.ng-invalid-required</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value"> red</span></span>;
-<span class="hljs-rule">}</span></span>
-<span class="hljs-tag">form</span><span class="hljs-class">.ng-valid-required</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value"> green</span></span>;
-<span class="hljs-rule">}</span></span>
-<span class="hljs-tag">form</span><span class="hljs-class">.ng-valid-required</span> <span class="hljs-class">.info</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">visibility</span>:<span class="hljs-value"> hidden</span></span>;
-<span class="hljs-rule">}</span></span>
-<span class="hljs-tag">form</span><span class="hljs-class">.ng-invalid-required</span> <span class="hljs-class">.info</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">visibility</span>:<span class="hljs-value"> visible</span></span>;
-<span class="hljs-rule">}</span></span>
-<span class="hljs-class">.ng-invalid-required</span> <span class="hljs-class">.dropdown-toggle</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value"> red</span></span>;
-<span class="hljs-rule">}</span></span>
-<span class="hljs-class">.ng-valid-required</span> <span class="hljs-class">.dropdown-toggle</span> <span class="hljs-rules">{
-  <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value"> green</span></span>;
-<span class="hljs-rule">}</span></span>
-</span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;alert-danger info&quot;</span>&gt;</span>please select at least one option!<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">required</span> <span class="hljs-attribute">multiple</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
-        </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span>
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-horizontal&quot;</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">&quot;myForm&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-group&quot;</span> <span class="hljs-attribute">ng-class</span>=<span class="hljs-value">&quot;{&#39;has-error&#39;: myForm.select1.$invalid}&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;control-label col-sm-3&quot;</span>&gt;</span>required example<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;col-sm-9&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">&quot;select1&quot;</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">required</span> <span class="hljs-attribute">multiple</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+            </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
+            <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;text-danger&quot;</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">&quot;myForm.select1.$invalid&quot;</span>&gt;</span>Please select at least one option<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-group&quot;</span> <span class="hljs-attribute">ng-class</span>=<span class="hljs-value">&quot;{&#39;has-error&#39;: myForm.select2.$invalid}&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;control-label col-sm-3&quot;</span>&gt;</span>ng-required example<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;col-sm-9&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">&quot;select2&quot;</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model2&quot;</span> <span class="hljs-attribute">ng-required</span>=<span class="hljs-value">&quot;select2Required&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+            </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
+            <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-default&quot;</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">&quot;select2Required=!select2Required&quot;</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;button&quot;</span>&gt;</span>select2 required: </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">select</span>2<span class="hljs-variable">Required</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
+  myForm.$pristine: </span><span class="hljs-expression"><span>{{</span>!!<span class="hljs-variable">myForm.</span>$<span class="hljs-variable">pristine</span><span>}}</span></span><span class="xml">
+<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
+  myForm.$dirty: </span><span class="hljs-expression"><span>{{</span>!!<span class="hljs-variable">myForm.</span>$<span class="hljs-variable">dirty</span><span>}}</span></span><span class="xml">
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
+  myForm.$valid: </span><span class="hljs-expression"><span>{{</span>!!<span class="hljs-variable">myForm.</span>$<span class="hljs-variable">valid</span><span>}}</span></span><span class="xml">
+<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
+  myForm.$invalid: </span><span class="hljs-expression"><span>{{</span>!!<span class="hljs-variable">myForm.</span>$<span class="hljs-variable">invalid</span><span>}}</span></span><span class="xml">
+<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
 </code></pre>
 
 </file>
 <file name="script.js">
-<pre><code class="lang-javascript">  <span class="hljs-variable">$scope</span>.options = [
+<pre><code class="lang-javascript">  <span class="hljs-variable">$scope</span>.select2Required = <span class="hljs-literal">true</span>;
+  <span class="hljs-variable">$scope</span>.options = [
     <span class="hljs-string">&#39;Alpha&#39;</span>,
     <span class="hljs-string">&#39;Bravo&#39;</span>,
     <span class="hljs-string">&#39;Charlie&#39;</span>,
