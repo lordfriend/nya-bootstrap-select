@@ -605,7 +605,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             length = list.length;
           for(i = 0; i < length; i++) {
             liElement = list.eq(i);
-            if(liElement.hasClass('active') && liElement.hasClass('nya-bs-option')) {
+            if(liElement.hasClass('active') && liElement.hasClass('nya-bs-option') && !liElement.hasClass('not-match')) {
               return liElement;
             }
           }
