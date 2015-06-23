@@ -75,7 +75,7 @@ as attribute:
 ```html
 <li
   nya-bs-option=""
-  [value=""]
+  [data-value=""]
   [deep-watch=""]>
   <a>
     ...
@@ -145,7 +145,7 @@ as attribute:
     </td>
   </tr>
   <tr>
-    <td>value</td>
+    <td>data-value</td>
     <td><span class="label label-default">comprehension_expression</span></td>
     <td>
       <p>
@@ -154,7 +154,7 @@ as attribute:
         if loop variable is `(key, value)`, `key` is prior to `value`.
       </p>
       <p>
-        For example: `<li nya-bs-option="album in artist.albums" value="album.album_name"></li>`. 
+        For example: `<li nya-bs-option="album in artist.albums" data-value="album.album_name"></li>`. 
         the value of each option will be album_name instead of the album object.
       </p>
     </td>

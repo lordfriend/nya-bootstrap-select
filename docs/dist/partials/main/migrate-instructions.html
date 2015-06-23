@@ -10,9 +10,9 @@
 If you are using static options you should use <code>nya-bs-option</code> class and <code>value</code> attribute to identify your option. 
 otherwise. the <code>nya-bs-option</code> directive must be used to populate options.</p>
 <p>In the 1.x version:</p>
-<pre><code class="lang-html">&lt;<span class="hljs-keyword">select</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"nya-selectpicker"</span> ng-model=<span class="hljs-string">"model"</span> ng-options=<span class="hljs-string">"option in options"</span>&gt;
-  ...
-&lt;/<span class="hljs-keyword">select</span>&gt;
+<pre><code class="lang-html">&lt;select class=<span class="hljs-string">"nya-selectpicker"</span> ng-model=<span class="hljs-string">"model"</span> ng-options=<span class="hljs-string">"option in options"</span>&gt;
+  <span class="hljs-keyword">...</span>
+&lt;/select&gt;
 </code></pre>
 <p>In the 2.x version:</p>
 <pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"nya-bs-select"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"model"</span>&gt;</span>
@@ -57,13 +57,13 @@ You can add these classes: <code>btn-primary</code> <code>btn-info</code> <code>
 <li><p>show-tick
 You don&#39;t need this class any more, because the select options are built by yourself. you can get full control of what content a select should have. so you need to add tick by yourself.
 Add <code>&lt;span class=&quot;glyphicon glyphicon-ok check-mark&quot;&gt;&lt;/span&gt;</code> inside <code>&lt;a&gt;</code> tag which is a direct child of <code>nya-bs-option</code> directive. make sure the content of option is before the <code>check-mark</code> element.</p>
-<pre><code class="lang-html"><span class="xml"> ...
-   <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">"option in options"</span>&gt;</span>
-     <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
-       </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
-       <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"glyphicon glyphicon-ok check-mark"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-     <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-   <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span></span>
+<pre><code class="lang-html"> <span class="hljs-keyword">...</span>
+   &lt;li nya-bs-option=<span class="hljs-string">"option in options"</span>&gt;
+     &lt;a&gt;
+       <span>{{</span> option <span>}}</span>
+       &lt;span class=<span class="hljs-string">"glyphicon glyphicon-ok check-mark"</span>&gt;&lt;/span&gt;
+     &lt;/a&gt;
+   &lt;/li&gt;
 </code></pre>
 </li>
 <li><p>style an option, custom HTML of option, data-icon, showSubText

@@ -103,3 +103,44 @@ These Button classes are supported: `btn-primary`, `btn-success`, `btn-info`, `b
 $scope.staticModel2 = 'a';
 </file>
 </example>
+
+###Button Sizes
+
+To get larger or smaller dropdown button, Add `.btn-lg`, `.btn-sm` or `.btn-xs` to `nyBsSelect` Directive
+
+NOTE: You must never use `form-control` class with the button size class
+<example>
+<file name="index.html">
+<p>
+  <ol class="nya-bs-select btn-lg" ng-model="staticModel2">
+    <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+  </ol>
+</p>
+<p>
+  <ol class="nya-bs-select" ng-model="staticModel2">
+    <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+  </ol>
+</p>
+<p>
+  <ol class="nya-bs-select btn-sm" ng-model="staticModel2">
+    <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+  </ol>
+</p>
+<p>
+  <ol class="nya-bs-select btn-xs" ng-model="staticModel2">
+    <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+    <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+  </ol>
+</p>
+</file>
+<file name="script.js">
+$scope.staticModel2 = "a";
+</file>
+</example>

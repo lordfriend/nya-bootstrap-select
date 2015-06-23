@@ -69,7 +69,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         index,
         liElement,
         localizedText = nyaBsConfig,
-        isMultiple = typeof tAttrs.multiple !== 'undefined';
+        isMultiple = typeof tAttrs.multiple !== 'undefined',
+        nyaBsOptionValue;
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
@@ -98,6 +99,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         liElement = options.eq(index);
         if(liElement.hasClass('nya-bs-option') || liElement.attr('nya-bs-option')) {
           liElement.find('a').attr('tabindex', '0');
+          // In order to be compatible with old version, we should copy value of value attribute into data-value attribute.
+          // For the reason we use data-value instead, see http://nya.io/AngularJS/Beware-Of-Using-value-Attribute-On-list-element/
+          nyaBsOptionValue = liElement.attr('value');
+          if(angular.isString(nyaBsOptionValue) && nyaBsOptionValue !== '') {
+            liElement.attr('data-value', nyaBsOptionValue);
+            liElement.removeAttr('value');
+          }
         }
       }
 
@@ -419,7 +427,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               }
             }
           }
-          console.log(nyaBsSelectCtrl.id + ' render end');
+          //console.log(nyaBsSelectCtrl.id + ' render end');
           updateButtonContent();
         };
 
@@ -791,7 +799,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               scopeOfOption = nyaBsOption.data('isolateScope');
               return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
-              return nyaBsOption.attr('value');
+              return nyaBsOption.attr('data-value');
             }
           }
 

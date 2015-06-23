@@ -74,11 +74,11 @@ $scope.objCollection = {
 </file>
 </example>
 
-###Value Expression
+###data-value Expression
 
-Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The **value expression** give an solution for this.
+Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The **data-value expression** give an solution for this.
  
-**value expression** is an attribute `value` add to `nya-bs-option` directive element. But unlike the `value` attribute used in static options. This `value`
+**data-value expression** is an attribute `data-value` add to `nya-bs-option` directive element. But unlike the `data-value` attribute used in static options. This `data-value`
 attribute is an expression which will evaluated in the child scope of `nya-bs-option`.
 
 <example>
@@ -88,7 +88,7 @@ attribute is an expression which will evaluated in the child scope of `nya-bs-op
     <p class="form-control-static">select: {{ model }}</p>
     <label for="array-collection">Array Collection</label>
     <ol id="array-collection" class="nya-bs-select" ng-model="model">
-      <li nya-bs-option="option in arrayCollection group by option.class" value="option.name">
+      <li nya-bs-option="option in arrayCollection group by option.class" data-value="option.name">
         <span class="dropdown-header">{{$group}}</span>
         <a>
           {{option.name}}
@@ -124,7 +124,7 @@ track by expression is very similar with `ng-repeat` which allow you to identify
     <p class="form-control-static">select: {{ model }}</p>
     <label for="array-collection">Array Collection</label>
     <ol id="array-collection" class="nya-bs-select" ng-model="model">
-      <li nya-bs-option="option in arrayCollection group by option.class track by option.name" value="option.name">
+      <li nya-bs-option="option in arrayCollection group by option.class track by option.name" data-value="option.name">
         <span class="dropdown-header">{{$group}}</span>
         <a>
           {{option.name}}
