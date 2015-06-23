@@ -291,14 +291,16 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         });
 
         // if click the outside of dropdown menu, close the dropdown menu
-        $document.on('click', function(event) {
+        var outClick = function(event) {
           if(filterTarget(event.target, $element.parent()[0], $element[0]) === null) {
             if($element.hasClass('open')) {
               $element.triggerHandler('blur');
             }
             $element.removeClass('open');
           }
-        });
+        };
+        $document.on('click', outClick);
+
         console.log(dropdownToggle[0]==$element.find('button').eq(0)[0]);
 
         dropdownToggle.on('blur', function() {
@@ -941,6 +943,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           }
 
         }
+
+        $scope.$on('$destroy', function() {
+          dropdownMenu.off();
+          dropdownToggle.off();
+          searchBox.off();
+          $document.off('click', outClick);
+          console.log('unregister event handler');
+        });
 
       };
     }
