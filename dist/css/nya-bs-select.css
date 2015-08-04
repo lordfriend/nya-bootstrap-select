@@ -7,6 +7,9 @@
   .form-inline .nya-bs-select.form-control {
     width: auto;
   }
+  .form-inline .nya-bs-select.form-control:not([class*="col-"]) {
+    width: auto;
+  }
 }
 .nya-bs-select {
   /*width: 220px\9; IE8 and below*/
