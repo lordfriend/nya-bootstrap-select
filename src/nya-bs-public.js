@@ -314,3 +314,8 @@ var deepCopy = angular.copy;
 var extend = angular.extend;
 
 var nyaBsSelect = angular.module('nya.bootstrap.select', []);
+
+/* commonjs package manager support (eg componentjs) */
+if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
+  module.exports = 'nya.bootstrap.select';
+}
