@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.0.10
+ * nya-bootstrap-select v2.0.11
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -169,6 +169,10 @@ var updateScope = function(scope, index, valueIdentifier, value, keyIdentifier, 
   }
 };
 
+var setElementIsolateScope = function(element, scope) {
+  element.data('isolateScope', scope);
+};
+
 var contains = function(array, element) {
   var length = array.length,
     i;
@@ -318,6 +322,11 @@ var deepCopy = angular.copy;
 var extend = angular.extend;
 
 var nyaBsSelect = angular.module('nya.bootstrap.select', []);
+
+/* commonjs package manager support (eg componentjs) */
+if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
+  module.exports = 'nya.bootstrap.select';
+}
 
 /**
  * A service for configuration. the configuration is shared globally.
@@ -484,10 +493,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           dropdownToggle.addClass(className);
         }
 
-        //if(/btn-(?:lg|sm|xs)/.test(className)) {
-        //  tElement.removeClass(className);
-        //  dropdownToggle.addClass(className);
-        //}
+        if(/btn-(?:lg|sm|xs)/.test(className)) {
+          tElement.removeClass(className);
+          dropdownToggle.addClass(className);
+        }
 
         if(className === 'form-control') {
           dropdownToggle.addClass(className);
@@ -616,14 +625,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             return;
           }
 
-          if(!values || values.length === 0) {
-            if(isMultiple) {
-              modelValue = [];
-            } else {
-              modelValue = null;
-            }
-          } else {
-
+          /**
+           * Behavior change, since 2.1.0, we don't want to reset model to null or empty array when options' collection is not prepared.
+           */
+          if(Array.isArray(values) && values.length > 0) {
             if(valueExpFn) {
               for(index = 0; index < values.length; index++) {
                 valuesForSelect.push(valueExpFn($scope, values[index]));
@@ -1040,7 +1045,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
           // focus on selected element
           for(var i = 0; i < dropdownMenu.children().length; i++) {
-            if(dropdownMenu.children().eq(i).hasClass('selected')) {
+            var childElement = dropdownMenu.children().eq(i);
+            if (!childElement.hasClass('not-match') && childElement.hasClass('selected')) {
               return dropdownMenu.children().eq(i)[0];
             }
           }
@@ -1191,11 +1197,12 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         function getOptionValue(nyaBsOption) {
           var scopeOfOption;
           if(valueExpFn) {
-            scopeOfOption = nyaBsOption.scope();
+            // here we use the scope bound by ourselves in the nya-bs-option.
+            scopeOfOption = nyaBsOption.data('isolateScope');
             return valueExpFn(scopeOfOption);
           } else {
             if(nyaBsSelectCtrl.valueIdentifier || nyaBsSelectCtrl.keyIdentifier) {
-              scopeOfOption = nyaBsOption.scope();
+              scopeOfOption = nyaBsOption.data('isolateScope');
               return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
               return nyaBsOption.attr('value');
@@ -1482,6 +1489,8 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
             group,
             lastGroup,
 
+            removedClone, // removed clone node, should also remove isolateScope data as well
+
             values = [],
             valueObj; // the collection value
 
@@ -1568,7 +1577,10 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
           // remove DOM nodes
           for( var blockKey in lastBlockMap) {
             block = lastBlockMap[blockKey];
-            getBlockNodes(block.clone).remove();
+            removedClone = getBlockNodes(block.clone);
+            // remove the isolateScope data to detach scope from this clone
+            removedClone.removeData('isolateScope');
+            removedClone.remove();
             block.scope.$destroy();
           }
 
@@ -1587,6 +1599,9 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
               updateScope(block.scope, index, valueIdentifier, block.value, keyIdentifier, block.key, collectionLength, block.group);
             } else {
               $transclude(function nyaBsOptionTransclude(clone, scope) {
+                // in case of the debugInfoEnable is set to false, we have to bind the scope to the clone node.
+                setElementIsolateScope(clone, scope);
+
                 block.scope = scope;
 
                 var endNode = nyaBsOptionEndComment.cloneNode(false);
@@ -1595,7 +1610,6 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
                 jqLite(previousNode).after(clone);
 
                 // add nya-bs-option class
-
                 clone.addClass('nya-bs-option');
 
                 // for newly created item we need to ensure its selected status from the model value.
