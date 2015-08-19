@@ -375,4 +375,42 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
     $timeout.flush();
     expect(selectElement.find('button').children().eq(0).text()).toBe('Beta');
   });
+
+  it('should update button label when update-button-on value changes.', function() {
+
+    $scope.options = [
+        {name: 'day', value: 'DAY'},
+        {name: 'week', value: 'WEEK'},
+        {name: 'month', value: 'MONTH'}
+    ];
+
+    $scope.model = 'DAY';
+    $scope.interval = '1';
+    $scope.$digest();
+
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model" update-button-on="interval">' +
+        '<li class="nya-bs-option" value="DAY">' +
+        '<a>day{{interval != "1" ? "s" : ""}}</a>' +
+      '</li>' +
+      '<li class="nya-bs-option" value="WEEK">' +
+        '<a>week{{interval != "1" ? "s" : ""}}</a>' +
+      '</li>' +
+      '<li class="nya-bs-option" value="MONTH">' +
+          '<a>month{{interval != "1" ? "s" : ""}}</a>' +
+      '</li>' +
+    '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+    $timeout.flush();
+    expect(selectElement.find('button').children().eq(0).text()).toBe('day');
+
+    // change property of update-button-on watch
+    $scope.interval = '2';
+
+    $scope.$digest();
+    $timeout.flush();
+    expect(selectElement.find('button').children().eq(0).text()).toBe('days');
+
+  });
 });
