@@ -38,21 +38,21 @@ Require: angular 1.2+
 
 ###Static Options
 
-You can use static options which means you can't change the option when the HTML code is ready. Under this usage, you don't use the `nya-bs-option` directive, but you should add `nya-bs-option` class to all the `<li>` element and `value` attribute to let the directive know you option's value.
+You can use static options which means you can't change the option when the HTML code is ready. Under this usage, you don't use the `nya-bs-option` directive, but you should add `nya-bs-option` class to all the `<li>` element and `data-value` attribute to let the directive know you option's value.
 
 ```html
 <ol class="nya-bs-select" ng-model="myModel">
-	<li value="alpha" class="nya-bs-option">
+	<li data-value="alpha" class="nya-bs-option">
 		<a>
 			Alpha
 		</a>
 	</li>
-	<li value="beta" class="nya-bs-option">
+	<li data-value="beta" class="nya-bs-option">
 		<a>
 			Beta
 		</a>
 	</li>
-	<li value="charlie" class="nya-bs-option">
+	<li data-value="charlie" class="nya-bs-option">
 		<a>
 			Charlie
 		</a>
@@ -104,6 +104,12 @@ This project is built by Grunt, fork this project. and clone to your local repos
 Source files are separated to several files. run `grunt build` will do some karma unit test and combine these files to one single file and compress the js and css files.
 
 e2e test is not available temporarily, I will add those test in the future.
+
+Something should be noticed:
+
+- If you add a feature, you should add a unit test case. The unit test using karma runner and jasmine 1.5 framework. you can add new test spec files in **test/spec** folder.
+- For any Pull Request, you should only modify the src files and documents, test specs. do not update dist files, package.json, bower.json or try to update project version.
+- Any feature should work without jquery.
 
 ## License ##
 

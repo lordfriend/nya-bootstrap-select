@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.0.10
+ * nya-bootstrap-select v2.1.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
