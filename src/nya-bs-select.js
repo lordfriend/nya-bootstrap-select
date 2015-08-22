@@ -331,11 +331,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
         // actions box
         if ($attrs.actionsBox === 'true' && isMultiple) {
-          actionsBox.find('.bs-select-all').on('click', function () {
+          actionsBox.find('button').eq(0).on('click', function () {
             setAllOptions(true);
           });
-
-          actionsBox.find('.bs-deselect-all').on('click', function () {
+          actionsBox.find('button').eq(1).on('click', function () {
             setAllOptions(false);
           });
         }
