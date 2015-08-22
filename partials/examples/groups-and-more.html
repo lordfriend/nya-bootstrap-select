@@ -67,9 +67,9 @@ $scope.objCollection = <span class="hljs-keyword">{</span>
 
 <iframe class="runnable-example-frame" src="examples/groups-and-more-example-1/index.html"></iframe>
 
-<h3 id="value-expression">Value Expression</h3>
-<p>Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The <strong>value expression</strong> give an solution for this.</p>
-<p><strong>value expression</strong> is an attribute <code>value</code> add to <code>nya-bs-option</code> directive element. But unlike the <code>value</code> attribute used in static options. This <code>value</code>
+<h3 id="data-value-expression">data-value Expression</h3>
+<p>Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The <strong>data-value expression</strong> give an solution for this.</p>
+<p><strong>data-value expression</strong> is an attribute <code>data-value</code> add to <code>nya-bs-option</code> directive element. But unlike the <code>data-value</code> attribute used in static options. This <code>data-value</code>
 attribute is an expression which will evaluated in the child scope of <code>nya-bs-option</code>.</p>
 <example>
 <file name="index.html">
@@ -78,7 +78,7 @@ attribute is an expression which will evaluated in the child scope of <code>nya-
     <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-control-static&quot;</span>&gt;</span>select: </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">model</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">&quot;array-collection&quot;</span>&gt;</span>Array Collection<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;array-collection&quot;</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in arrayCollection group by option.class&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;option.name&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in arrayCollection group by option.class&quot;</span> <span class="hljs-attribute">data-value</span>=<span class="hljs-value">&quot;option.name&quot;</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;dropdown-header&quot;</span>&gt;</span></span><span class="hljs-expression"><span>{{</span>$<span class="hljs-variable">group</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
           </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option.name</span><span>}}</span></span><span class="xml">
@@ -118,7 +118,7 @@ attribute is an expression which will evaluated in the child scope of <code>nya-
     <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-control-static&quot;</span>&gt;</span>select: </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">model</span> <span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">&quot;array-collection&quot;</span>&gt;</span>Array Collection<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;array-collection&quot;</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in arrayCollection group by option.class track by option.name&quot;</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">&quot;option.name&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in arrayCollection group by option.class track by option.name&quot;</span> <span class="hljs-attribute">data-value</span>=<span class="hljs-value">&quot;option.name&quot;</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;dropdown-header&quot;</span>&gt;</span></span><span class="hljs-expression"><span>{{</span>$<span class="hljs-variable">group</span><span>}}</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
           </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option.name</span><span>}}</span></span><span class="xml">

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+  <link rel="stylesheet" href="../../css/main.css"/>
+  <link rel="stylesheet" href="../../css/nya-bs-select.css"/>
+  <script src="../../js/angular.js"></script>
+  <script src="../../js/nya-bs-select.js"></script>
+  <script src="script.js"></script>
+</head>
+<body ng-app="ActionsBoxExample1App">
+  <div ng-controller="MainController">
+    <form class="form-inline">
+  <!-- title on nya-bs-select -->
+  <ol class="nya-bs-select" ng-model="model" actions-box="true" multiple>
+    <li nya-bs-option="option in arrayCollection">
+      <a>
+        {{ option.name }}
+        <span class="glyphicon glyphicon-ok check-mark"></span>
+      </a>
+    </li>
+  </ol>
+</form>
+  </div>
+</body>
+</html>

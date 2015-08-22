@@ -478,7 +478,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         index,
         liElement,
         localizedText = nyaBsConfig,
-        isMultiple = typeof tAttrs.multiple !== 'undefined';
+        isMultiple = typeof tAttrs.multiple !== 'undefined',
+        nyaBsOptionValue;
 
       classList = getClassList(tElement[0]);
       classList.forEach(function(className) {
@@ -507,6 +508,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         liElement = options.eq(index);
         if(liElement.hasClass('nya-bs-option') || liElement.attr('nya-bs-option')) {
           liElement.find('a').attr('tabindex', '0');
+          // In order to be compatible with old version, we should copy value of value attribute into data-value attribute.
+          // For the reason we use data-value instead, see http://nya.io/AngularJS/Beware-Of-Using-value-Attribute-On-list-element/
+          nyaBsOptionValue = liElement.attr('value');
+          if(angular.isString(nyaBsOptionValue) && nyaBsOptionValue !== '') {
+            liElement.attr('data-value', nyaBsOptionValue);
+            liElement.removeAttr('value');
+          }
         }
       }
 
@@ -692,14 +700,16 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         });
 
         // if click the outside of dropdown menu, close the dropdown menu
-        $document.on('click', function(event) {
+        var outClick = function(event) {
           if(filterTarget(event.target, $element.parent()[0], $element[0]) === null) {
             if($element.hasClass('open')) {
               $element.triggerHandler('blur');
             }
             $element.removeClass('open');
           }
-        });
+        };
+        $document.on('click', outClick);
+
         
 
         dropdownToggle.on('blur', function() {
@@ -730,11 +740,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
         // actions box
         if ($attrs.actionsBox === 'true' && isMultiple) {
-          actionsBox.find('.bs-select-all').on('click', function () {
+          actionsBox.find('button').eq(0).on('click', function () {
             setAllOptions(true);
           });
-
-          actionsBox.find('.bs-deselect-all').on('click', function () {
+          actionsBox.find('button').eq(1).on('click', function () {
             setAllOptions(false);
           });
         }
@@ -828,7 +837,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               }
             }
           }
-          
+          //console.log(nyaBsSelectCtrl.id + ' render end');
           updateButtonContent();
         };
 
@@ -1006,7 +1015,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             length = list.length;
           for(i = 0; i < length; i++) {
             liElement = list.eq(i);
-            if(liElement.hasClass('active') && liElement.hasClass('nya-bs-option')) {
+            if(liElement.hasClass('active') && liElement.hasClass('nya-bs-option') && !liElement.hasClass('not-match')) {
               return liElement;
             }
           }
@@ -1200,7 +1209,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               scopeOfOption = nyaBsOption.data('isolateScope');
               return scopeOfOption[nyaBsSelectCtrl.valueIdentifier] || scopeOfOption[nyaBsSelectCtrl.keyIdentifier];
             } else {
-              return nyaBsOption.attr('value');
+              return nyaBsOption.attr('data-value');
             }
           }
 
@@ -1342,6 +1351,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           }
 
         }
+
+        $scope.$on('$destroy', function() {
+          dropdownMenu.off();
+          dropdownToggle.off();
+          searchBox.off();
+          $document.off('click', outClick);
+          
+        });
 
       };
     }

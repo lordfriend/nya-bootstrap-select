@@ -1,0 +1,38 @@
+<section>
+  <h1 id="actions-box">Actions Box</h1>
+<p>Actions Box is an additional toggle button inside dropdown menu that give you ability to select/un-select all options with a single click.</p>
+<example>
+<file name="index.html">
+<pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-inline&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- title on nya-bs-select --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">actions-box</span>=<span class="hljs-value">&quot;true&quot;</span> <span class="hljs-attribute">multiple</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in arrayCollection&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+        </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option.name</span> <span>}}</span></span><span class="xml">
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;glyphicon glyphicon-ok check-mark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span>
+</code></pre>
+
+</file>
+<file name="script.js">
+<pre><code class="lang-javascript">$scope.arrayCollection = [
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Daniel&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Emi&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Flank&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>},</span>
+  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>}</span>
+];
+</code></pre>
+
+</file>
+</example>
+
+<iframe class="runnable-example-frame" src="examples/actions-box-example-1/index.html"></iframe>
+
+</section>

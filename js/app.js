@@ -148,7 +148,8 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'fi
         'custom-content',
         'disable-an-option',
         'control-dropdown-menu-size',
-        'show-menu-arrow'
+        'show-menu-arrow',
+        'actions-box'
       ],
       api: [
         'nya-bs-select',

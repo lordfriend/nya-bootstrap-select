@@ -16,7 +16,7 @@
     <p class="form-control-static">select: {{ model }}</p>
     <label for="array-collection">Array Collection</label>
     <ol id="array-collection" class="nya-bs-select" ng-model="model">
-      <li nya-bs-option="option in arrayCollection group by option.class" value="option.name">
+      <li nya-bs-option="option in arrayCollection group by option.class" data-value="option.name">
         <span class="dropdown-header">{{$group}}</span>
         <a>
           {{option.name}}
