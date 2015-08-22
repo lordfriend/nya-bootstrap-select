@@ -9,7 +9,7 @@ To make multiple selection. just add `multiple` into `nya-bs-select` element.
 
 ###Static Options
 
-Static Options don't change. you need to add `nya-bs-option` class to each of your `<li>` element to make them as options. Beside, you also need to use `value` attribute to specify the value of each option.
+Static Options don't change. you need to add `nya-bs-option` class to each of your `<li>` element to make them as options. Beside, you also need to use `data-value` attribute to specify the value of each option.
 
 <example>
 <file name="index.html">
