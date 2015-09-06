@@ -946,7 +946,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         $scope.$on('$destroy', function() {
           dropdownMenu.off();
           dropdownToggle.off();
-          searchBox.off();
+          if (searchBox.off) searchBox.off();
           $document.off('click', outClick);
           console.log('unregister event handler');
         });
