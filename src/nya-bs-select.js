@@ -778,6 +778,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               $element.triggerHandler('blur');
             }
             $element.removeClass('open');
+            dropdownToggle[0].focus();
           }
           updateButtonContent();
         }
