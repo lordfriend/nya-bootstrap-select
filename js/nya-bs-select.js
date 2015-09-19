@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.1.1
+ * nya-bootstrap-select v2.1.2
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -1187,6 +1187,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               $element.triggerHandler('blur');
             }
             $element.removeClass('open');
+            dropdownToggle[0].focus();
           }
           updateButtonContent();
         }
@@ -1355,7 +1356,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         $scope.$on('$destroy', function() {
           dropdownMenu.off();
           dropdownToggle.off();
-          searchBox.off();
+          if (searchBox.off) searchBox.off();
           $document.off('click', outClick);
           
         });
