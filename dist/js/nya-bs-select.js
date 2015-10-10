@@ -521,11 +521,17 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
       if(tAttrs.liveSearch === 'true') {
         searchBox = jqLite(SEARCH_BOX);
 
-        // set localized text
-        if(localizedText.noSearchResultTpl) {
-          NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', localizedText.noSearchResultTpl);
-        } else if(localizedText.noSearchResult) {
-          NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', localizedText.noSearchResult);
+        if(tAttrs.noSearchTitle) {
+            NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', tAttrs.noSearchTitle);
+        } else if (tAttrs.noSearchTitleTpl) {
+            NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', tAttrs.noSearchTitleTpl);
+        }else {
+          // set localized text
+          if(localizedText.noSearchResultTpl) {
+            NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', localizedText.noSearchResultTpl);
+          } else if(localizedText.noSearchResult) {
+            NO_SEARCH_RESULT = NO_SEARCH_RESULT.replace('NO SEARCH RESULT', localizedText.noSearchResult);
+          }
         }
 
         noSearchResult = jqLite(NO_SEARCH_RESULT);
