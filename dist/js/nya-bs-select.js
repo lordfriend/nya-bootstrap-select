@@ -849,11 +849,19 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
         // simple keyboard support
         $element.on('keydown', function(event){
-          var keyCode = event.keyCode;
+          var keyCode = event.keyCode,
+          
+          $this = $(this);
 
           if(keyCode !== 27 && keyCode !== 13 && keyCode !== 38 && keyCode !== 40) {
-            // we only handle special keys. don't waste time to traverse the dom tree.
-            return;
+          
+            var letter = String.fromCharCode(event.which);
+
+            var filterLetter = $this.find('a:contains("'+ letter +'")').filter(function() {
+              return $(this).text().indexOf(letter) === 0;
+            });
+
+            filterLetter.eq(0).focus();
           }
 
           // prevent a click event to be fired.
