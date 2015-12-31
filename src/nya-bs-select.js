@@ -68,7 +68,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         length,
         index,
         liElement,
-        localizedText = nyaBsConfig,
+        localizedText = nyaBsConfig.text,
         isMultiple = typeof tAttrs.multiple !== 'undefined',
         nyaBsOptionValue;
 
