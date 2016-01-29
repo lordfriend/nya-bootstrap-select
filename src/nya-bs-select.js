@@ -194,13 +194,15 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         }
         if(typeof $attrs.disabled !== 'undefined') {
           $scope.$watch($attrs.disabled, function(disabled){
-            if(!!disabled) {
+            if(disabled) {
               dropdownToggle.addClass('disabled');
+              dropdownToggle.attr('disabled', 'disabled');
               previousTabIndex = dropdownToggle.attr('tabindex');
               dropdownToggle.attr('tabindex', '-1');
               isDisabled = true;
             } else {
               dropdownToggle.removeClass('disabled');
+              dropdownToggle.removeAttr('disabled');
               if(previousTabIndex) {
                 dropdownToggle.attr('tabindex', previousTabIndex);
               } else {
