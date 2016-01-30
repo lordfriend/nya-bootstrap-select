@@ -282,7 +282,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           if(isDisabled) {
             return;
           }
-
+          console.log('dropdown click');
           if(jqLite(event.target).hasClass('dropdown-header')) {
             return;
           }
@@ -692,16 +692,16 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             return;
 
           var liElements,
-            modelValue,
+            wv,
             viewValue;
 
           liElements = dropdownMenu.find('li');
           if (liElements.length > 0) {
-            modelValue = ngCtrl.$modelValue;
+            wv = ngCtrl.$viewValue;
 
             // make a deep copy enforce ngModelController to call its $render method.
             // See: https://github.com/angular/angular.js/issues/1751
-            viewValue = Array.isArray(modelValue) ? deepCopy(modelValue) : [];
+            viewValue = Array.isArray(wv) ? deepCopy(wv) : [];
 
             for (var i = 0; i < liElements.length; i++) {
               var nyaBsOption = jqLite(liElements[i]);
@@ -744,7 +744,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         function selectOption(nyaBsOption) {
           var value,
             viewValue,
-            modelValue = ngCtrl.$modelValue,
+            wv = ngCtrl.$viewValue,
             index;
           // if user specify the value attribute. we should use the value attribute
           // otherwise, use the valueIdentifier specified field in target scope
@@ -755,7 +755,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             if(isMultiple) {
               // make a deep copy enforce ngModelController to call its $render method.
               // See: https://github.com/angular/angular.js/issues/1751
-              viewValue = Array.isArray(modelValue) ? deepCopy(modelValue) : [];
+              viewValue = Array.isArray(wv) ? deepCopy(wv) : [];
               index = indexOf(viewValue, value);
               if(index === -1) {
                 // check element
@@ -827,11 +827,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         }
 
         function updateButtonContent() {
-          var modelValue = ngCtrl.$modelValue;
+          var viewValue = ngCtrl.$viewValue;
           $element.triggerHandler('change');
 
           var filterOption = dropdownToggle.children().eq(0);
-          if(typeof modelValue === 'undefined') {
+          if(typeof viewValue === 'undefined') {
             /**
              * Select empty option when model is undefined.
              */
@@ -839,7 +839,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
             filterOption.append(getDefaultNoneSelectionContent());
             return;
           }
-          if(isMultiple && modelValue.length === 0) {
+          if(isMultiple && viewValue.length === 0) {
             filterOption.empty();
             filterOption.append(getDefaultNoneSelectionContent());
           } else {
@@ -862,14 +862,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
               }
 
               // data-selected-text-format="count" or data-selected-text-format="count>x"
-              if((typeof count !== 'undefined') && modelValue.length > count) {
+              if((typeof count !== 'undefined') && viewValue.length > count) {
                 filterOption.empty();
                 if(localizedText.numberItemSelectedTpl) {
-                  filterOption.append(jqLite(localizedText.numberItemSelectedTpl.replace('%d', modelValue.length)));
+                  filterOption.append(jqLite(localizedText.numberItemSelectedTpl.replace('%d', viewValue.length)));
                 } else if(localizedText.numberItemSelected) {
-                  filterOption.append(document.createTextNode(localizedText.numberItemSelected.replace('%d', modelValue.length)));
+                  filterOption.append(document.createTextNode(localizedText.numberItemSelected.replace('%d', viewValue.length)));
                 } else {
-                  filterOption.append(document.createTextNode(modelValue.length + ' items selected'));
+                  filterOption.append(document.createTextNode(viewValue.length + ' items selected'));
                 }
                 return;
               }
@@ -882,7 +882,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
                   value = getOptionValue(nyaBsOption);
 
                   if(isMultiple) {
-                    if(Array.isArray(modelValue) && contains(modelValue, value)) {
+                    if(Array.isArray(viewValue) && contains(viewValue, value)) {
                       // if option has an title attribute. use the title value as content show in button.
                       // otherwise get very first child element.
                       optionTitle = nyaBsOption.attr('title');
@@ -894,7 +894,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
                     }
                   } else {
-                    if(deepEquals(modelValue, value)) {
+                    if(deepEquals(viewValue, value)) {
                       optionTitle = nyaBsOption.attr('title');
                       if(optionTitle) {
                         selection.push(document.createTextNode(optionTitle));

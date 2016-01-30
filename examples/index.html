@@ -522,6 +522,21 @@
       </div>
 
     </form>
+
+    <h3>ngModelOptions</h3>
+    <p>should work with ngModelOptions</p>
+
+    <form class="form-inline">
+      <ol id="ngModelOptionsExample" class="nya-bs-select" ng-model="model9" multiple ng-model-options="{updateOn: 'blur', debounce: 200}">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <div class="form-static-control">{{model9}}</div>
+    </form>
   </section>
 </div>
 <footer class="footer">
