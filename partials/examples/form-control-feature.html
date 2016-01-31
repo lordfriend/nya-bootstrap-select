@@ -1,8 +1,8 @@
 <section>
-  <h1 id="form-control-feature">Form Control Feature</h1>
+  <p>#Form Control Feature</p>
 <p>Because we don&#39;t have an form element to build a form control. Some form features which provided by angular need to be implemented specially.</p>
 <p>Currently form control valid and disabled are supported.</p>
-<h3 id="disable-a-select">Disable a select</h3>
+<p>###Disable a select</p>
 <p>To disable a select. Use <code>disabled=&quot;true&quot;</code> as an attribute on <code>nya-bs-select</code> element. the value of this attribute is a data-binding to current scope. So you can use model to control
 an select being disabled or enabled. Note that <code>ng-disabled</code> are not supported.</p>
 <example>
@@ -38,7 +38,7 @@ an select being disabled or enabled. Note that <code>ng-disabled</code> are not 
 
 <iframe class="runnable-example-frame" src="examples/form-control-feature-example-1/index.html"></iframe>
 
-<h3 id="ng-required">ng-required</h3>
+<p>###ng-required</p>
 <p><code>ng-required</code> and <code>required</code> directive are supported. when you add one of these directives. it will check your ng-model and set its <code>$valid</code> and <code>$invalid</code> property. For details, see <a href="https://docs.angularjs.org/api/ng/type/ngModel.NgModelController">ngModelController</a>
 When selection is multiple, an empty array or undefined model is invalid. When selection is single, an undefined, empty string, NaN, null model is invalid.</p>
 <p>When using with form or ngForm, the valid status of form is also affected by this directive.</p>

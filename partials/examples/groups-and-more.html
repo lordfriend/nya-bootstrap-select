@@ -1,14 +1,14 @@
 <section>
-  <h1 id="groups-and-more">Groups And More</h1>
-<h3 id="group-features">Group features</h3>
-<p>The native <code>&lt;select&gt;</code> element support <code>optgroup</code> tag which can divide options to different groups. So is Bootstrap-select. Although nya-bootstrap-select doesn&#39;t use <code>select</code> tag anymore, nevertheless, nya-bootstrap-select also supports group features.</p>
+  <p>#Groups And More</p>
+<p>###Group features
+The native <code>&lt;select&gt;</code> element support <code>optgroup</code> tag which can divide options to different groups. So is Bootstrap-select. Although nya-bootstrap-select doesn&#39;t use <code>select</code> tag anymore, nevertheless, nya-bootstrap-select also supports group features.</p>
 <p>The key of this feature is sort the list element by its group property. then using some css to stylize the group header which already implemented in Bootstrap, the <code>dropdown-header</code> class.</p>
 <p>When using group features, like <code>ng-options</code>, you need to use <code>group by</code> expression after the <code>collection</code> expression in the expression of <code>nya-bs-option</code> directive.</p>
 <p>For example:</p>
 <p>An array of object, group by the <code>class</code> property</p>
-<pre><code>nya-bs-<span class="hljs-keyword">option</span>=<span class="hljs-string">"student in students group by student.class"</span>
+<pre><code><span class="hljs-label">nya</span>-<span class="hljs-keyword">bs-option="student </span>in students group <span class="hljs-keyword">by </span>student.class<span class="hljs-string">"</span>
 </code></pre><p>An object collection, group by the <code>group</code> property of each value</p>
-<pre><code>nya-bs-<span class="hljs-keyword">option</span>=<span class="hljs-string">"(key, value) in options group by value.group"</span>
+<pre><code><span class="hljs-label">nya</span>-<span class="hljs-keyword">bs-option="(key, </span>value) in options group <span class="hljs-keyword">by </span>value.group<span class="hljs-string">"</span>
 </code></pre><p>With <code>group by</code> expression, <code>nya-bs-option</code> directive will sort the options by their group and expose an <code>$group</code> property in each scope of its child. To show the group header, you need to add an header for each group.</p>
 <example>
 <file name="index.html">
@@ -42,24 +42,24 @@
 
 </file>
 <file name="script.js">
-<pre><code class="lang-javascript">$scope.arrayCollection = [
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Daniel&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Emi&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Flank&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>}</span>
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.arrayCollection = [
+  {name: <span class="hljs-string">&#39;Alice&#39;</span>, class: <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Bob&#39;</span>, class: <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;Carl&#39;</span>, class: <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Daniel&#39;</span>, class: <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;Emi&#39;</span>, class: <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Flank&#39;</span>, class: <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;George&#39;</span>, class: <span class="hljs-string">&#39;Class C&#39;</span>},
+  {name: <span class="hljs-string">&#39;Harry&#39;</span>, class: <span class="hljs-string">&#39;Class C&#39;</span>}
 ];
-$scope.objCollection = <span class="hljs-keyword">{</span>
-  <span class="hljs-keyword">wheat: {</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;wheat&#39;</span>, <span class="hljs-literal">group</span>: <span class="hljs-string">&#39;grain&#39;</span><span class="hljs-keyword">}</span>,
-  <span class="hljs-keyword">barley: {</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;barley&#39;</span>, <span class="hljs-literal">group</span>: <span class="hljs-string">&#39;grain&#39;</span><span class="hljs-keyword">}</span>,
-  <span class="hljs-keyword">pork: {</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;pork&#39;</span>, <span class="hljs-literal">group</span>: <span class="hljs-string">&#39;protein&#39;</span><span class="hljs-keyword">}</span>,
-  <span class="hljs-keyword">chicken: {</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;chicken&#39;</span>, <span class="hljs-literal">group</span>: <span class="hljs-string">&#39;protein&#39;</span><span class="hljs-keyword">}</span>,
-  <span class="hljs-keyword">orange: {</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;orange&#39;</span>, <span class="hljs-literal">group</span>: <span class="hljs-string">&#39;fruit&#39;</span><span class="hljs-keyword">}</span>,
-  <span class="hljs-keyword">apple: {</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;apple&#39;</span>, <span class="hljs-literal">group</span>: <span class="hljs-string">&#39;fruit&#39;</span><span class="hljs-keyword">}</span>
-<span class="hljs-keyword">}</span>;
+<span class="hljs-variable">$scope</span>.objCollection = {
+  wheat: {name: <span class="hljs-string">&#39;wheat&#39;</span>, group: <span class="hljs-string">&#39;grain&#39;</span>},
+  barley: {name: <span class="hljs-string">&#39;barley&#39;</span>, group: <span class="hljs-string">&#39;grain&#39;</span>},
+  pork: {name: <span class="hljs-string">&#39;pork&#39;</span>, group: <span class="hljs-string">&#39;protein&#39;</span>},
+  chicken: {name: <span class="hljs-string">&#39;chicken&#39;</span>, group: <span class="hljs-string">&#39;protein&#39;</span>},
+  orange: {name: <span class="hljs-string">&#39;orange&#39;</span>, group: <span class="hljs-string">&#39;fruit&#39;</span>},
+  apple: {name: <span class="hljs-string">&#39;apple&#39;</span>, group: <span class="hljs-string">&#39;fruit&#39;</span>}
+};
 </code></pre>
 
 </file>
@@ -67,7 +67,7 @@ $scope.objCollection = <span class="hljs-keyword">{</span>
 
 <iframe class="runnable-example-frame" src="examples/groups-and-more-example-1/index.html"></iframe>
 
-<h3 id="data-value-expression">data-value Expression</h3>
+<p>###data-value Expression</p>
 <p>Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The <strong>data-value expression</strong> give an solution for this.</p>
 <p><strong>data-value expression</strong> is an attribute <code>data-value</code> add to <code>nya-bs-option</code> directive element. But unlike the <code>data-value</code> attribute used in static options. This <code>data-value</code>
 attribute is an expression which will evaluated in the child scope of <code>nya-bs-option</code>.</p>
@@ -92,14 +92,14 @@ attribute is an expression which will evaluated in the child scope of <code>nya-
 </file>
 <file name="script.js">
 <pre><code class="lang-javascript">$scope.arrayCollection = [
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Daniel&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Emi&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Flank&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>}</span>
+  {name: <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Daniel&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;Emi&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Flank&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class C&#39;</span>},
+  {name: <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class C&#39;</span>}
 ];
 </code></pre>
 
@@ -108,7 +108,7 @@ attribute is an expression which will evaluated in the child scope of <code>nya-
 
 <iframe class="runnable-example-frame" src="examples/groups-and-more-example-2/index.html"></iframe>
 
-<h3 id="track-by-expression">Track By Expression</h3>
+<p>###Track By Expression</p>
 <p>track by expression is very similar with <code>ng-repeat</code> which allow you to identify collection element with some unique property. It is useful when the element may be empty or duplicated. But a select component shouldn&#39;t have an duplicated option.
  So In our case, this is not very useful, however, you can use this to improve performance when your array elements are very large.</p>
 <example>
@@ -132,14 +132,14 @@ attribute is an expression which will evaluated in the child scope of <code>nya-
 </file>
 <file name="script.js">
 <pre><code class="lang-javascript">$scope.arrayCollection = [
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Daniel&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Emi&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class A&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Flank&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class B&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>},</span>
-  <span class="hljs-keyword">{</span><span class="hljs-literal">name</span>: <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-keyword"><span class="hljs-keyword">class</span>: <span class="hljs-string">&#39;Class C&#39;</span>}</span>
+  {name: <span class="hljs-string">&#39;Alice&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Bob&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;Carl&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Daniel&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;Emi&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class A&#39;</span>},
+  {name: <span class="hljs-string">&#39;Flank&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class B&#39;</span>},
+  {name: <span class="hljs-string">&#39;George&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class C&#39;</span>},
+  {name: <span class="hljs-string">&#39;Harry&#39;</span>, <span class="hljs-class"><span class="hljs-keyword">class</span>:</span> <span class="hljs-string">&#39;Class C&#39;</span>}
 ];
 </code></pre>
 

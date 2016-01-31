@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.1.2
+ * nya-bootstrap-select v2.1.3
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -21,17 +21,29 @@
 .nya-bs-select.form-control:not([class*="col-"]) {
   width: 100%;
 }
-.nya-bs-select > .btn {
+.nya-bs-select .dropdown-toggle {
   width: 100%;
   padding-right: 25px;
 }
-.nya-bs-select > .btn .filter-option {
-  display: inline-block;
+.nya-bs-select .dropdown-toggle .filter-option,
+.nya-bs-select .dropdown-toggle .special-title {
   overflow: hidden;
   width: 100%;
   text-align: left;
 }
-.nya-bs-select > .btn .caret {
+.nya-bs-select .dropdown-toggle .filter-option {
+  display: inline-block;
+}
+.nya-bs-select .dropdown-toggle .special-title {
+  display: none;
+}
+.nya-bs-select .dropdown-toggle.show-special-title .filter-option {
+  display: none;
+}
+.nya-bs-select .dropdown-toggle.show-special-title .special-title {
+  display: inline-block;
+}
+.nya-bs-select .dropdown-toggle .caret {
   position: absolute;
   top: 50%;
   right: 12px;
@@ -197,7 +209,8 @@
   position: static;
   border-radius: 4px;
 }
-.nya-bs-select.fit-width .btn .filter-option {
+.nya-bs-select.fit-width .btn .filter-option,
+.nya-bs-select.fit-width .btn .special-title {
   position: static;
 }
 .nya-bs-select.fit-width .btn .caret {

@@ -1,5 +1,5 @@
 <section>
-  <h1 id="nyabsconfigprovider">nyaBsConfigProvider</h1>
+  <p>#nyaBsConfigProvider</p>
 <p>This provider help the developer configure the default text appearance of nya-bs-select base on user-agent localization. Default implementation of the locale text is <code>en-us</code>. </p>
 <p>There are three default text can be configured. Each one has two form, pure text and custom html template. The priority of template configuration is higher than pure text.</p>
 <table class="table table-striped">
@@ -36,20 +36,20 @@
 <blockquote>
 <p>NOTE: You shouldn&#39;t use any angular directive or expression in template, it will not be parsed. </p>
 </blockquote>
-<h3 id="methods">Methods</h3>
-<h4 id="-setlocalizedtext-localeid-configobj-"><code>setLocalizedText(localeId, configObj);</code></h4>
+<p>###Methods</p>
+<p>####<code>setLocalizedText(localeId, configObj);</code></p>
 <p>Register a new locale configuration or override an existing locale configuration.</p>
 <ul>
 <li><code>localeId</code> a string formatted as languageId-countryId, e.g. en-us</li>
 <li><code>configObj</code> a localized configuration object. should contain one of the three properties.</li>
 </ul>
-<pre><code class="lang-javascript">{
-  <span class="hljs-attribute">defaultNoneSelection</span>: <span class="hljs-string">'Nothing selected'</span>,
-  <span class="hljs-attribute">noSearchResult</span>: <span class="hljs-string">'NO SEARCH RESULT'</span>,
-  <span class="hljs-attribute">numberItemSelected</span>: <span class="hljs-string">'%d item selected'</span>
-}
+<pre><code class="lang-javascript"><span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">defaultNoneSelection</span>:<span class="hljs-value"> <span class="hljs-string">'Nothing selected'</span>,
+  noSearchResult: <span class="hljs-string">'NO SEARCH RESULT'</span>,
+  numberItemSelected: <span class="hljs-string">'%d item selected'</span>
+</span></span></span>}
 </code></pre>
-<h4 id="-uselocale-localeid-"><code>useLocale(localeId);</code></h4>
+<p>####<code>useLocale(localeId);</code></p>
 <p>Force to use a special locale configuration with given localeId.</p>
 <ul>
 <li><code>localeId</code> a string formatted as languageId-countryId, e.g. en-us</li>

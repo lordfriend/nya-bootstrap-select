@@ -1,18 +1,18 @@
 <section>
-  <h1 id="migrate-instructions">Migrate Instructions</h1>
+  <p>#Migrate Instructions</p>
 <p>This guide will help you migrate from 1.x to 2.x. If you are first time using <strong>nya-bootstrap-select</strong> , just ignore this section.</p>
-<h2 id="data-structure">Data Structure</h2>
+<p>##Data Structure</p>
 <p>The collection which are used to populate options and the model which are used to work with selection results don&#39;t changed.</p>
 <p>Both array and object collection are supported by the new directive <code>nya-bs-option</code>. See the <a href="#/api/nya-bs-option">document</a> to learn usage.</p>
 <p>model of multiple selection is array and model of single selection is object or string as.</p>
-<h2 id="rewrite-template">Rewrite Template</h2>
+<p>##Rewrite Template</p>
 <p>The most changes are the template. <code>&lt;select&gt;</code> is totally deprecated. you need to use new directive <code>nya-bs-select</code> to build your select.
 If you are using static options you should use <code>nya-bs-option</code> class and <code>value</code> attribute to identify your option. 
 otherwise. the <code>nya-bs-option</code> directive must be used to populate options.</p>
 <p>In the 1.x version:</p>
-<pre><code class="lang-html">&lt;select class=<span class="hljs-string">"nya-selectpicker"</span> ng-model=<span class="hljs-string">"model"</span> ng-options=<span class="hljs-string">"option in options"</span>&gt;
-  <span class="hljs-keyword">...</span>
-&lt;/select&gt;
+<pre><code class="lang-html">&lt;<span class="hljs-keyword">select</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"nya-selectpicker"</span> ng-model=<span class="hljs-string">"model"</span> ng-options=<span class="hljs-string">"option in options"</span>&gt;
+  ...
+&lt;/<span class="hljs-keyword">select</span>&gt;
 </code></pre>
 <p>In the 2.x version:</p>
 <pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"nya-bs-select"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"model"</span>&gt;</span>
@@ -31,9 +31,9 @@ otherwise. the <code>nya-bs-option</code> directive must be used to populate opt
 of <code>nya-bs-option</code>.</p>
 </blockquote>
 <p>For group and other usage changes, see the <a href="#/examples">examples</a>.</p>
-<h2 id="features-of-bootstrap-select">Features of Bootstrap-select</h2>
+<p>##Features of Bootstrap-select</p>
 <p>If you have used some features of Bootstrap-select in the 1.x version. Those features may not be supported or have a different implementation at current version.</p>
-<h4 id="features-not-supported">Features Not supported</h4>
+<p>####Features Not supported</p>
 <ul>
 <li><strong>data-container</strong> this feature is buggy and have compatible issue with the model dialog of ui-bootstrap. So it may not be supported any more.</li>
 <li><p><strong>dropup</strong> this feature, in fact, can be supported in current version. But I found the implementation in Bootstrap-select is also not very functional. It need user to click 
@@ -48,7 +48,7 @@ automatically add <code>dropup</code> class to dropdown-menu-container. This imp
 <li><p><strong>data-width</strong> this feature may be supported in future version.</p>
 </li>
 </ul>
-<h4 id="features-with-different-implementing-">Features with different implementing.</h4>
+<p>####Features with different implementing.</p>
 <ul>
 <li><p>data-style
 In current version, if you want to make a different look of the dropdown-toggle button, just add the corresponding class to the <code>nya-bs-select</code> directive.
@@ -57,13 +57,13 @@ You can add these classes: <code>btn-primary</code> <code>btn-info</code> <code>
 <li><p>show-tick
 You don&#39;t need this class any more, because the select options are built by yourself. you can get full control of what content a select should have. so you need to add tick by yourself.
 Add <code>&lt;span class=&quot;glyphicon glyphicon-ok check-mark&quot;&gt;&lt;/span&gt;</code> inside <code>&lt;a&gt;</code> tag which is a direct child of <code>nya-bs-option</code> directive. make sure the content of option is before the <code>check-mark</code> element.</p>
-<pre><code class="lang-html"> <span class="hljs-keyword">...</span>
-   &lt;li nya-bs-option=<span class="hljs-string">"option in options"</span>&gt;
-     &lt;a&gt;
-       <span>{{</span> option <span>}}</span>
-       &lt;span class=<span class="hljs-string">"glyphicon glyphicon-ok check-mark"</span>&gt;&lt;/span&gt;
-     &lt;/a&gt;
-   &lt;/li&gt;
+<pre><code class="lang-html"><span class="xml"> ...
+   <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">"option in options"</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
+       </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">option</span> <span>}}</span></span><span class="xml">
+       <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"glyphicon glyphicon-ok check-mark"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span></span>
 </code></pre>
 </li>
 <li><p>style an option, custom HTML of option, data-icon, showSubText

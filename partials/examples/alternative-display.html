@@ -1,5 +1,5 @@
 <section>
-  <h1 id="alternative-display">Alternative Display</h1>
+  <p>#Alternative Display</p>
 <p>This is a feature borrowed from Bootstrap-select. Add a <code>title</code> attribute to each <code>nya-bs-option</code>, when an option is selected, the <code>title</code> value will be displayed in dropdown-toggle button instead of the content of option.</p>
 <p>By the way, <code>title</code> attribute can also be used on <code>nya-bs-select</code> directive. It will replace the default no select text <code>Nothing selected</code>.</p>
 <example>
@@ -28,12 +28,12 @@
 
 </file>
 <file name="script.js">
-<pre><code class="lang-javascript">$scope.options = [
-  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;apple&#39;</span>, <span class="hljs-string">title:</span> <span class="hljs-string">&#39;c1: apple&#39;</span>},
-  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;orange&#39;</span>, <span class="hljs-string">title:</span> <span class="hljs-string">&#39;c2: orange&#39;</span>},
-  {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;berry&#39;</span>, <span class="hljs-string">title:</span> <span class="hljs-string">&#39;c3: berry&#39;</span>}
+<pre><code class="lang-javascript"><span class="hljs-variable">$scope</span>.options = [
+  {name: <span class="hljs-string">&#39;apple&#39;</span>, title: <span class="hljs-string">&#39;c1: apple&#39;</span>},
+  {name: <span class="hljs-string">&#39;orange&#39;</span>, title: <span class="hljs-string">&#39;c2: orange&#39;</span>},
+  {name: <span class="hljs-string">&#39;berry&#39;</span>, title: <span class="hljs-string">&#39;c3: berry&#39;</span>}
 ];
-$scope.model2 = {<span class="hljs-string">name:</span> <span class="hljs-string">&#39;berry&#39;</span>, <span class="hljs-string">title:</span> <span class="hljs-string">&#39;c3: berry&#39;</span>};
+<span class="hljs-variable">$scope</span>.model2 = {name: <span class="hljs-string">&#39;berry&#39;</span>, title: <span class="hljs-string">&#39;c3: berry&#39;</span>};
 </code></pre>
 
 </file>

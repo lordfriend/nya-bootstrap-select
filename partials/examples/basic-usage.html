@@ -1,10 +1,10 @@
 <section>
-  <h1 id="basic-usage">Basic Usage</h1>
+  <p>#Basic Usage</p>
 <p>nya-bootstrap-select is an directive combination. The main directive is <code>nya-bs-select</code>. This directive maintain the value of ng-model and dropdown and toggle button presentation.
 You need to add your options using <code>&lt;li&gt;</code> element as children of <code>nya-bs-select</code>. You can either add static options or generate options using <code>nya-bs-option</code>.</p>
 <p>An option is, in fact, an dropdown list element. So you need to add an anchor element as a direct child of <code>&lt;li&gt;</code> element, then add your own content as the menu item.</p>
 <p>To make multiple selection. just add <code>multiple</code> into <code>nya-bs-select</code> element.</p>
-<h3 id="static-options">Static Options</h3>
+<p>###Static Options</p>
 <p>Static Options don&#39;t change. you need to add <code>nya-bs-option</code> class to each of your <code>&lt;li&gt;</code> element to make them as options. Beside, you also need to use <code>data-value</code> attribute to specify the value of each option.</p>
 <example>
 <file name="index.html">
@@ -45,7 +45,7 @@ You need to add your options using <code>&lt;li&gt;</code> element as children o
 <iframe class="runnable-example-frame" src="examples/basic-usage-example-1/index.html"></iframe>
 
 
-<h3 id="dynamic-options">Dynamic Options</h3>
+<p>###Dynamic Options</p>
 <p>If you want to generate options from a collection, <code>nya-bs-option</code> directive is right for you. Just think it is an alias of <code>ng-repeat</code>, with some tweak and magic to support our options and groups.</p>
 <p>This example demonstrate how how to use <code>nya-bs-option</code> directive to generate options from collections.</p>
 <example>
@@ -72,7 +72,7 @@ You need to add your options using <code>&lt;li&gt;</code> element as children o
   <span class="hljs-string">&#39;Tango&#39;</span>, <span class="hljs-string">&#39;Uniform&#39;</span>, <span class="hljs-string">&#39;Victor&#39;</span>, <span class="hljs-string">&#39;Whiskey&#39;</span>, <span class="hljs-string">&#39;X-ray&#39;</span>, <span class="hljs-string">&#39;Yankee&#39;</span>, <span class="hljs-string">&#39;Zulu&#39;</span>
 ];
 <span class="hljs-comment">// randomly generate options from options array</span>
-$scope.changeGroups = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(targetOptions)</span> </span>{
+$scope.changeGroups = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">targetOptions</span>) </span>{
   <span class="hljs-keyword">var</span> length = <span class="hljs-built_in">Math</span>.max(<span class="hljs-built_in">Math</span>.min(<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() <em> options.length), <span class="hljs-number">10</span>), <span class="hljs-number">3</span>);
   <span class="hljs-keyword">var</span> newOptions = {};
   <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) {
@@ -80,7 +80,7 @@ $scope.changeGroups = <span class="hljs-function"><span class="hljs-keyword">fun
   }
   <span class="hljs-keyword">var</span> newOptionArray = [];
   <span class="hljs-keyword">var</span> groupCount = <span class="hljs-built_in">Math</span>.max(<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() <em> length / <span class="hljs-number">2</span>), <span class="hljs-number">2</span>);
-  angular.forEach(newOptions, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, key)</span> </span>{
+  angular.forEach(newOptions, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, key</span>) </span>{
     <span class="hljs-keyword">var</span> group = <span class="hljs-built_in">Math</span>.max(<span class="hljs-built_in">Math</span>.ceil(<span class="hljs-built_in">Math</span>.random() </em> groupCount), <span class="hljs-number">1</span>);
     newOptionArray.push({
       name: key,
