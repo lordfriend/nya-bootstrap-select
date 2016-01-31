@@ -1,9 +1,10 @@
-nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsConfig', function ($parse, $document, $timeout, nyaBsConfig) {
+nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compile', 'nyaBsConfig', function ($parse, $document, $timeout, $compile, nyaBsConfig) {
 
   var DEFAULT_NONE_SELECTION = 'Nothing selected';
 
   var DROPDOWN_TOGGLE = '<button class="btn btn-default dropdown-toggle" type="button">' +
     '<span class="pull-left filter-option"></span>' +
+    '<span class="pull-left special-title"></span>' +
     '&nbsp;' +
     '<span class="caret"></span>' +
     '</button>';
@@ -34,7 +35,13 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
       tElement.addClass('btn-group');
 
-      var getDefaultNoneSelectionContent = function() {
+
+      /**
+       * get the default text when nothing is selected. can be template
+       * @param scope, if provided, will try to compile template with given scope, will not attempt to compile the pure text.
+       * @returns {*}
+       */
+      var getDefaultNoneSelectionContent = function(scope) {
         // text node or jqLite element.
         var content;
 
@@ -54,6 +61,12 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           // use default.
           content = document.createTextNode(DEFAULT_NONE_SELECTION);
         }
+
+        if(scope && (tAttrs.titleTpl || localizedText.defaultNoneSelectionTpl)) {
+          console.log('compiled');
+          return $compile(content)(scope);
+        }
+
         return content;
       };
 
@@ -149,7 +162,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
       }
 
       // set default none selection text
-      dropdownToggle.children().eq(0).append(getDefaultNoneSelectionContent());
+      jqLite(dropdownToggle[0].querySelector('.special-title')).append(getDefaultNoneSelectionContent());
 
       dropdownContainer.append(dropdownMenu);
 
@@ -168,12 +181,12 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           isMultiple = typeof $attrs.multiple !== 'undefined';
 
         // find element from current $element root. because the compiled element may be detached from DOM tree by ng-if or ng-switch.
-        var dropdownToggle = queryChildren($element, ['dropdown-toggle']),
+        var dropdownToggle = jqLite($element[0].querySelector('.dropdown-toggle')),
           dropdownContainer = dropdownToggle.next(),
-          dropdownMenu = queryChildren(dropdownContainer, ['dropdown-menu', 'inner']),
-          searchBox = queryChildren(dropdownContainer, ['bs-searchbox']),
-          noSearchResult = queryChildren(dropdownMenu, ['no-search-result']),
-          actionsBox = queryChildren(dropdownContainer, ['bs-actionsbox']);
+          dropdownMenu = jqLite(dropdownContainer[0].querySelector('.dropdown-menu.inner')),
+          searchBox = jqLite(dropdownContainer[0].querySelector('.bs-searchbox')),
+          noSearchResult = jqLite(dropdownMenu[0].querySelector('.no-search-result')),
+          actionsBox = jqLite(dropdownContainer[0].querySelector('.bs-actionsbox'));
 
         if(nyaBsSelectCtrl.valueExp) {
           valueExpFn = function(scope, locals) {
@@ -830,19 +843,21 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
           var viewValue = ngCtrl.$viewValue;
           $element.triggerHandler('change');
 
-          var filterOption = dropdownToggle.children().eq(0);
+          var filterOption = jqLite(dropdownToggle[0].querySelector('.filter-option'));
+          var specialTitle = jqLite(dropdownToggle[0].querySelector('.special-title'));
           if(typeof viewValue === 'undefined') {
             /**
              * Select empty option when model is undefined.
              */
+            dropdownToggle.addClass('show-special-title');
             filterOption.empty();
-            filterOption.append(getDefaultNoneSelectionContent());
             return;
           }
           if(isMultiple && viewValue.length === 0) {
+            dropdownToggle.addClass('show-special-title');
             filterOption.empty();
-            filterOption.append(getDefaultNoneSelectionContent());
           } else {
+            dropdownToggle.removeClass('show-special-title');
             $timeout(function() {
 
               var bsOptionElements = dropdownMenu.children(),
@@ -909,12 +924,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
 
               if(selection.length === 0) {
                 filterOption.empty();
-                filterOption.append(getDefaultNoneSelectionContent());
+                dropdownToggle.addClass('show-special-title');
               } else if(selection.length === 1) {
+                dropdownToggle.removeClass('show-special-title');
                 // either single or multiple selection will show the only selected content.
                 filterOption.empty();
                 filterOption.append(selection[0]);
               } else {
+                dropdownToggle.removeClass('show-special-title');
                 filterOption.empty();
                 for(index = 0; index < selection.length; index++) {
                   filterOption.append(selection[index]);

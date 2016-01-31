@@ -19,13 +19,13 @@
       <li>
         <a href="/">Basic Examples</a>
       </li>
-      <li class="active">
+      <li>
         <a href="#">Localized Default Examples</a>
       </li>
       <li>
         <a href="manual.html">Localized Manual Examples</a>
       </li>
-      <li>
+      <li class="active">
         <a href="angular-translate-filter.html">Angular Translate filter Example</a>
       </li>
     </ul>
@@ -43,33 +43,16 @@
   <section>
     <h1 id="bs-features" class="page-header">Bootstrap-select Features</h1>
 
-    <h3>Live Search</h3>
+    <h3>Default Text</h3>
 
-    <p>Add <code>data-live-search="true"</code> in <code>nya-bs-select</code> directive to add live search support</p>
+    <p>Default Text using angular-translate</p>
 
+    <button class="btn btn-default" ng-click="changeLocale('en')">English</button>
+    <button class="btn btn-default" ng-click="changeLocale('jp')">Japanese</button>
+
+    <p>Current Locale: {{'LANG' | translate}}</p>
     <form class="form-inline">
-      <ol class="nya-bs-select" ng-model="staticModel3" data-live-search="true">
-        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-      </ol>
-    </form>
-
-    <h3>default selection display</h3>
-
-    <p>
-      To display an default information when nothing is selected. just set <code>title</code> attribute in <code>nya-bs-select</code> directive.<br/>
-      You can also set a template for default information when nothing is selected.
-      <strong>Note: This only works on <code>multiple nya-bs-select</code>. For <code>single nyab-bs-select</code>You should give your model an default value to avoid the default text to display</strong>
-    </p>
-
-    <form class="form-inline">
-      <ol class="nya-bs-select" ng-model="staticModel5" title="Choose one of the following" multiple>
-        <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-        <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-        <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-      </ol>
-      <ol class="nya-bs-select" ng-model="staticModel5" title-tpl="<span class='text-muted'>Choose one of the following</span>" multiple>
+      <ol class="nya-bs-select" ng-model="staticModel3" data-live-search="true" multiple title-tpl="<span>{{'NOTHING' | translate}}</spa>">
         <li class="nya-bs-option" value="a"><a>Alpha<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="b"><a>Bravo<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
         <li class="nya-bs-option" value="c"><a>Charlie<span class="glyphicon glyphicon-ok check-mark"></span></a></li>
@@ -137,11 +120,12 @@
 
 
 <script src="../../bower_components/angular/angular.js"></script>
+<script src="../../bower_components/angular-translate/angular-translate.js"></script>
 <script src="../../src/nya-bs-public.js"></script>
 <script src="../../src/nya-bs-config.js"></script>
 <script src="../../src/nya-bs-select-ctrl.js"></script>
 <script src="../../src/nya-bs-select.js"></script>
 <script src="../../src/nya-bs-option.js"></script>
-<script src="default.js"></script>
+<script src="angular-translate-filter.js"></script>
 </body>
 </html>
