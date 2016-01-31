@@ -91,7 +91,7 @@ describe('nyaBsConfig service', function() {
 
     $timeout.flush();
 
-    expect(selectElement.find('button').children().eq(0).children()).toHaveClass('nothing');
+    expect(angular.element(selectElement[0].querySelector('.special-title')).children()).toHaveClass('nothing');
 
     $scope.model = options.slice(0, 5);
 
@@ -99,6 +99,6 @@ describe('nyaBsConfig service', function() {
 
     $timeout.flush();
 
-    expect(selectElement.find('button').children().eq(0).children()).toHaveClass('item-count');
+    expect(angular.element(selectElement[0].querySelector('.filter-option')).children()).toHaveClass('item-count');
   });
 });
