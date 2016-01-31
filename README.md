@@ -7,6 +7,8 @@ The 2.x version is totally rewritten. while keep the most feature of **bootstrap
 
 Require: angular 1.2+
 
+###This project is currently in maintenance state, it will only accept bug fix Pull Request, will not accept any new feature.
+
 ##Usage
 
 1. Install
