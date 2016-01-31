@@ -1,12 +1,12 @@
 <section>
-  <h1 id="getting-started">Getting started</h1>
-<h3 id="different-from-1-x">Different from 1.x</h3>
+  <p>#Getting started</p>
+<p>###Different from 1.x</p>
 <p>Unlike nya-bootstrap-select v1.x which is a wrapper for <a href="https://github.com/silviomoreto/bootstrap-select">Bootstrap-select</a>. This project
 is a totally independent one which only fork most of the features of Bootstrap-select without any code dependency.</p>
 <p>If you are using the 1.x and want migrate to 2.x. follow the <a href="#/main/migrate-instructions">migrate instructions</a>.</p>
-<h2 id="dependencies-and-compatibility-">Dependencies and compatibility:</h2>
+<p>##Dependencies and compatibility:</p>
 <p>This directive only requires AngularJS v1.2 or later and the css of Bootstrap. No other dependencies.</p>
-<h2 id="installation-">Installation.</h2>
+<p>##Installation.</p>
 <p>Install via <a href="http://bower.io">Bower</a>.</p>
 <pre><code class="lang-bash">$ bower <span class="hljs-operator"><span class="hljs-keyword">install</span> nya-bootstrap-<span class="hljs-keyword">select</span> <span class="hljs-comment">--save</span></span>
 </code></pre>
@@ -14,13 +14,13 @@ is a totally independent one which only fork most of the features of Bootstrap-s
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bower_components/bootstrap/dist/css/bootstrap.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/angular/angular.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/angular/angular.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre>
 <p>make &#39;nya.bootstrap.select&#39; module as your application dependency.</p>
 <pre><code class="lang-javascript">angular.<span class="hljs-keyword">module</span>(<span class="hljs-symbol">'myApp'</span>, [<span class="hljs-symbol">'nya</span>.bootstrap.select']);
 </code></pre>
-<h2 id="make-your-select-component-">Make your select component.</h2>
+<p>##Make your select component.</p>
 <p>In view file, use <code>nya-bs-select</code> as element, attribute or class to build an bootstrap select component. the <code>ng-model</code> is also required on the element.
 To make your select options, you will need <code>nya-bs-option</code> directive to populate options from an collection, or you can using <code>nya-bs-option</code> as an class
 of <code>&lt;li&gt;</code> element to make static options. If you are using static options, you should also add an value attribute on <code>&lt;li&gt;</code> element to explicitly set to value of each option.</p>
