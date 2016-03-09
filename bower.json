@@ -20,13 +20,16 @@
     "angular"
   ],
   "dependencies": {
-    "angular": ">=1.2"
+    "angular": "~1.4.0"
   },
   "devDependencies": {
     "jquery": "~2.1.1",
     "bootstrap": "~3.3.0",
-    "angular-mocks": "*",
+    "angular-mocks": "~1.4.0",
     "angular-ui-router": "~0.2.11",
     "angular-translate": "^2.9.0"
+  },
+  "resolutions": {
+    "angular": "~1.4.0"
   }
 }
