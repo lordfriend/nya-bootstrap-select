@@ -743,7 +743,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
             // update view value regardless
             ngCtrl.$setViewValue(viewValue);
-            $scope.$apply();
+            $scope.$digest();
 
             updateButtonContent();
           }
@@ -791,7 +791,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
           }
           // update view value regardless
           ngCtrl.$setViewValue(viewValue);
-          $scope.$apply();
+          $scope.$digest();
 
           if(!isMultiple) {
             // in single selection mode. close the dropdown menu
