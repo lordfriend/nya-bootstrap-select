@@ -1,5 +1,6 @@
 /**
  * A service for configuration. the configuration is shared globally.
+ * Testing ci build --jpmckearin
  */
 nyaBsSelect.provider('nyaBsConfig', function() {
 

@@ -28,9 +28,10 @@
     "karma-jasmine": "^0.1.5",
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-ng-scenario": "^0.1.0",
-    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-phantomjs-launcher": "^1.0.0",
     "load-grunt-tasks": "~0.3.0",
     "marked": "~0.3.2",
+    "phantomjs-prebuilt": ">= 1.9.0",
     "time-grunt": "~0.2.9"
   },
   "scripts": {
