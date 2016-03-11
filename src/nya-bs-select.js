@@ -225,6 +225,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
           });
         }
+        if(typeof $attrs.updateButtonOn !== 'undefined') {
+          $scope.$watch($attrs.updateButtonOn, updateButtonContent);
+        }
 
         /**
          * Do some check on modelValue. remove no existing value
