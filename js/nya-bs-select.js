@@ -639,6 +639,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         /**
          * Do some check on modelValue. remove no existing value
          * @param values
+         * @param deepWatched
          */
         nyaBsSelectCtrl.onCollectionChange = function (values, deepWatched) {
           var valuesForSelect = [],
