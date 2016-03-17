@@ -51,6 +51,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         var nyaBsSelectCtrl = ctrls[0],
           ngCtrl = ctrls[1],
           valueExpFn,
+          deepWatched,
           valueExpLocals = {};
 
         if(trackByExpGetter) {
@@ -108,8 +109,10 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
         // deepWatch will impact performance. use with caution.
         if($attr.deepWatch === 'true') {
+          deepWatched = true;
           $scope.$watch(collectionExp, nyaBsOptionAction, true);
         } else {
+          deepWatched = false;
           $scope.$watchCollection(collectionExp, nyaBsOptionAction);
         }
 
@@ -302,7 +305,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
           lastBlockMap = nextBlockMap;
 
-          nyaBsSelectCtrl.onCollectionChange(values);
+          nyaBsSelectCtrl.onCollectionChange(values, deepWatched);
         }
       };
     }

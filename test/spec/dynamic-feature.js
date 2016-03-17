@@ -375,4 +375,29 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
     $timeout.flush();
     expect(selectElement.find('button').children().eq(0).text()).toBe('Beta');
   });
+
+  it('should not change $dirty state when initialized', function() {
+    $scope.options = [
+      {name: 'Alpha', value: 'a'},
+      {name: 'Bravo', value: 'b'}
+    ];
+    $scope.model = 'b';
+    $scope.$digest();
+
+    var selectElement = angular.element('<form name="testForm">' +
+        '<ol class="nya-bs-select" ng-model="model" name="testPicker">' +
+          '<li nya-bs-option="option in options" value="option.value">' +
+            '<a>{{option.name}}</a>' +
+          '</li>' +
+        '</ol>' +
+      '</form>'
+      );
+    $compile(selectElement)($scope);
+
+    spyOn($scope.testForm.testPicker, '$setViewValue');
+
+    $scope.$digest();
+
+    expect($scope.testForm.testPicker.$setViewValue).not.toHaveBeenCalled();
+  });
 });

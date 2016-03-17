@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.1.3
+ * nya-bootstrap-select v2.1.4
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -325,6 +325,7 @@ var nyaBsSelect = angular.module('nya.bootstrap.select', []);
 
 /**
  * A service for configuration. the configuration is shared globally.
+ * Testing ci build --jpmckearin
  */
 nyaBsSelect.provider('nyaBsConfig', function() {
 
@@ -638,12 +639,15 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         /**
          * Do some check on modelValue. remove no existing value
          * @param values
+         * @param deepWatched
          */
-        nyaBsSelectCtrl.onCollectionChange = function (values) {
+        nyaBsSelectCtrl.onCollectionChange = function (values, deepWatched) {
           var valuesForSelect = [],
             index,
-            length,
-            modelValue = ngCtrl.$modelValue;
+            modelValueChanged = false,
+            // Due to ngModelController compare reference with the old modelValue, we must set an new array instead of modifying the old one.
+            // See: https://github.com/angular/angular.js/issues/1751
+            modelValue = deepCopy(ngCtrl.$modelValue);
 
           if(!modelValue) {
             return;
@@ -669,32 +673,42 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
 
             if(isMultiple) {
-              length = modelValue.length;
               for(index = 0; index < modelValue.length; index++) {
                 if(!contains(valuesForSelect, modelValue[index])) {
+                  modelValueChanged = true;
                   modelValue.splice(index, 1);
                   index--;
                 }
               }
 
-              if(length !== modelValue.length) {
+              if(modelValueChanged) {
                 // modelValue changed.
-                // Due to ngModelController compare reference with the old modelValue, we must set an new array instead of modifying the old one.
-                // See: https://github.com/angular/angular.js/issues/1751
-                modelValue = deepCopy(modelValue);
+
+                ngCtrl.$setViewValue(modelValue);
+
+                updateButtonContent();
               }
 
             } else {
               if(!contains(valuesForSelect, modelValue)) {
                 modelValue = valuesForSelect[0];
+
+                ngCtrl.$setViewValue(modelValue);
+
+                updateButtonContent();
               }
             }
 
           }
 
-          ngCtrl.$setViewValue(modelValue);
-
-          updateButtonContent();
+          /**
+           * if we set deep-watch="true" on nyaBsOption directive,
+           * we need to refresh dropdown button content whenever a change happened in collection.
+           */
+          if(deepWatched) {
+            
+            updateButtonContent();
+          }
 
         };
 
@@ -1444,6 +1458,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
         var nyaBsSelectCtrl = ctrls[0],
           ngCtrl = ctrls[1],
           valueExpFn,
+          deepWatched,
           valueExpLocals = {};
 
         if(trackByExpGetter) {
@@ -1501,8 +1516,10 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
         // deepWatch will impact performance. use with caution.
         if($attr.deepWatch === 'true') {
+          deepWatched = true;
           $scope.$watch(collectionExp, nyaBsOptionAction, true);
         } else {
+          deepWatched = false;
           $scope.$watchCollection(collectionExp, nyaBsOptionAction);
         }
 
@@ -1695,7 +1712,7 @@ nyaBsSelect.directive('nyaBsOption', ['$parse', function($parse){
 
           lastBlockMap = nextBlockMap;
 
-          nyaBsSelectCtrl.onCollectionChange(values);
+          nyaBsSelectCtrl.onCollectionChange(values, deepWatched);
         }
       };
     }

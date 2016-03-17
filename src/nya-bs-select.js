@@ -229,12 +229,15 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         /**
          * Do some check on modelValue. remove no existing value
          * @param values
+         * @param deepWatched
          */
-        nyaBsSelectCtrl.onCollectionChange = function (values) {
+        nyaBsSelectCtrl.onCollectionChange = function (values, deepWatched) {
           var valuesForSelect = [],
             index,
-            length,
-            modelValue = ngCtrl.$modelValue;
+            modelValueChanged = false,
+            // Due to ngModelController compare reference with the old modelValue, we must set an new array instead of modifying the old one.
+            // See: https://github.com/angular/angular.js/issues/1751
+            modelValue = deepCopy(ngCtrl.$modelValue);
 
           if(!modelValue) {
             return;
@@ -260,32 +263,42 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
 
             if(isMultiple) {
-              length = modelValue.length;
               for(index = 0; index < modelValue.length; index++) {
                 if(!contains(valuesForSelect, modelValue[index])) {
+                  modelValueChanged = true;
                   modelValue.splice(index, 1);
                   index--;
                 }
               }
 
-              if(length !== modelValue.length) {
+              if(modelValueChanged) {
                 // modelValue changed.
-                // Due to ngModelController compare reference with the old modelValue, we must set an new array instead of modifying the old one.
-                // See: https://github.com/angular/angular.js/issues/1751
-                modelValue = deepCopy(modelValue);
+
+                ngCtrl.$setViewValue(modelValue);
+
+                updateButtonContent();
               }
 
             } else {
               if(!contains(valuesForSelect, modelValue)) {
                 modelValue = valuesForSelect[0];
+
+                ngCtrl.$setViewValue(modelValue);
+
+                updateButtonContent();
               }
             }
 
           }
 
-          ngCtrl.$setViewValue(modelValue);
-
-          updateButtonContent();
+          /**
+           * if we set deep-watch="true" on nyaBsOption directive,
+           * we need to refresh dropdown button content whenever a change happened in collection.
+           */
+          if(deepWatched) {
+            console.log('update content');
+            updateButtonContent();
+          }
 
         };
 
