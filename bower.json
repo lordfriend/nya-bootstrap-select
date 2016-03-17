@@ -12,8 +12,7 @@
     "test",
     "examples",
     "src",
-    "docs",
-    "less"
+    "docs"
   ],
   "keywords": [
     "bootstrap",
