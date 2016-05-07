@@ -721,7 +721,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             wv,
             viewValue;
 
-          liElements = dropdownMenu.find('li');
+          liElements = dropdownMenu[0].querySelectorAll('.nya-bs-option');
           if (liElements.length > 0) {
             wv = ngCtrl.$viewValue;
 

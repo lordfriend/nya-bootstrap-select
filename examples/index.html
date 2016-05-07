@@ -540,6 +540,35 @@
       </ol>
       <div class="form-static-control">{{model9}}</div>
     </form>
+
+    <h3>actionsBoxExample</h3>
+    <p>should work with action-box="true"</p>
+
+    <form class="form-inline">
+      <ol id="actionsBoxExample" class="nya-bs-select" ng-model="model10" multiple actions-box="true">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <div class="form-static-control">{{model10}}</div>
+    </form>
+
+    <p>should work with action-box="true" and live-search="true"</p>
+
+    <form class="form-inline">
+      <ol id="actionBoxWithLiveSearchExample" class="nya-bs-select" ng-model="model11" multiple actions-box="true" data-live-search="true">
+        <li nya-bs-option="option in options2">
+          <a>
+            {{option}}
+            <span class="glyphicon glyphicon-ok check-mark"></span>
+          </a>
+        </li>
+      </ol>
+      <div class="form-static-control">{{model11}}</div>
+    </form>
   </section>
 </div>
 <footer class="footer">
