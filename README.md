@@ -68,7 +68,7 @@ If you decide to use static option, you shouldn't change the option any more, ot
 In this section you'll see several usage of the `nya-bs-option` directive.
 
 ####Basic usage
-This is the very basic usage, we have an array of object used to generate options. the `myModel` will be one of the objects in the `options` array.  if you add an `mulitple` attribute to the `nya-bs-select` element.  `myModel` will be array of objects.
+This is the very basic usage, we have an array of object used to generate options. the `myModel` will be one of the objects in the `options` array.  if you add an `multiple` attribute to the `nya-bs-select` element.  `myModel` will be array of objects.
 
 ```html
 <ol class="nya-bs-select" ng-model="myModel">
@@ -101,16 +101,16 @@ Like vanilla `<select>` we can also generate option group with any property in a
 
 ##How to Contribute
 
-This project is built by Grunt, fork this project. and clone to your local repository. run `npm install`, `bower install` to install all development dependencies.
+This project is built by Grunt, fork this project. and clone to your local repository. Run `npm install`, `bower install` to install all development dependencies.
 
-Source files are separated to several files. run `grunt build` will do some karma unit test and combine these files to one single file and compress the js and css files.
+Source files are separated to several files. Run `grunt build` will do some karma unit test and combine these files to one single file and compress the js and css files.
 
 e2e test is not available temporarily, I will add those test in the future.
 
 Something should be noticed:
 
 - If you add a feature, you should add a unit test case. The unit test using karma runner and jasmine 1.5 framework. you can add new test spec files in **test/spec** folder.
-- For any Pull Request, you should only modify the src files and documents, test specs. do not update dist files, package.json, bower.json or try to update project version.
+- For any Pull Request, you should only modify the src files and documents, test specs. Do not update dist files, package.json, bower.json or try to update project version.
 - Any feature should work without jquery.
 
 ## License ##
