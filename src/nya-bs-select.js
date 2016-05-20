@@ -881,7 +881,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                 optionTitle,
                 selection = [],
                 match,
-                count;
+                count,
+                clone;
 
               if(isMultiple && $attrs.selectedTextFormat === 'count') {
                 count = 1;
@@ -942,12 +943,14 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                 dropdownToggle.removeClass('show-special-title');
                 // either single or multiple selection will show the only selected content.
                 filterOption.empty();
-                filterOption.append(selection[0]);
+                clone = $compile (selection[0])($scope);
+                filterOption.append(clone);
               } else {
                 dropdownToggle.removeClass('show-special-title');
                 filterOption.empty();
                 for(index = 0; index < selection.length; index++) {
-                  filterOption.append(selection[index]);
+                  clone = $compile (selection[index])($scope);
+                  filterOption.append(clone);
                   if(index < selection.length -1) {
                     filterOption.append(document.createTextNode(', '));
                   }
