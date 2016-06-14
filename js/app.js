@@ -143,7 +143,7 @@ angular.module('docApp', ['ui.router', 'nya.bootstrap.select', 'directives', 'fi
         'layout-and-styles',
         'live-search',
         'alternative-display',
-        'select-text-format',
+        'selected-text-format',
         'tick-icon',
         'custom-content',
         'disable-an-option',
