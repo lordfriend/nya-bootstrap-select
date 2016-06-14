@@ -1,6 +1,6 @@
-#Select Text Format
+#Selected Text Format
 
-This is a feature borrowed from Bootstrap-select. Add an attribute `data-select-text-format` or `select-text-format` on `nya-bs-select` element. Then configure its value with the following formats:
+This is a feature borrowed from Bootstrap-select. Add an attribute `data-selected-text-format` or `select-texted-format` on `nya-bs-select` element. Then configure its value with the following formats:
 
 - `values` A comma delimited list of selected values. (default)
 - `count` If one item is selected, then the value is shown, if more than one is selected then the number of selected items is displayed.

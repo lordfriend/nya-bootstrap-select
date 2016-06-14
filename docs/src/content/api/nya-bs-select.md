@@ -14,7 +14,7 @@ as element:
   [ng-required=""]
   [disabled=""]
   [size=""]
-  [select-text-format=""]
+  [selected-text-format=""]
   [title=""]>
 ...
 </nya-bs-select>
@@ -31,7 +31,7 @@ as attribute:
   [ng-required=""]
   [disabled=""]
   [size=""]
-  [select-text-format=""]
+  [selected-text-format=""]
   [title=""]>
 ...
 </ANY>
@@ -48,7 +48,7 @@ as class:
   [ng-required=""]
   [disabled=""]
   [size=""]
-  [select-text-format=""]
+  [selected-text-format=""]
   [title=""]>
 ...
 </ANY>
@@ -101,7 +101,7 @@ as class:
     <td>Sets max number which the dropdown-menu can show. if the number of options exceed the limit. an scrollbar will be shown.</td>
   </tr>
   <tr>
-    <td>select-text-format</td>
+    <td>selected-text-format</td>
     <td><small class="label label-primary">string</small></td>
     <td>
       <span>Sets the content format of dropdown-toggle.</span>
