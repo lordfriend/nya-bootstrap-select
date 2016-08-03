@@ -1,5 +1,5 @@
 /**
- * nya-bootstrap-select v2.1.6
+ * nya-bootstrap-select v2.1.7
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -508,9 +508,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
           dropdownToggle.addClass(className);
         }
 
-        if(className === 'form-control') {
-          dropdownToggle.addClass(className);
-        }
+        // if(className === 'form-control') {
+        //   dropdownToggle.addClass(className);
+        // }
       });
 
       dropdownMenu.append(options);
@@ -1290,8 +1290,10 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                 length = bsOptionElements.length,
                 optionTitle,
                 selection = [],
+                optionScopes = [],
                 match,
-                count;
+                count,
+                clone;
 
               if(isMultiple && $attrs.selectedTextFormat === 'count') {
                 count = 1;
@@ -1328,6 +1330,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                         selection.push(document.createTextNode(optionTitle));
                       } else {
                         selection.push(getOptionText(nyaBsOption));
+                        optionScopes.push(nyaBsOption.data('isolateScope'))
                       }
 
                     }
@@ -1338,6 +1341,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                         selection.push(document.createTextNode(optionTitle));
                       } else {
                         selection.push(getOptionText(nyaBsOption));
+                        optionScopes.push(nyaBsOption.data('isolateScope'))
                       }
                     }
                   }
@@ -1352,12 +1356,23 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                 dropdownToggle.removeClass('show-special-title');
                 // either single or multiple selection will show the only selected content.
                 filterOption.empty();
-                filterOption.append(selection[0]);
+                // the isolateScope attribute may not set when we use the static version nya-bs-option class with data-value attribute.
+                if(optionScopes[0]) {
+                  clone = $compile (selection[0])(optionScopes[0]);
+                } else {
+                  clone = selection[0];
+                }
+                filterOption.append(clone);
               } else {
                 dropdownToggle.removeClass('show-special-title');
                 filterOption.empty();
                 for(index = 0; index < selection.length; index++) {
-                  filterOption.append(selection[index]);
+                  if(optionScopes[index]) {
+                    clone = $compile (selection[index])(optionScopes[index]);
+                  } else {
+                    clone = selection[index];
+                  }
+                  filterOption.append(clone);
                   if(index < selection.length -1) {
                     filterOption.append(document.createTextNode(', '));
                   }

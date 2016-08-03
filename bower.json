@@ -1,6 +1,6 @@
 {
   "name": "nya-bootstrap-select",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "main": [
     "dist/js/nya-bs-select.js",
     "dist/css/nya-bs-select.css"
