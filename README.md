@@ -15,7 +15,10 @@ Require: angular 1.2+
 
 	Install via bower: 
     `bower install nya-bootstrap-select --save`
-    or download the latest release.
+  
+  Install via npm:
+    `npm install @lordfriend/nya-bootstrap-select --save`
+  
 
 2. include the nya-bootstrap-select.js and nya-bootstrap-select.css file to your html.
 3. add to application dependecies.
