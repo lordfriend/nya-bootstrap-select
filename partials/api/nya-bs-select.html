@@ -1,7 +1,7 @@
 <section>
-  <p>#nyaBsSelect</p>
+  <h1 id="nyabsselect">nyaBsSelect</h1>
 <p>nyaBsSelect is the main directive of this module. You can consider it as a select directive. It manipulates the the dropdown-toggle content and all user interaction. </p>
-<p>###Usage</p>
+<h3 id="usage">Usage</h3>
 <p>as element:</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">nya-bs-select</span>
   <span class="hljs-attribute">ng-mode</span>=<span class="hljs-value">""</span>
@@ -12,7 +12,8 @@
   [<span class="hljs-attribute">disabled</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
   [<span class="hljs-attribute">size</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
   [<span class="hljs-attribute">selected-text-format</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
-  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
+  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">actions-box</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-title">nya-bs-select</span>&gt;</span>
 </code></pre>
@@ -27,7 +28,8 @@
   [<span class="hljs-attribute">disabled</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
   [<span class="hljs-attribute">size</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
   [<span class="hljs-attribute">selected-text-format</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
-  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
+  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">actions-box</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-title">ANY</span>&gt;</span>
 </code></pre>
@@ -42,11 +44,12 @@
   [<span class="hljs-attribute">disabled</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
   [<span class="hljs-attribute">size</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
   [<span class="hljs-attribute">selected-text-format</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
-  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
+  [<span class="hljs-attribute">title</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>
+  [<span class="hljs-attribute">actions-box</span>=<span class="hljs-value">""</span><span class="hljs-value">]</span>&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-title">ANY</span>&gt;</span>
 </code></pre>
-<p>###Arguments</p>
+<h3 id="arguments">Arguments</h3>
 <table class="table table-striped">
 <thead>
   <tr>
@@ -114,6 +117,11 @@
     <td><small class="label label-primary">string</small></td>
     <td>provide a replacement for default text when nothing is selected.</td>
   </tr>
+  <tr>
+      <td>actions-box(optional)</td>
+      <td><small class="label label-primary">string</small></td>
+      <td>Enable the actions box which contains two action select all and deselect all to do batch operation</td>
+    </tr>
 </tbody>
 </table>
 

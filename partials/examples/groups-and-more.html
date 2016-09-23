@@ -1,7 +1,7 @@
 <section>
-  <p>#Groups And More</p>
-<p>###Group features
-The native <code>&lt;select&gt;</code> element support <code>optgroup</code> tag which can divide options to different groups. So is Bootstrap-select. Although nya-bootstrap-select doesn&#39;t use <code>select</code> tag anymore, nevertheless, nya-bootstrap-select also supports group features.</p>
+  <h1 id="groups-and-more">Groups And More</h1>
+<h3 id="group-features">Group features</h3>
+<p>The native <code>&lt;select&gt;</code> element support <code>optgroup</code> tag which can divide options to different groups. So is Bootstrap-select. Although nya-bootstrap-select doesn&#39;t use <code>select</code> tag anymore, nevertheless, nya-bootstrap-select also supports group features.</p>
 <p>The key of this feature is sort the list element by its group property. then using some css to stylize the group header which already implemented in Bootstrap, the <code>dropdown-header</code> class.</p>
 <p>When using group features, like <code>ng-options</code>, you need to use <code>group by</code> expression after the <code>collection</code> expression in the expression of <code>nya-bs-option</code> directive.</p>
 <p>For example:</p>
@@ -67,7 +67,7 @@ The native <code>&lt;select&gt;</code> element support <code>optgroup</code> tag
 
 <iframe class="runnable-example-frame" src="examples/groups-and-more-example-1/index.html"></iframe>
 
-<p>###data-value Expression</p>
+<h3 id="data-value-expression">data-value Expression</h3>
 <p>Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The <strong>data-value expression</strong> give an solution for this.</p>
 <p><strong>data-value expression</strong> is an attribute <code>data-value</code> add to <code>nya-bs-option</code> directive element. But unlike the <code>data-value</code> attribute used in static options. This <code>data-value</code>
 attribute is an expression which will evaluated in the child scope of <code>nya-bs-option</code>.</p>
@@ -108,7 +108,7 @@ attribute is an expression which will evaluated in the child scope of <code>nya-
 
 <iframe class="runnable-example-frame" src="examples/groups-and-more-example-2/index.html"></iframe>
 
-<p>###Track By Expression</p>
+<h3 id="track-by-expression">Track By Expression</h3>
 <p>track by expression is very similar with <code>ng-repeat</code> which allow you to identify collection element with some unique property. It is useful when the element may be empty or duplicated. But a select component shouldn&#39;t have an duplicated option.
  So In our case, this is not very useful, however, you can use this to improve performance when your array elements are very large.</p>
 <example>

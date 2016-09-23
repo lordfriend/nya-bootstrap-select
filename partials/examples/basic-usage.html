@@ -1,10 +1,10 @@
 <section>
-  <p>#Basic Usage</p>
+  <h1 id="basic-usage">Basic Usage</h1>
 <p>nya-bootstrap-select is an directive combination. The main directive is <code>nya-bs-select</code>. This directive maintain the value of ng-model and dropdown and toggle button presentation.
 You need to add your options using <code>&lt;li&gt;</code> element as children of <code>nya-bs-select</code>. You can either add static options or generate options using <code>nya-bs-option</code>.</p>
 <p>An option is, in fact, an dropdown list element. So you need to add an anchor element as a direct child of <code>&lt;li&gt;</code> element, then add your own content as the menu item.</p>
 <p>To make multiple selection. just add <code>multiple</code> into <code>nya-bs-select</code> element.</p>
-<p>###Static Options</p>
+<h3 id="static-options">Static Options</h3>
 <p>Static Options don&#39;t change. you need to add <code>nya-bs-option</code> class to each of your <code>&lt;li&gt;</code> element to make them as options. Beside, you also need to use <code>data-value</code> attribute to specify the value of each option.</p>
 <example>
 <file name="index.html">
@@ -45,7 +45,7 @@ You need to add your options using <code>&lt;li&gt;</code> element as children o
 <iframe class="runnable-example-frame" src="examples/basic-usage-example-1/index.html"></iframe>
 
 
-<p>###Dynamic Options</p>
+<h3 id="dynamic-options">Dynamic Options</h3>
 <p>If you want to generate options from a collection, <code>nya-bs-option</code> directive is right for you. Just think it is an alias of <code>ng-repeat</code>, with some tweak and magic to support our options and groups.</p>
 <p>This example demonstrate how how to use <code>nya-bs-option</code> directive to generate options from collections.</p>
 <example>
