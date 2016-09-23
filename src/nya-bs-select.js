@@ -21,8 +21,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
   var ACTIONS_BOX = '<div class="bs-actionsbox">' +
     '<div class="btn-group btn-group-sm btn-block">' +
-    '<button class="actions-btn bs-select-all btn btn-default">SELECT ALL</button>' +
-    '<button class="actions-btn bs-deselect-all btn btn-default">DESELECT ALL</button>' +
+    '<button type="button" class="actions-btn bs-select-all btn btn-default">SELECT ALL</button>' +
+    '<button type="button" class="actions-btn bs-deselect-all btn btn-default">DESELECT ALL</button>' +
     '</div>' +
     '</div>';
 
