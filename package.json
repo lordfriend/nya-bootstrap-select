@@ -1,6 +1,6 @@
 {
   "name": "@lordfriend/nya-bootstrap-select",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "An angular directive wraps bootstrap-select",
   "repository": {
     "type": "git",
