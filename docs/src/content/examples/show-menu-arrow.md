@@ -1,4 +1,4 @@
-#Show Menu Arrow
+# Show Menu Arrow
 
 To enable an menu arrow on dropdown menu. just add a class `show-menu-arrow` on `nya-bs-select` element.
 

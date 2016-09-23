@@ -1,4 +1,4 @@
-#nyaBsOption
+# nyaBsOption
 
 The main function of this directive is manipulating an option list base on given collection. 
 its expression is very similar as `ng-repeat` but add a little magic to support the special scenario of select component.
@@ -59,17 +59,17 @@ the generated options list will resorted by the result of the expression, and `$
 </tbody>
 </table>
 
-###Special class generated on each element.
+### Special class generated on each element.
 
 When using `group by` expression, the `nyaBsOption` will generate a class `group-item` on each repeated element. 
 To identify the first element of each group. It will also add a class `first-in-group` on the first element of a group.
 Theses class has some special styles to build the group header.
 
-###Directive Info
+### Directive Info
 This directive creates new scope.
 This directive executes at priority level 1000.
 
-###Usage
+### Usage
 
 as attribute:
 ```html
@@ -83,7 +83,7 @@ as attribute:
 </li>
 ```
 
-###Arguments
+### Arguments
 <table class="table table-striped">
 <thead>
  <tr>

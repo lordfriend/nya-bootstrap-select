@@ -1,4 +1,4 @@
-#Alternative Display
+# Alternative Display
 
 This is a feature borrowed from Bootstrap-select. Add a `title` attribute to each `nya-bs-option`, when an option is selected, the `title` value will be displayed in dropdown-toggle button instead of the content of option.
 

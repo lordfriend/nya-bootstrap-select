@@ -1,4 +1,4 @@
-#Tick Icon
+# Tick Icon
 
 Tick icon can be add via a special class `check-mark` on a `span` element as the last child of the anchor element. The icon can be any Bootstrap glyphon icon or even FontAwesome Icon.
   

@@ -1,4 +1,4 @@
-#Basic Usage
+# Basic Usage
 
 nya-bootstrap-select is an directive combination. The main directive is `nya-bs-select`. This directive maintain the value of ng-model and dropdown and toggle button presentation.
 You need to add your options using `<li>` element as children of `nya-bs-select`. You can either add static options or generate options using `nya-bs-option`.
@@ -7,7 +7,7 @@ An option is, in fact, an dropdown list element. So you need to add an anchor el
 
 To make multiple selection. just add `multiple` into `nya-bs-select` element.
 
-###Static Options
+### Static Options
 
 Static Options don't change. you need to add `nya-bs-option` class to each of your `<li>` element to make them as options. Beside, you also need to use `data-value` attribute to specify the value of each option.
 
@@ -44,7 +44,7 @@ $scope.model2 = ['b', 'c'];
 </example>
 
 
-###Dynamic Options
+### Dynamic Options
 
 If you want to generate options from a collection, `nya-bs-option` directive is right for you. Just think it is an alias of `ng-repeat`, with some tweak and magic to support our options and groups.
 

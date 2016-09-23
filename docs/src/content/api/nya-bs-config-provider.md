@@ -1,4 +1,4 @@
-#nyaBsConfigProvider
+# nyaBsConfigProvider
 
 This provider help the developer configure the default text appearance of nya-bs-select base on user-agent localization. Default implementation of the locale text is `en-us`. 
 
@@ -32,29 +32,41 @@ There are three default text can be configured. Each one has two form, pure text
     <p>**To show a count of selected items. this text string or template should contains a `%d` which will be replaced with number**</p>
   </td>
 </tr>
+<tr>
+  <td>selectAll</td>
+  <td>selectAllTpl</td>
+  <td>selectAll is the action button to select all options by a single click. It is available by setting actions-box="true"</td>
+</tr>
+<tr>
+  <td>deselectAll</td>
+  <td>deselectAllTpl</td>
+  <td>deselectAll is the action button to deselect all options by a single click. It is available by setting actions-box="true"</td>
+</tr>
 </tbody>
 </table>
 
 >NOTE: You shouldn't use any angular directive or expression in template, it will not be parsed. 
 
-###Methods
+### Methods
 
-####`setLocalizedText(localeId, configObj);`
+#### `setLocalizedText(localeId, configObj);`
 
 Register a new locale configuration or override an existing locale configuration.
 
 - `localeId` a string formatted as languageId-countryId, e.g. en-us
-- `configObj` a localized configuration object. should contain one of the three properties.
+- `configObj` a localized configuration object. should contain one of the five properties.
 
 ```javascript
 {
   defaultNoneSelection: 'Nothing selected',
   noSearchResult: 'NO SEARCH RESULT',
-  numberItemSelected: '%d item selected'
+  numberItemSelected: '%d item selected',
+  selectAll: 'Select All',
+  deselectAll: 'Deselect All'
 }
 ```
 
-####`useLocale(localeId);`
+#### `useLocale(localeId);`
 
 Force to use a special locale configuration with given localeId.
 

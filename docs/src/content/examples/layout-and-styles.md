@@ -1,8 +1,8 @@
-#Layout And Styles
+# Layout And Styles
 
 nya-bootstrap-select is a Bootstrap component. Bootstrap 3's grid layout class `col-*` and button style class `btn-*` are fully supported. so is the `form-control` class.
 
-###Layout
+### Layout
 
 Just add `col-*`, `form-control` on `nya-bs-select` element to control your select size.
 
@@ -65,7 +65,7 @@ $scope.options = [
 </file>
 </example>
 
-###Styles
+### Styles
 
 These Button classes are supported: `btn-primary`, `btn-success`, `btn-info`, `btn-warning`, `btn-danger`.
 
@@ -104,7 +104,7 @@ $scope.staticModel2 = 'a';
 </file>
 </example>
 
-###Button Sizes
+### Button Sizes
 
 To get larger or smaller dropdown button, Add `.btn-lg`, `.btn-sm` or `.btn-xs` to `nyBsSelect` Directive
 

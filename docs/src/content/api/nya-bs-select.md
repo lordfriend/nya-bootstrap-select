@@ -1,8 +1,8 @@
-#nyaBsSelect
+# nyaBsSelect
 
 nyaBsSelect is the main directive of this module. You can consider it as a select directive. It manipulates the the dropdown-toggle content and all user interaction. 
 
-###Usage
+### Usage
 
 as element:
 ```html
@@ -15,7 +15,8 @@ as element:
   [disabled=""]
   [size=""]
   [selected-text-format=""]
-  [title=""]>
+  [title=""]
+  [actions-box=""]>
 ...
 </nya-bs-select>
 ```
@@ -32,7 +33,8 @@ as attribute:
   [disabled=""]
   [size=""]
   [selected-text-format=""]
-  [title=""]>
+  [title=""]
+  [actions-box=""]>
 ...
 </ANY>
 ```
@@ -49,12 +51,13 @@ as class:
   [disabled=""]
   [size=""]
   [selected-text-format=""]
-  [title=""]>
+  [title=""]
+  [actions-box=""]>
 ...
 </ANY>
 ```
 
-###Arguments
+### Arguments
 
 <table class="table table-striped">
 <thead>
@@ -123,5 +126,10 @@ as class:
     <td><small class="label label-primary">string</small></td>
     <td>provide a replacement for default text when nothing is selected.</td>
   </tr>
+  <tr>
+      <td>actions-box(optional)</td>
+      <td><small class="label label-primary">string</small></td>
+      <td>Enable the actions box which contains two action select all and deselect all to do batch operation</td>
+    </tr>
 </tbody>
 </table>

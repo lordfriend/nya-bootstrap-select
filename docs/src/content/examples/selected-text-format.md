@@ -1,4 +1,4 @@
-#Selected Text Format
+# Selected Text Format
 
 This is a feature borrowed from Bootstrap-select. Add an attribute `data-selected-text-format` or `select-texted-format` on `nya-bs-select` element. Then configure its value with the following formats:
 

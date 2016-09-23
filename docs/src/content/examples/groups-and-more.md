@@ -1,6 +1,6 @@
-#Groups And More
+# Groups And More
 
-###Group features
+### Group features
 The native `<select>` element support `optgroup` tag which can divide options to different groups. So is Bootstrap-select. Although nya-bootstrap-select doesn't use `select` tag anymore, nevertheless, nya-bootstrap-select also supports group features.
 
 The key of this feature is sort the list element by its group property. then using some css to stylize the group header which already implemented in Bootstrap, the `dropdown-header` class.
@@ -74,7 +74,7 @@ $scope.objCollection = {
 </file>
 </example>
 
-###data-value Expression
+### data-value Expression
 
 Sometimes, you may want to use one property instead the object in collection as the result(model) of your selection. The **data-value expression** give an solution for this.
  
@@ -112,7 +112,7 @@ $scope.arrayCollection = [
 </file>
 </example>
 
-###Track By Expression
+### Track By Expression
 
 track by expression is very similar with `ng-repeat` which allow you to identify collection element with some unique property. It is useful when the element may be empty or duplicated. But a select component shouldn't have an duplicated option.
  So In our case, this is not very useful, however, you can use this to improve performance when your array elements are very large.

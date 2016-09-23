@@ -1,4 +1,4 @@
-#Live Search
+# Live Search
 
 This feature is borrowed from Bootstrap-select. It give you ability to search through the options. To use this feature. Add `data-live-search="true"` or `live-search="true"` on the `nya-bs-select` element.
 

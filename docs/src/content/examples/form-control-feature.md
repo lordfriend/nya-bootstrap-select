@@ -1,10 +1,10 @@
-#Form Control Feature
+# Form Control Feature
 
 Because we don't have an form element to build a form control. Some form features which provided by angular need to be implemented specially.
 
 Currently form control valid and disabled are supported.
 
-###Disable a select
+### Disable a select
 
 To disable a select. Use `disabled="true"` as an attribute on `nya-bs-select` element. the value of this attribute is a data-binding to current scope. So you can use model to control
 an select being disabled or enabled. Note that `ng-disabled` are not supported.
@@ -36,7 +36,7 @@ $scope.options = [
 </file>
 </example>
 
-###ng-required
+### ng-required
 
 `ng-required` and `required` directive are supported. when you add one of these directives. it will check your ng-model and set its `$valid` and `$invalid` property. For details, see [ngModelController](https://docs.angularjs.org/api/ng/type/ngModel.NgModelController)
 When selection is multiple, an empty array or undefined model is invalid. When selection is single, an undefined, empty string, NaN, null model is invalid.

@@ -1,4 +1,4 @@
-#Control Dropdown Menu Size
+# Control Dropdown Menu Size
 
 This feature is borrowed from Bootstrap-select. It give you ability to control the height of dropdown menu to display certain number of options. To use this feature, add an attribute `data-size` or `size`
 on `nya-bs-select` element. the value of the attribute is the max number of options you want to display. If the number exceed the limit, an scrollbar will be shown on the dropdown menu.

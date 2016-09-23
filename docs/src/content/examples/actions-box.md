@@ -1,4 +1,4 @@
-#Actions Box
+# Actions Box
 
 Actions Box is an additional toggle button inside dropdown menu that give you ability to select/un-select all options with a single click.
 

@@ -1,4 +1,4 @@
-#Disable An Option
+# Disable An Option
 
 To disable an option, just add `disabled` class to `nya-bs-option` element. But when your want to disable an entire group of options. you may need to add disabled on every option of the group.
 
