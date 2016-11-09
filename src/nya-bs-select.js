@@ -663,6 +663,19 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
           }
         }
+        
+        function supportsSelector(selector) {
+          var el = document.createElement('div');
+          el.innerHTML = ['&shy;', '<style>', selector, '{}', '</style>'].join('');
+          el = document.body.appendChild(el);
+          var style = el.getElementsByTagName('style')[0];
+            if (style && style.sheet && style.sheet.rules && style.sheet.cssRules) {
+              var ret = !!(style.sheet.rules || style.sheet.cssRules)[0];
+              document.body.removeChild(el);
+              return ret;
+            }
+          return false;
+        }
 
         function findFocus(fromFirst) {
           var firstLiElement;
@@ -673,7 +686,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
           }
 
           // focus on selected element
-          if (document.addEventListener) {
+          if (supportsSelector(".selected:not(.not-match)")) {
             var match = dropdownMenu[0].querySelector('.selected:not(.not-match)');
               if (match)
                   return match;
