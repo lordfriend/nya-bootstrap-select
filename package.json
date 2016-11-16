@@ -1,7 +1,8 @@
 {
   "name": "@lordfriend/nya-bootstrap-select",
-  "version": "2.1.9",
+  "version": "2.1.10",
   "description": "An angular directive wraps bootstrap-select",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/lordfriend/nya-bootstrap-select.git"
