@@ -879,7 +879,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
           var filterOption = jqLite(dropdownToggle[0].querySelector('.filter-option'));
           var specialTitle = jqLite(dropdownToggle[0].querySelector('.special-title'));
-          if(typeof viewValue === 'undefined') {
+          if(!viewValue) {
             /**
              * Select empty option when model is undefined.
              */
