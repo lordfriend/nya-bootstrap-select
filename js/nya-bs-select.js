@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.1.10
+ * @lordfriend/nya-bootstrap-select v2.2.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -1162,7 +1162,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
             for (var i = 0; i < liElements.length; i++) {
               var nyaBsOption = jqLite(liElements[i]);
-              if (nyaBsOption.hasClass('disabled'))
+              if (nyaBsOption.hasClass('disabled') || nyaBsOption.hasClass('not-match'))
                 continue;
 
               var value, index;
