@@ -104,7 +104,7 @@ Like vanilla `<select>` we can also generate option group with any property in a
 
 ##How to Contribute
 
-This project is built by Grunt, fork this project. and clone to your local repository. Run `npm install`, `bower install` to install all development dependencies.
+This project is built by Grunt, fork this project. and clone to your local repository. Run `yarn install` to install all development dependencies.
 
 Source files are separated to several files. Run `grunt build` will do some karma unit test and combine these files to one single file and compress the js and css files.
 
