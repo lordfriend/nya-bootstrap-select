@@ -13,7 +13,13 @@ This directive only requires AngularJS v1.2 or later and the css of Bootstrap. N
  
 ##Installation.
 
-Install via [Bower](http://bower.io).
+Install via npm.
+
+```bash
+$ npm install @lordfriend/nya-bootstrap-select --save
+```
+
+or via [Bower](http://bower.io)
 
 ```bash
 $ bower install nya-bootstrap-select --save
@@ -22,11 +28,11 @@ $ bower install nya-bootstrap-select --save
 Load the script and css and other dependencies **jquery and bootstrap script are not required!** .
 
 ```html
-<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-<link href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" rel="stylesheet">
+<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="node_modules/nya-bootstrap-select/dist/css/nya-bs-select.css" rel="stylesheet">
 
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
 ```
 
 make 'nya.bootstrap.select' module as your application dependency.

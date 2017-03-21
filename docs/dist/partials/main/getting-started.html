@@ -7,15 +7,18 @@ is a totally independent one which only fork most of the features of Bootstrap-s
 <p>##Dependencies and compatibility:</p>
 <p>This directive only requires AngularJS v1.2 or later and the css of Bootstrap. No other dependencies.</p>
 <p>##Installation.</p>
-<p>Install via <a href="http://bower.io">Bower</a>.</p>
+<p>Install via npm.</p>
+<pre><code class="lang-bash">$ npm <span class="hljs-operator"><span class="hljs-keyword">install</span> @lordfriend/nya-bootstrap-<span class="hljs-keyword">select</span> <span class="hljs-comment">--save</span></span>
+</code></pre>
+<p>or via <a href="http://bower.io">Bower</a></p>
 <pre><code class="lang-bash">$ bower <span class="hljs-operator"><span class="hljs-keyword">install</span> nya-bootstrap-<span class="hljs-keyword">select</span> <span class="hljs-comment">--save</span></span>
 </code></pre>
 <p>Load the script and css and other dependencies <strong>jquery and bootstrap script are not required!</strong> .</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bower_components/bootstrap/dist/css/bootstrap.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"node_modules/bootstrap/dist/css/bootstrap.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"node_modules/nya-bootstrap-select/dist/css/nya-bs-select.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/angular/angular.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"node_modules/angular/angular.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"node_modules/nya-bootstrap-select/dist/js/nya-bs-select.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 </code></pre>
 <p>make &#39;nya.bootstrap.select&#39; module as your application dependency.</p>
 <pre><code class="lang-javascript">angular.<span class="hljs-keyword">module</span>(<span class="hljs-symbol">'myApp'</span>, [<span class="hljs-symbol">'nya</span>.bootstrap.select']);

@@ -181,7 +181,7 @@ module.exports = function(grunt) {
         files:[
           {
             expand: true,
-            cwd: 'bower_components/',
+            cwd: 'node_modules/',
             flatten: true,
             src: [
               'angular/angular.js',
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
-            cwd: 'bower_components',
+            cwd: 'node_modules',
             flatten: true,
             src: [
               'bootstrap/dist/fonts/*'
@@ -211,12 +211,6 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['dist/css/nya-bs-select.css'],
             dest: 'docs/dist/css/'
-          },
-          {
-            expand: true,
-            cwd: 'bower_components/svg-loaders',
-            src: ['svg-loaders/*'],
-            dest: 'docs/dist/'
           }
         ]
       }

@@ -1,6 +1,6 @@
 {
   "name": "@lordfriend/nya-bootstrap-select",
-  "version": "2.1.10",
+  "version": "2.2.0",
   "description": "An angular directive wraps bootstrap-select",
   "main": "index.js",
   "repository": {
@@ -9,6 +9,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "angular": "^1.6.3",
+    "angular-mocks": "^1.6.3",
+    "angular-translate": "^2.15.1",
+    "angular-ui-router": "^0.4.2",
+    "bootstrap": "^3.3.7",
     "groundskeeper": "^0.1.11",
     "grunt": "~0.4.2",
     "grunt-contrib-concat": "^0.5.0",
@@ -24,6 +29,7 @@
     "grunt-newer": "~0.6.1",
     "grunt-protractor-runner": "^2.0.0",
     "highlight.js": "^8.4.0",
+    "jquery": "^3.2.1",
     "jshint-stylish": "~0.1.5",
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.8",

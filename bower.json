@@ -1,6 +1,6 @@
 {
   "name": "nya-bootstrap-select",
-  "version": "2.1.10",
+  "version": "2.2.0",
   "main": [
     "dist/js/nya-bs-select.js",
     "dist/css/nya-bs-select.css"
@@ -19,15 +19,5 @@
     "bootstrap-select",
     "dropdown",
     "angular"
-  ],
-  "dependencies": {
-    "angular": ">=1.2"
-  },
-  "devDependencies": {
-    "jquery": "~2.1.1",
-    "bootstrap": "~3.3.0",
-    "angular-mocks": "*",
-    "angular-ui-router": "~0.2.11",
-    "angular-translate": "^2.9.0"
-  }
+  ]
 }
