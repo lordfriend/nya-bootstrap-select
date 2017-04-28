@@ -615,8 +615,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             return !value || value.length === 0;
           };
         }
-        if(typeof $attrs.disabled !== 'undefined') {
-          $scope.$watch($attrs.disabled, function(disabled){
+        if(typeof $attrs.ngDisabled !== 'undefined') {
+          $scope.$watch($attrs.ngDisabled, function(disabled){
             if(disabled) {
               dropdownToggle.addClass('disabled');
               dropdownToggle.attr('disabled', 'disabled');
