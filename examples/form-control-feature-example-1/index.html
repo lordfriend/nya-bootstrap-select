@@ -15,7 +15,7 @@
 <button class="btn btn-default" ng-click="disable=!disable">
   {{ disable ? "Enable select" : "Disable select" }}
 </button>
-<ol class="nya-bs-select" ng-model="model" disabled="disable">
+<ol class="nya-bs-select" ng-model="model" ng-disabled="disable">
   <li nya-bs-option="option in options">
     <a>
       {{option}}

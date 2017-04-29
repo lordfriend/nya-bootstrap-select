@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.2.0
+ * @lordfriend/nya-bootstrap-select v2.3.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -615,24 +615,31 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             return !value || value.length === 0;
           };
         }
+        function disabledHandling(disabled){
+          if(disabled) {
+            dropdownToggle.addClass('disabled');
+            dropdownToggle.attr('disabled', 'disabled');
+            previousTabIndex = dropdownToggle.attr('tabindex');
+            dropdownToggle.attr('tabindex', '-1');
+            isDisabled = true;
+          } else {
+            dropdownToggle.removeClass('disabled');
+            dropdownToggle.removeAttr('disabled');
+            if(previousTabIndex) {
+              dropdownToggle.attr('tabindex', previousTabIndex);
+            } else {
+              dropdownToggle.removeAttr('tabindex');
+            }
+            isDisabled = false;
+          }
+        }
         if(typeof $attrs.disabled !== 'undefined') {
           $scope.$watch($attrs.disabled, function(disabled){
-            if(disabled) {
-              dropdownToggle.addClass('disabled');
-              dropdownToggle.attr('disabled', 'disabled');
-              previousTabIndex = dropdownToggle.attr('tabindex');
-              dropdownToggle.attr('tabindex', '-1');
-              isDisabled = true;
-            } else {
-              dropdownToggle.removeClass('disabled');
-              dropdownToggle.removeAttr('disabled');
-              if(previousTabIndex) {
-                dropdownToggle.attr('tabindex', previousTabIndex);
-              } else {
-                dropdownToggle.removeAttr('tabindex');
-              }
-              isDisabled = false;
-            }
+            disabledHandling(disabled);
+          });
+        }else if(typeof $attrs.ngDisabled !== 'undefined'){
+          $scope.$watch($attrs.ngDisabled, function(disabled){
+            disabledHandling(disabled);
           });
         }
 
@@ -843,7 +850,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             bsOptionElements = dropdownMenu.children(),
             length = bsOptionElements.length,
             value;
-          if(typeof modelValue === 'undefined') {
+          if(typeof modelValue === 'undefined' || modelValue === null) {
             // if modelValue is undefined. uncheck all option
             for(index = 0; index < length; index++) {
               if(bsOptionElements.eq(index).hasClass('nya-bs-option')) {
@@ -1073,7 +1080,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
           }
         }
-        
+
         function supportsSelector(selector) {
           var el = document.createElement('div');
           el.innerHTML = ['&shy;', '<style>', selector, '{}', '</style>'].join('');
@@ -1289,7 +1296,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
           var filterOption = jqLite(dropdownToggle[0].querySelector('.filter-option'));
           var specialTitle = jqLite(dropdownToggle[0].querySelector('.special-title'));
-          if(typeof viewValue === 'undefined') {
+          if(typeof viewValue === 'undefined' || viewValue === null) {
             /**
              * Select empty option when model is undefined.
              */

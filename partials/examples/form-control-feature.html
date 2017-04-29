@@ -3,15 +3,15 @@
 <p>Because we don&#39;t have an form element to build a form control. Some form features which provided by angular need to be implemented specially.</p>
 <p>Currently form control valid and disabled are supported.</p>
 <h3 id="disable-a-select">Disable a select</h3>
-<p>To disable a select. Use <code>disabled=&quot;true&quot;</code> as an attribute on <code>nya-bs-select</code> element. the value of this attribute is a data-binding to current scope. So you can use model to control
-an select being disabled or enabled. Note that <code>ng-disabled</code> are not supported.</p>
+<p>To disable a select. Use <code>ng-disabled=&quot;true&quot;</code> as an attribute on <code>nya-bs-select</code> element. the value of this attribute is a data-binding to current scope. So you can use model to control
+an select being disabled or enabled. Note that in the early version <code>disabled</code> is used to support this feature, you can still use disabled but this could cause buggy in IE.</p>
 <example>
 <file name="index.html">
 <pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-default&quot;</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">&quot;disable=!disable&quot;</span>&gt;</span>
   </span><span class="hljs-expression"><span>{{</span> <span class="hljs-variable">disable</span> ? <span class="hljs-string">&quot;Enable select&quot;</span> : <span class="hljs-string">&quot;Disable select&quot;</span> <span>}}</span></span><span class="xml">
 <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">disabled</span>=<span class="hljs-value">&quot;disable&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;nya-bs-select&quot;</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">&quot;model&quot;</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">&quot;disable&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">nya-bs-option</span>=<span class="hljs-value">&quot;option in options&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span>
       </span><span class="hljs-expression"><span>{{</span><span class="hljs-variable">option</span><span>}}</span></span><span class="xml">
