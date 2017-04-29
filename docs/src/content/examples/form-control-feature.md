@@ -6,8 +6,8 @@ Currently form control valid and disabled are supported.
 
 ### Disable a select
 
-To disable a select. Use `disabled="true"` as an attribute on `nya-bs-select` element. the value of this attribute is a data-binding to current scope. So you can use model to control
-an select being disabled or enabled. Note that `ng-disabled` are not supported.
+To disable a select. Use `ng-disabled="true"` as an attribute on `nya-bs-select` element. the value of this attribute is a data-binding to current scope. So you can use model to control
+an select being disabled or enabled. Note that in the early version `disabled` is used to support this feature, you can still use disabled but this could cause buggy in IE.
 
 <example>
 <file name="index.html">
@@ -15,7 +15,7 @@ an select being disabled or enabled. Note that `ng-disabled` are not supported.
 <button class="btn btn-default" ng-click="disable=!disable">
   {{ disable ? "Enable select" : "Disable select" }}
 </button>
-<ol class="nya-bs-select" ng-model="model" disabled="disable">
+<ol class="nya-bs-select" ng-model="model" ng-disabled="disable">
   <li nya-bs-option="option in options">
     <a>
       {{option}}

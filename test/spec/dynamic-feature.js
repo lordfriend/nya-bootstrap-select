@@ -400,4 +400,74 @@ describe('Features contains ngModel, option auto generate, etc;', function() {
 
     expect($scope.testForm.testPicker.$setViewValue).not.toHaveBeenCalled();
   });
+
+  it('should reset select when model is null or undefined', function () {
+    $scope.options = [
+      {name: 'Alpha', value: 'a'},
+      {name: 'Bravo', value: 'b'}
+    ];
+    $scope.model = 'b';
+    $scope.$digest();
+
+    var selectElement = angular.element('<form name="testForm">' +
+        '<ol class="nya-bs-select" ng-model="model" name="testPicker">' +
+          '<li nya-bs-option="option in options" value="option.value">' +
+            '<a>{{option.name}}</a>' +
+          '</li>' +
+        '</ol>' +
+      '</form>'
+    );
+    $compile(selectElement)($scope);
+    $scope.$digest();
+
+    var selectedOptions = selectElement[0].querySelectorAll('li.selected');
+    expect(selectedOptions.length).toEqual(1);
+
+    $scope.model = null;
+    $scope.$digest();
+    selectedOptions = selectElement[0].querySelectorAll('li.selected');
+    expect(selectedOptions.length).toEqual(0);
+
+    $scope.model = 'a';
+    $scope.$digest();
+
+    selectedOptions = selectElement[0].querySelectorAll('li.selected');
+    expect(selectedOptions.length).toEqual(1);
+
+    $scope.model = undefined;
+    $scope.$digest();
+
+    selectedOptions = selectElement[0].querySelectorAll('li.selected');
+    expect(selectedOptions.length).toEqual(0);
+
+  });
+
+  it('should add/remove disabled class in dropdownToggle button when using ngDisabled', function () {
+    $scope.options = [
+      {name: 'Alpha', value: 'a'},
+      {name: 'Bravo', value: 'b'}
+    ];
+    $scope.model = 'b';
+    $scope.$digest();
+    $scope.disableMe = true;
+
+    var selectElement = angular.element('<form name="testForm">' +
+        '<ol class="nya-bs-select" ng-model="model" name="testPicker" ng-disabled="disableMe">' +
+          '<li nya-bs-option="option in options" value="option.value">' +
+            '<a>{{option.name}}</a>' +
+          '</li>' +
+        '</ol>' +
+      '</form>'
+    );
+    $compile(selectElement)($scope);
+    $scope.$digest();
+
+    var dropdownToggle = selectElement[0].querySelector('.dropdown-toggle');
+    expect(dropdownToggle.classList.contains('disabled')).toBeTruthy();
+
+    $scope.disableMe = false;
+    $scope.$digest();
+
+    expect(dropdownToggle.classList.contains('disabled')).toBeFalsy();
+  });
 });

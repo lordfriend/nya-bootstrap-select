@@ -615,24 +615,31 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             return !value || value.length === 0;
           };
         }
+        function disabledHandling(disabled){
+          if(disabled) {
+            dropdownToggle.addClass('disabled');
+            dropdownToggle.attr('disabled', 'disabled');
+            previousTabIndex = dropdownToggle.attr('tabindex');
+            dropdownToggle.attr('tabindex', '-1');
+            isDisabled = true;
+          } else {
+            dropdownToggle.removeClass('disabled');
+            dropdownToggle.removeAttr('disabled');
+            if(previousTabIndex) {
+              dropdownToggle.attr('tabindex', previousTabIndex);
+            } else {
+              dropdownToggle.removeAttr('tabindex');
+            }
+            isDisabled = false;
+          }
+        }
         if(typeof $attrs.disabled !== 'undefined') {
           $scope.$watch($attrs.disabled, function(disabled){
-            if(disabled) {
-              dropdownToggle.addClass('disabled');
-              dropdownToggle.attr('disabled', 'disabled');
-              previousTabIndex = dropdownToggle.attr('tabindex');
-              dropdownToggle.attr('tabindex', '-1');
-              isDisabled = true;
-            } else {
-              dropdownToggle.removeClass('disabled');
-              dropdownToggle.removeAttr('disabled');
-              if(previousTabIndex) {
-                dropdownToggle.attr('tabindex', previousTabIndex);
-              } else {
-                dropdownToggle.removeAttr('tabindex');
-              }
-              isDisabled = false;
-            }
+            disabledHandling(disabled);
+          });
+        }else if(typeof $attrs.ngDisabled !== 'undefined'){
+          $scope.$watch($attrs.ngDisabled, function(disabled){
+            disabledHandling(disabled);
           });
         }
 
@@ -1073,7 +1080,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
           }
         }
-        
+
         function supportsSelector(selector) {
           var el = document.createElement('div');
           el.innerHTML = ['&shy;', '<style>', selector, '{}', '</style>'].join('');
