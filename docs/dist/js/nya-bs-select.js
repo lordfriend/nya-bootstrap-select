@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.2.0
+ * @lordfriend/nya-bootstrap-select v2.3.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -850,7 +850,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             bsOptionElements = dropdownMenu.children(),
             length = bsOptionElements.length,
             value;
-          if(typeof modelValue === 'undefined') {
+          if(typeof modelValue === 'undefined' || modelValue === null) {
             // if modelValue is undefined. uncheck all option
             for(index = 0; index < length; index++) {
               if(bsOptionElements.eq(index).hasClass('nya-bs-option')) {
@@ -1296,7 +1296,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
           var filterOption = jqLite(dropdownToggle[0].querySelector('.filter-option'));
           var specialTitle = jqLite(dropdownToggle[0].querySelector('.special-title'));
-          if(typeof viewValue === 'undefined') {
+          if(typeof viewValue === 'undefined' || viewValue === null) {
             /**
              * Select empty option when model is undefined.
              */
