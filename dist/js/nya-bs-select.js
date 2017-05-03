@@ -532,7 +532,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         }
       }
 
-      if(tAttrs.liveSearch === 'true') {
+      if(typeof tAttrs.liveSearch !== 'undefined') {
         searchBox = jqLite(SEARCH_BOX);
 
         if(tAttrs.noSearchTitle) {
@@ -553,7 +553,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         dropdownMenu.append(noSearchResult);
       }
 
-      if (tAttrs.actionsBox === 'true' && isMultiple) {
+      if (typeof tAttrs.actionsBox !== 'undefined' && isMultiple) {
         // set localizedText
         if (localizedText.selectAllTpl) {
           ACTIONS_BOX = ACTIONS_BOX.replace('SELECT ALL', localizedText.selectAllTpl);
@@ -789,6 +789,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             setAllOptions(false);
           });
         }
+        else{
+          if (actionsBox) {
+            actionsBox.addClass('hidden');
+          }
+        }
 
 
         // live search
@@ -839,6 +844,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
 
           });
+        }
+        else{
+          if (searchBox) {
+            searchBox.addClass('hidden');
+          }
         }
 
 
