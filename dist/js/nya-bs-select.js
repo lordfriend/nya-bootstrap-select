@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.3.0
+ * @lordfriend/nya-bootstrap-select v2.4.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -788,8 +788,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
           actionsBox.find('button').eq(1).on('click', function () {
             setAllOptions(false);
           });
-        }
-        else{
+        } else {
+          // if using inside ng-repeat or other transclude directive
           if (actionsBox) {
             actionsBox.addClass('hidden');
           }
@@ -844,8 +844,8 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
 
           });
-        }
-        else{
+        } else {
+          // if using inside ng-repeat or other transclude directive
           if (searchBox) {
             searchBox.addClass('hidden');
           }

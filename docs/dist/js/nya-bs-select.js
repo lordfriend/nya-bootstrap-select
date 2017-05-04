@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.3.0
+ * @lordfriend/nya-bootstrap-select v2.4.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -532,7 +532,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         }
       }
 
-      if(tAttrs.liveSearch === 'true') {
+      if(typeof tAttrs.liveSearch !== 'undefined') {
         searchBox = jqLite(SEARCH_BOX);
 
         if(tAttrs.noSearchTitle) {
@@ -553,7 +553,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         dropdownMenu.append(noSearchResult);
       }
 
-      if (tAttrs.actionsBox === 'true' && isMultiple) {
+      if (typeof tAttrs.actionsBox !== 'undefined' && isMultiple) {
         // set localizedText
         if (localizedText.selectAllTpl) {
           ACTIONS_BOX = ACTIONS_BOX.replace('SELECT ALL', localizedText.selectAllTpl);
@@ -788,6 +788,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
           actionsBox.find('button').eq(1).on('click', function () {
             setAllOptions(false);
           });
+        } else {
+          // if using inside ng-repeat or other transclude directive
+          if (actionsBox) {
+            actionsBox.addClass('hidden');
+          }
         }
 
 
@@ -839,6 +844,11 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             }
 
           });
+        } else {
+          // if using inside ng-repeat or other transclude directive
+          if (searchBox) {
+            searchBox.addClass('hidden');
+          }
         }
 
 
