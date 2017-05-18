@@ -5,6 +5,7 @@
 nyaBsSelect.provider('nyaBsConfig', function() {
 
   var locale = null;
+  var _self = this;
 
   // default localized text. cannot be modified.
   var defaultText = {
@@ -57,7 +58,10 @@ nyaBsSelect.provider('nyaBsConfig', function() {
     if(!localizedText) {
       localizedText = defaultText['en-us'];
     }
-    return localizedText;
+    return { 
+      text: localizedText, 
+      use: useLocale 
+    };
   }];
 
 });
