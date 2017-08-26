@@ -11,7 +11,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
   var DROPDOWN_CONTAINER = '<div class="dropdown-menu open"></div>';
 
-  var SEARCH_BOX = '<div class="bs-searchbox">' +
+  var SEARCH_BOX = '<div class="nya-bs-searchbox">' +
     '<input type="text" class="form-control">' +
     '</div>';
 
@@ -19,7 +19,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
   var NO_SEARCH_RESULT = '<li class="no-search-result"><span>NO SEARCH RESULT</span></li>';
 
-  var ACTIONS_BOX = '<div class="bs-actionsbox">' +
+  var ACTIONS_BOX = '<div class="nya-bs-actionsbox">' +
     '<div class="btn-group btn-group-sm btn-block">' +
     '<button type="button" class="actions-btn bs-select-all btn btn-default">SELECT ALL</button>' +
     '<button type="button" class="actions-btn bs-deselect-all btn btn-default">DESELECT ALL</button>' +
@@ -184,9 +184,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         var dropdownToggle = jqLite($element[0].querySelector('.dropdown-toggle')),
           dropdownContainer = dropdownToggle.next(),
           dropdownMenu = jqLite(dropdownContainer[0].querySelector('.dropdown-menu.inner')),
-          searchBox = jqLite(dropdownContainer[0].querySelector('.bs-searchbox')),
+          searchBox = jqLite(dropdownContainer[0].querySelector('.nya-bs-searchbox')),
           noSearchResult = jqLite(dropdownMenu[0].querySelector('.no-search-result')),
-          actionsBox = jqLite(dropdownContainer[0].querySelector('.bs-actionsbox'));
+          actionsBox = jqLite(dropdownContainer[0].querySelector('.nya-bs-actionsbox'));
 
         if(nyaBsSelectCtrl.valueExp) {
           valueExpFn = function(scope, locals) {
