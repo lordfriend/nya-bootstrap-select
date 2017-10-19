@@ -7,9 +7,9 @@ The 2.x version is totally rewritten. while keep the most feature of **bootstrap
 
 Require: angular 1.2+
 
-###This project is currently in maintenance state, it will only accept bug fix Pull Request, will not accept any new feature.
+### This project is currently in maintenance state, it will only accept bug fix Pull Request, will not accept any new feature.
 
-##Usage
+## Usage
 
 1. Install
 
@@ -39,9 +39,9 @@ Require: angular 1.2+
 	
 **Migrate from 1.x**  If you have used the previous version of this directive. you need to replace the old code in the template.  See the examples below
 
-##Examples
+## Examples
 
-###Static Options
+### Static Options
 
 You can use static options which means you can't change the option when the HTML code is ready. Under this usage, you don't use the `nya-bs-option` directive, but you should add `nya-bs-option` class to all the `<li>` element and `data-value` attribute to let the directive know you option's value.
 
@@ -67,10 +67,10 @@ You can use static options which means you can't change the option when the HTML
 
 If you decide to use static option, you shouldn't change the option any more, otherwise you may need the `nya-bs-option` directive to generate options dynamically.
 
-###Dynamic Options
+### Dynamic Options
 In this section you'll see several usage of the `nya-bs-option` directive.
 
-####Basic usage
+#### Basic usage
 This is the very basic usage, we have an array of object used to generate options. the `myModel` will be one of the objects in the `options` array.  if you add an `multiple` attribute to the `nya-bs-select` element.  `myModel` will be array of objects.
 
 ```html
@@ -81,7 +81,7 @@ This is the very basic usage, we have an array of object used to generate option
 </ol>
 ```
 
-####Group By Object Property
+#### Group By Object Property
 Like vanilla `<select>` we can also generate option group with any property in an object. if you `options` is an array of object. like [{name: "alpha", group: "Group 1"}, {name: "beta", group: "Group 2}, {name: "charlie", group: "Group 2"}]. then we can use group by in `nya-bs-option` expression to generate group.
 
 ```html
@@ -95,14 +95,14 @@ Like vanilla `<select>` we can also generate option group with any property in a
 </ol>
 ```
 
-##TODO
+## TODO
 
 - data-header support
 - ~~data-container support~~ may not be supported any more
 - data-max-options support
 - auto dropup support
 
-##How to Contribute
+## How to Contribute
 
 This project is built by Grunt, fork this project. and clone to your local repository. Run `yarn install` to install all development dependencies.
 
@@ -116,6 +116,6 @@ Something should be noticed:
 - For any Pull Request, you should only modify the src files and documents, test specs. Do not update dist files, package.json, bower.json or try to update project version.
 - Any feature should work without jquery.
 
-## License ##
+## License
 
 Licensed under the MIT license
