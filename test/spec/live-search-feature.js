@@ -73,4 +73,67 @@ describe('features about live search related, etc;', function() {
     check();
   });
 
+ it('should clear live-search', function() {
+    // get amount of available li
+    function get_amount() {
+      var list = selectElement.find('ul').children();
+      var i, k, length = list.length,
+          liElement,
+          classList,
+          check,
+          counter = 0;
+      for(i = 0; i < length; i++) {
+        liElement = list.eq(i);
+        if(liElement.hasClass('nya-bs-option')) {
+          classList = liElement[0].classList;
+          check = false;
+          for(k = 0; k < classList.length; k++){
+            if(classList[k] === 'not-match'){
+                check = true;
+            }
+          }
+          if(check === false){
+            counter++;
+          }
+        }
+      }
+      return counter;
+    }
+
+    // string array
+    $scope.options = options;
+    $scope.model = [];
+    $scope.$digest();
+    var selectElement = angular.element('<ol class="nya-bs-select" ng-model="model" live-search="true">' +
+                                        '<li nya-bs-option="option in options">' +
+                                        '<a>{{option}}</a>' +
+                                        '</li>' +
+                                        '</ol>');
+    $compile(selectElement)($scope);
+
+    $scope.$digest();
+    //open dropdown
+    selectElement.find('button')[0].click();
+    //get amount of options
+	  var before_change = get_amount(selectElement, 'amount');
+    //set live-search
+    selectElement.find('input').val('o');
+    //trigger live-search
+    selectElement.find('input').triggerHandler('input');
+    //trigger digest cycle
+    $scope.$digest();
+    //check if value is set
+    expect(selectElement.find('input').val()).toBe('o');
+	  //check amount of options vs new amount
+    expect(get_amount(selectElement, 'amount')).not.toBe(before_change);
+    //close dropdown
+    selectElement.find('button')[0].click();
+    //open dropdown
+    selectElement.find('button')[0].click();
+    //check if value is empty
+    expect(selectElement.find('input').val()).toBe('');
+    //check amount of options vs new amount
+    expect(get_amount(selectElement, 'amount')).toBe(before_change);
+  });
+  
 });
