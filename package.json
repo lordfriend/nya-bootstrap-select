@@ -1,6 +1,6 @@
 {
   "name": "@lordfriend/nya-bootstrap-select",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "An angular directive wraps bootstrap-select",
   "main": "index.js",
   "repository": {
@@ -31,7 +31,7 @@
     "highlight.js": "^8.4.0",
     "jquery": "^3.2.1",
     "jshint-stylish": "~0.1.5",
-    "karma": "^0.12.31",
+    "karma": "0.13.22",
     "karma-chrome-launcher": "^0.1.8",
     "karma-jasmine": "^0.1.5",
     "karma-ng-html2js-preprocessor": "^0.1.2",

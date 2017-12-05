@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.4.0
+ * @lordfriend/nya-bootstrap-select v2.5.0
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -752,6 +752,28 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
         };
         $document.on('click', outClick);
 
+        function reset_search() {
+          searchBox.children().eq(0)[0].value = "";
+          var options = dropdownMenu.children(),
+              length = options.length,
+              index,
+              option,
+              nyaBsOptionNode;
+            for(index = 0; index < length; index++) {
+              option = options.eq(index);
+              if(option.hasClass('nya-bs-option')) {
+                option.removeClass('not-match');
+              }
+            }
+            noSearchResult.removeClass('show');
+            nyaBsOptionNode = findFocus(true);
+
+            if(nyaBsOptionNode) {
+                options.removeClass('active');
+                jqLite(nyaBsOptionNode).addClass('active');
+            }
+        }
+        
         
 
         dropdownToggle.on('blur', function() {
@@ -766,6 +788,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
             calcMenuSize();
           }
           if($attrs.liveSearch === 'true' && $element.hasClass('open')) {
+            reset_search();
             searchBox.children().eq(0)[0].focus();
             nyaBsOptionNode = findFocus(true);
             if(nyaBsOptionNode) {
