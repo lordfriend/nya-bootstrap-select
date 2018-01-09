@@ -1,5 +1,5 @@
 /**
- * @lordfriend/nya-bootstrap-select v2.5.0
+ * @lordfriend/nya-bootstrap-select v2.5.1
  * Copyright 2014 Nyasoft
  * Licensed under MIT license
  */
@@ -960,6 +960,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
               // if live search enabled. give focus to search box.
               if($attrs.liveSearch === 'true') {
+                reset_search();
                 searchBox.children().eq(0)[0].focus();
                 // find the focusable node but we will use active
                 nyaBsOptionNode = findFocus(true);
