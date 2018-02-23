@@ -66,7 +66,7 @@ describe('features about live search related, etc;', function() {
     inputElement.val('o');
     inputElement.triggerHandler('input');
 
-    selectElement[0].querySelector('.bs-actionsbox .bs-select-all').click();
+    selectElement[0].querySelector('.nya-bs-actionsbox .bs-select-all').click();
 
     $scope.$digest();
 
