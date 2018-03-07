@@ -412,7 +412,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
 
   var DEFAULT_NONE_SELECTION = 'Nothing selected';
 
-  var DROPDOWN_TOGGLE = '<button class="btn btn-default dropdown-toggle" type="button">' +
+  var DROPDOWN_TOGGLE = '<button class="a-btn a-btn-default dropdown-toggle" type="button">' +
     '<span class="pull-left filter-option"></span>' +
     '<span class="pull-left special-title"></span>' +
     '&nbsp;' +
@@ -430,9 +430,9 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
   var NO_SEARCH_RESULT = '<li class="no-search-result"><span>NO SEARCH RESULT</span></li>';
 
   var ACTIONS_BOX = '<div class="bs-actionsbox">' +
-    '<div class="btn-group btn-group-sm btn-block">' +
-    '<button type="button" class="actions-btn bs-select-all btn btn-default">SELECT ALL</button>' +
-    '<button type="button" class="actions-btn bs-deselect-all btn btn-default">DESELECT ALL</button>' +
+    '<div class="m-btn-group btn-group-sm btn-block">' +
+    '<button type="button" class="actions-btn bs-select-all a-btn a-btn-default">SELECT ALL</button>' +
+    '<button type="button" class="actions-btn bs-deselect-all a-btn a-btn-default">DESELECT ALL</button>' +
     '</div>' +
     '</div>';
 
@@ -773,7 +773,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compi
                 jqLite(nyaBsOptionNode).addClass('active');
             }
         }
-        
+
         
 
         dropdownToggle.on('blur', function() {
